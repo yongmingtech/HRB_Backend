@@ -1,0 +1,7 @@
+*** Settings ***
+Test Teardown     Close Browser
+Resource          ../Login.robot
+
+*** Test Cases ***
+Valid Login
+    Open Broser and Login automatically

@@ -1,0 +1,8 @@
+*** Setting ***
+Resource          ../Login.robot
+
+*** Test Cases ***
+Code type sort by ascend
+    Open Broser and Login automatically
+    Set Selenium Speed    5
+    Click Element    button-1014-btnIconEl
