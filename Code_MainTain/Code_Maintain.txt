@@ -1,8 +1,13 @@
 *** Setting ***
 Resource          ../Login.robot
+Library           DebugLibrary
 
 *** Test Cases ***
 Code type sort by ascend
     Open Broser and Login automatically
-    Set Selenium Speed    5
-    Click Element    button-1014-btnIconEl
+    Sleep    5
+    ${Code MainTain Button}=    Set Variable    id=button-1014-btnEl
+    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
+    Mouse Over    ${Code MainTain Button}
+    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
+    Click Element    ${Code MainTain Button}
