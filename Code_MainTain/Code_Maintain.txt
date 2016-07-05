@@ -1,6 +1,7 @@
 *** Setting ***
 Resource          ../Login.robot
-Library           DebugLibrary
+Resource          ../DataBase.robot
+Resource          DB_Query.txt
 
 *** Test Cases ***
 Code type sort by ascend
@@ -11,3 +12,17 @@ Code type sort by ascend
     Mouse Over    ${Code MainTain Button}
     Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
     Click Element    ${Code MainTain Button}
+    Wait Until Element Is Visible    ext-gen1240    10 seconds
+    Click Element    ext-gen1240
+    Connect To Database    ${DBModuleName}    ${DBName}    ${DBUser}    ${DBPassword}    ${DBHost}    ${DBPort}
+    ${queryResults}    Query    ${Query Code Type}
+    Log Many    ${queryResults}
+    Sleep    1
+    ${Code Type List Count}    Get Matching Xpath Count    xpath=//*[@id="boundlist-1143-listEl"]/div
+    Log    ${Code Type List Count}
+    ${Create List}    Create List
+    : FOR    ${Index}    IN RANGE    1    ${Code Type List Count}+1
+    \    ${Values}=    Get Text    xpath=//*[@id="boundlist-1143-listEl"]/div[${Index}]
+    \    Append To List    ${Create List}    ${Values}
+    Log Many    ${Create List}
+    Length Should Be    ${queryResults}    ${Code Type List Count

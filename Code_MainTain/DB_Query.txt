@@ -1,0 +1,2 @@
+*** Variables ***
+${Query Code Type}    select code_type from Basic_CodeType where active_flag=1 order by code_type
