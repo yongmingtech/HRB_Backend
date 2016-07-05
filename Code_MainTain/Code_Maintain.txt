@@ -25,4 +25,4 @@ Code type sort by ascend
     \    ${Values}=    Get Text    xpath=//*[@id="boundlist-1143-listEl"]/div[${Index}]
     \    Append To List    ${Create List}    ${Values}
     Log Many    ${Create List}
-    Length Should Be    ${queryResults}    ${Code Type List Count
+    Length Should Be    ${queryResults}    ${Code Type List Count}
