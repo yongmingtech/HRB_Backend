@@ -1,4 +1,5 @@
 *** Setting ***
+Test Teardown     Close All Browsers
 Resource          ../Login.robot
 Resource          ../DataBase.robot
 Resource          DB_Query.txt
