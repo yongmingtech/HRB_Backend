@@ -1,4 +1,5 @@
 *** Setting ***
+Test Setup        Click Code Maintain Button
 Test Teardown     Close All Browsers
 Resource          ../Login.robot
 Resource          ../DataBase.robot
@@ -6,9 +7,15 @@ Resource          DB_Query.txt
 
 *** Test Cases ***
 Code type sort by ascend
-    Open Broser and Login automatically
-    Sleep    5
-    Click Code Maintain Button
+    [Documentation]    Test case Description :
+    ...    主要測試代碼查詢下面的代碼類型下拉式選單
+    ...    1. 使用者點擊左上角代碼維護
+    ...    2. 在代碼查詢下有一個下拉選單叫做代碼類型
+    ...    3. 抓出資料庫資料
+    ...    4. 資料庫資料要和代碼類型選單比較
+    ...
+    ...    Verify :
+    ...    代碼類型下拉選單筆數要和資料庫比數符合
     Wait Until Element Is Visible    ext-gen1240    10 seconds
     Click Element    ext-gen1240
     Connect Database
@@ -24,8 +31,34 @@ Code type sort by ascend
     Log Many    ${Create List}
     Length Should Be    ${queryResults}    ${Code Type List Count}
 
+Code Type Pop up Window
+    [Documentation]    Test case Description :
+    ...    主要測試代碼查詢下面Gridview，滑鼠點擊其中一筆資料，跳窗出來的資訊是否正確
+    ...    1. 使用者點擊左上角代碼維護
+    ...    2. 點擊GridView其中一筆資料
+    ...    3. 跳出"代碼類型維護"視窗
+    ...
+    ...    Verify :
+    ...    代碼類型和代碼名稱要和跳窗出來的代碼類型和代碼名稱符合
+    Sleep    5
+    Double Click Element    id=gridview-1096-record-c628fed5-695c-45c8-8a3f-d39d9a8b18dd
+    ${CodeType}=    Get Text    xpath=//*[@id="gridview-1096-record-c628fed5-695c-45c8-8a3f-d39d9a8b18dd"]/td[5]/div
+    ${CodeTypeName}=    Get Text    xpath=//*[@id="gridview-1096-record-c628fed5-695c-45c8-8a3f-d39d9a8b18dd"]/td[6]/div
+    Sleep    2
+    ${CodeTypePopup}    Get Text    id=displayfield-1147-inputEl
+    ${CodeTypeNamePopup}    Get Value    id=textfield-1148-inputEl
+    Log    ${CodeType}
+    Log    ${CodeTypeName}
+    Log    ${CodeTypePopup}
+    Log    ${CodeTypeNamePopup}
+    Should Be Equal    ${CodeType}    ${CodeTypePopup}
+    Should Be Equal    ${CodeTypeName}    ${CodeTypeNamePopup}
+    Sleep    3
+
 *** Keywords ***
 Click Code Maintain Button
+    Open Broser and Login automatically
+    Sleep    5
     ${Code MainTain Button}=    Set Variable    id=button-1014-btnEl
     Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
     Mouse Over    ${Code MainTain Button}
