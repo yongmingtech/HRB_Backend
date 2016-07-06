@@ -21,15 +21,25 @@ Code type sort by ascend
     Connect Database
     ${queryResults}    Query    ${Query Code Type}
     Log Many    ${queryResults}
+    ${Create_Code_Type_List}    Create List
+    ${Create_Code_Type_List_Count}    Get Length    ${queryResults}
+    Log    ${Create_Code_Type_List_Count}
+    : FOR    ${Index}    IN RANGE    0    ${Create_Code_Type_List_Count}
+    \    ${Get_Item}=    Convert To String    ${queryResults[${Index}]}
+    \    ${Value}=    Split String    ${Get_Item}    '    2
+    \    ${Item}=    Convert To String    ${Value[1]}
+    \    Append To List    ${Create_Code_Type_List}    ${Item}
+    Log Many    ${Create_Code_Type_List}
     Sleep    1
     ${Code Type List Count}    Get Matching Xpath Count    xpath=//*[@id="boundlist-1143-listEl"]/div
     Log    ${Code Type List Count}
     ${Create List}    Create List
     : FOR    ${Index}    IN RANGE    1    ${Code Type List Count}+1
     \    ${Values}=    Get Text    xpath=//*[@id="boundlist-1143-listEl"]/div[${Index}]
+    \    ${Values}=    Strip String    ${Values}
     \    Append To List    ${Create List}    ${Values}
     Log Many    ${Create List}
-    Length Should Be    ${queryResults}    ${Code Type List Count}
+    Length Should Be    ${Create_Code_Type_List}    ${Code Type List Count}
 
 Code Type Pop up Window
     [Documentation]    Test case Description :
@@ -47,13 +57,23 @@ Code Type Pop up Window
     Sleep    2
     ${CodeTypePopup}    Get Text    id=displayfield-1147-inputEl
     ${CodeTypeNamePopup}    Get Value    id=textfield-1148-inputEl
+    ${CodeTypeDescriptionPopup}    Get Value    id=textareafield-1149-inputEl
+    Connect Database
+    ${queryResults}    Query    ${Query Code Type Description}
+    ${GetData}=    Convert To String    ${queryResults[0]}
+    ${DescriptionList}=    Split String    ${GetData}    '    2
+    ${Description}=    Convert To String    ${DescriptionList[1]}
+    ${Description}=    Strip String    ${Description}
     Log    ${CodeType}
     Log    ${CodeTypeName}
+    Log    ${Description}
     Log    ${CodeTypePopup}
     Log    ${CodeTypeNamePopup}
+    Log    ${CodeTypeDescriptionPopup}
     Should Be Equal    ${CodeType}    ${CodeTypePopup}
     Should Be Equal    ${CodeTypeName}    ${CodeTypeNamePopup}
-    Sleep    3
+    Should Be Equal    ${Description}    ${CodeTypeDescriptionPopup}
+    Sleep    1
 
 *** Keywords ***
 Click Code Maintain Button
