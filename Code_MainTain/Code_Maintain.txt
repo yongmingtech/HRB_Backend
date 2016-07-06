@@ -8,14 +8,10 @@ Resource          DB_Query.txt
 Code type sort by ascend
     Open Broser and Login automatically
     Sleep    5
-    ${Code MainTain Button}=    Set Variable    id=button-1014-btnEl
-    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
-    Mouse Over    ${Code MainTain Button}
-    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
-    Click Element    ${Code MainTain Button}
+    Click Code Maintain Button
     Wait Until Element Is Visible    ext-gen1240    10 seconds
     Click Element    ext-gen1240
-    Connect To Database    ${DBModuleName}    ${DBName}    ${DBUser}    ${DBPassword}    ${DBHost}    ${DBPort}
+    Connect Database
     ${queryResults}    Query    ${Query Code Type}
     Log Many    ${queryResults}
     Sleep    1
@@ -27,3 +23,11 @@ Code type sort by ascend
     \    Append To List    ${Create List}    ${Values}
     Log Many    ${Create List}
     Length Should Be    ${queryResults}    ${Code Type List Count}
+
+*** Keywords ***
+Click Code Maintain Button
+    ${Code MainTain Button}=    Set Variable    id=button-1014-btnEl
+    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
+    Mouse Over    ${Code MainTain Button}
+    Wait Until Element Is Visible    ${Code MainTain Button}    10 seconds
+    Click Element    ${Code MainTain Button}
