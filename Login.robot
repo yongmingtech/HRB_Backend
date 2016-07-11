@@ -10,6 +10,9 @@ Resource          Library.robot
 *** Variables ***
 ${DELAY}          0
 ${SERVER}         http://10.32.86.132:8080/    # Backend
+${User_Name}      FC750
+${User_Password}    0406
+${Submit_Button}    button-1014-btnIconEl
 
 *** Keywords ***
 Open Broser to Login Page
@@ -18,13 +21,13 @@ Open Broser to Login Page
     Set Selenium Speed    ${DELAY}
 
 Input Username
-    Input Text    username    FC750
+    Input Text    username    ${User_Name}
 
 Input Password
-    Input Text    password    0406
+    Input Text    password    ${User_Password}
 
 Submit Credentials
-    Click Element    button-1014-btnIconEl
+    Click Element    ${Submit_Button}
 
 Open Broser and Login automatically
     Open Broser to Login Page
