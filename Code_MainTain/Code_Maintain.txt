@@ -7,7 +7,6 @@ Resource          DB_Query.txt
 
 *** Variables ***
 ${Menu_Code_Type_ID}    ext-gen1240
-${Wait_For_Element_Timeout}    10 seconds
 ${Code_MainTain_Button}    ${EMPTY}
 ${Code_MainTain_Button_ID}    id=button-1014-btnEl
 
@@ -22,7 +21,7 @@ Code type sort by ascend
     ...
     ...    Verify :
     ...    代碼類型下拉選單筆數要和資料庫比數符合
-    Wait Until Element Is Visible    ${Menu_Code_Type_ID}    ${Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    ${Menu_Code_Type_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Menu_Code_Type_ID}
     Connect Database
     ${queryResults}    Query    ${Query_Code_Type}
@@ -70,7 +69,7 @@ Click Code Maintain Button
     Open Broser and Login automatically
     Sleep    5
     ${Code_MainTain_Button}=    Set Variable    ${Code_MainTain_Button_ID}
-    Wait Until Element Is Visible    ${Code_MainTain_Button}    ${Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    ${Code_MainTain_Button}    ${G_Wait_For_Element_Timeout}
     Mouse Over    ${Code MainTain Button}
-    Wait Until Element Is Visible    ${Code_MainTain_Button}    ${Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    ${Code_MainTain_Button}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Code_MainTain_Button}

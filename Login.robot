@@ -16,7 +16,7 @@ ${Submit_Button}    button-1014-btnIconEl
 
 *** Keywords ***
 Open Broser to Login Page
-    Open Browser    ${SERVER}    ${BROWSER}
+    Open Browser    ${SERVER}    ${G_BROWSER}
     Maximize Browser Window
     Set Selenium Speed    ${DELAY}
 
