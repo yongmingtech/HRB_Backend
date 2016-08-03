@@ -1,11 +1,13 @@
 *** Setting ***
 Documentation     主要測試醫療機構維護
 ...               1. Check Page 主要測試裡面所有的字型和字型的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
+...               2. Refill Form 主要是在新增資料時，測試重填按鈕是否生效
 Test Setup        Click Medical Organization Maintain Button
-Test Teardown     Close Browser
+Test Teardown     Close All Browsers
 Metadata          Version    0.1
 Resource          ../Login.robot
 Resource          ../DataBase.robot
+Resource          DB_Query.robot
 
 *** Variables ***
 ${Medical_Organization_Maintain_Button_ID}    button-1016-btnIconEl
@@ -27,21 +29,33 @@ ${Organization_Address_Column}    gridcolumn-1078-textEl    #機構地址
 ${Contact_Phone_Column}    gridcolumn-1079-textEl    #連絡電話
 ${Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
 ${Click_one_Cell}    gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5
-${PopupWindow_System_Code_Column}    gridcolumn-1075-textEl    #系統內碼
-${PopupWindow_Organization_Code_Column}    gridcolumn-1076-textEl    #機構代碼
-${PopupWindow_Organization_Name_Column}    gridcolumn-1077-textEl    #機構名稱
-${PopupWindow_Organization_Address_Column}    gridcolumn-1078-textEl    #機構地址
-${PopupWindow_Contact_Phone_Column}    gridcolumn-1079-textEl    #連絡電話
-${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
-${PopupWindow_System_Code_TextBox}    textfield-1094-inputEl    #系統內碼 TextBox
-${PopupWindow_Organization_Code_TextBox}    textfield-1095-inputEl    #機構代碼 TextBox
-${PopupWindow_Organization_Name_TextBox}    textfield-1096-inputEl    #機構名稱 TextBox
-${PopupWindow_Organization_Address_TextBox}    textareafield-1097-inputEl    #機構地址 TextBox
-${PopupWindow_Contact_Phone_TextBox}    textareafield-1098-inputEl    #連絡電話 TextBox
-${PopupWindow_Contact_Email_TextBox}    textareafield-1099-inputEl    #聯絡信箱 TextBox
-${PopupWindow_Refill_Button}    button-1103-btnInnerEl    #重填 Button
+${PopupWindow_System_Code_Column}    gridcolumn-1075-textEl    #跳窗 系統內碼
+${PopupWindow_Organization_Code_Column}    gridcolumn-1076-textEl    #跳窗 機構代碼
+${PopupWindow_Organization_Name_Column}    gridcolumn-1077-textEl    #跳窗 機構名稱
+${PopupWindow_Organization_Address_Column}    gridcolumn-1078-textEl    #跳窗 機構地址
+${PopupWindow_Contact_Phone_Column}    gridcolumn-1079-textEl    #跳窗 連絡電話
+${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #跳窗 聯絡信箱
+${PopupWindow_System_Code_TextBox}    textfield-1094-inputEl    #跳窗 系統內碼 TextBox
+${PopupWindow_Organization_Code_TextBox}    textfield-1095-inputEl    #跳窗 機構代碼 TextBox
+${PopupWindow_Organization_Name_TextBox}    textfield-1096-inputEl    #跳窗 機構名稱 TextBox
+${PopupWindow_Organization_Address_TextBox}    textareafield-1097-inputEl    #跳窗 機構地址 TextBox
+${PopupWindow_Contact_Phone_TextBox}    textareafield-1098-inputEl    #跳窗 連絡電話 TextBox
+${PopupWindow_Contact_Email_TextBox}    textareafield-1099-inputEl    #跳窗 聯絡信箱 TextBox
+${PopupWindow_Refill_Button}    button-1103-btnInnerEl    #跳窗 重填 Button
+${PopupWindow_Insert_Button}    button-1101-btnInnerEl    #跳窗 新增 Button
 ${PagenationToolBar}    pagingtoolbar-1057-innerCt    # Pagenation Tool Bar
-${TestData}       hlthealthy    # 測試資料
+${TestData_System_Code_1}    _hlthealthy_1    # 測試資料 系統內碼
+${TestData_Organization_Code_1}    012345678    # 測試資料 機構代碼
+${TestData_Organization_Name_1}    (TestData_1)    # 測試資料 機構名稱    (排序)
+${TestData_Organization_Address_1}    address.    # 測試資料 機構地址
+${TestData_Contact_Phone_1}    7533967    # 測試資料 連絡電話
+${TestData_Contact_Email_1}    test@yamail.com    # 測試資料    聯絡信箱
+${TestData_System_Code_2}    _hlthealthy_2    # 測試資料 系統內碼
+${TestData_Organization_Code_2}    876543210    # 測試資料 機構代碼
+${TestData_Organization_Name_2}    (TestData_2)    # 測試資料 機構名稱    (排序)
+${TestData_Organization_Address_2}    address    # 測試資料 機構地址
+${TestData_Contact_Phone_2}    5937081    # 測試資料 連絡電話
+${TestData_Contact_Email_2}    test@yamail.com    # 測試資料    聯絡信箱
 
 *** Test Cases ***
 Check Page
@@ -130,14 +144,13 @@ Check Page
 
 Refill Form
     Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${Insert_Button}
-    Sleep    2
-    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData}
-    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData}
-    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData}
-    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData}
-    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData}
-    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData}
+    Click Insert Button
+    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
+    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
+    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
+    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
+    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
+    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
     Click Element    ${PopupWindow_Refill_Button}
     ${Get_System_Code_TextBox}=    Get Text    ${PopupWindow_System_Code_TextBox}
     ${Get_Organization_Code_TextBox}=    Get Text    ${PopupWindow_Organization_Code_TextBox}
@@ -151,7 +164,12 @@ Refill Form
     Should Be Empty    ${Get_Organization_Address_TextBox}
     Should Be Empty    ${Get_Contact_Phone_TextBox}
     Should Be Empty    ${Get_Contact_Email_TextBox}
-    Sleep    2
+
+Insert Two Records
+    Connect Database
+    ${queryResults}=    Query    ${Query_Basic_Hospital}
+    Log Many    ${queryResults}
+    [Teardown]    Run Keywords    Close All Browsers    Disconnect From Database
 
 *** Keywords ***
 Click Medical Organization Maintain Button
@@ -162,3 +180,29 @@ Click Medical Organization Maintain Button
     Mouse Over    ${Medical_Organization_Maintain_Button}
     Wait Until Element Is Visible    ${Medical_Organization_Maintain_Button}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Medical_Organization_Maintain_Button}
+
+Click Insert Button
+    Click Element    ${Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_System_Code_TextBox}
+
+Add Two Record In DB
+    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
+    Click Insert Button
+    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
+    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
+    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
+    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
+    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
+    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
+    Click Element    ${PopupWindow_Insert_Button}
+    Sleep    2
+    Click Element    ${Insert_Button}
+    Sleep    2
+    Input Text    textfield-1110-inputEl    ${TestData_System_Code_2}
+    Input Text    textfield-1111-inputEl    ${TestData_Organization_Code_2}
+    Input Text    textfield-1112-inputEl    ${TestData_Organization_Name_2}
+    Input Text    textareafield-1113-inputEl    ${TestData_Organization_Address_2}
+    Input Text    textareafield-1114-inputEl    ${TestData_Contact_Phone_2}
+    Input Text    textareafield-1115-inputEl    ${TestData_Contact_Email_2}
+    Click Element    button-1117-btnInnerEl
+    Sleep    1
