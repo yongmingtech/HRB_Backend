@@ -167,7 +167,9 @@ Refill Form
 
 Insert Two Records
     Connect Database
-    ${queryResults}=    Query    ${Query_Basic_Hospital}
+    Execute Sql String    ${Delete_Basic_Hospital_TestData}
+    Add Two Record In DB
+    ${queryResults}    Execute Sql String    ${Query_Basic_Hospital}
     Log Many    ${queryResults}
     [Teardown]    Run Keywords    Close All Browsers    Disconnect From Database
 
