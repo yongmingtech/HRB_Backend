@@ -1,7 +1,8 @@
 *** Setting ***
 Documentation     主要測試醫療機構維護
+...               1. Check Page 主要測試裡面所有的字型和字型的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
 Test Setup        Click Medical Organization Maintain Button
-Test Teardown     Close All Browsers
+Test Teardown     Close Browser
 Metadata          Version    0.1
 Resource          ../Login.robot
 Resource          ../DataBase.robot
@@ -32,6 +33,15 @@ ${PopupWindow_Organization_Name_Column}    gridcolumn-1077-textEl    #機構名�
 ${PopupWindow_Organization_Address_Column}    gridcolumn-1078-textEl    #機構地址
 ${PopupWindow_Contact_Phone_Column}    gridcolumn-1079-textEl    #連絡電話
 ${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
+${PopupWindow_System_Code_TextBox}    textfield-1094-inputEl    #系統內碼 TextBox
+${PopupWindow_Organization_Code_TextBox}    textfield-1095-inputEl    #機構代碼 TextBox
+${PopupWindow_Organization_Name_TextBox}    textfield-1096-inputEl    #機構名稱 TextBox
+${PopupWindow_Organization_Address_TextBox}    textareafield-1097-inputEl    #機構地址 TextBox
+${PopupWindow_Contact_Phone_TextBox}    textareafield-1098-inputEl    #連絡電話 TextBox
+${PopupWindow_Contact_Email_TextBox}    textareafield-1099-inputEl    #聯絡信箱 TextBox
+${PopupWindow_Refill_Button}    button-1103-btnInnerEl    #重填 Button
+${PagenationToolBar}    pagingtoolbar-1057-innerCt    # Pagenation Tool Bar
+${TestData}       hlthealthy    # 測試資料
 
 *** Test Cases ***
 Check Page
@@ -63,6 +73,7 @@ Check Page
     ${Get_Refill_Button_Name}=    Get Text    ${Refill_Button_ID}
     Element Should Be Visible    ${Organization_Code_Dropdown_ID}
     Element Should Be Visible    ${Organization_CodeName_Dropdown_ID}
+    Element Should Be Visible    ${PagenationToolBar}
     Should Be Equal    ${Verify_Tab}    ${Get_Tab}
     Should Be Equal    ${Verify_Organization_Code_Div}    ${Get_Organization_Code_Div}
     Should Be Equal    ${Verify_Organization_Code}    ${Get_Organization_Code}
@@ -116,6 +127,31 @@ Check Page
     Should Be Equal    ${Verify_Organization_Address_Column}    ${Get_Organization_Address_Column}
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
+
+Refill Form
+    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
+    Click Element    ${Insert_Button}
+    Sleep    2
+    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData}
+    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData}
+    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData}
+    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData}
+    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData}
+    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData}
+    Click Element    ${PopupWindow_Refill_Button}
+    ${Get_System_Code_TextBox}=    Get Text    ${PopupWindow_System_Code_TextBox}
+    ${Get_Organization_Code_TextBox}=    Get Text    ${PopupWindow_Organization_Code_TextBox}
+    ${Get_Organization_Name_TextBox}=    Get Text    ${PopupWindow_Organization_Name_TextBox}
+    ${Get_Organization_Address_TextBox}=    Get Text    ${PopupWindow_Organization_Address_TextBox}
+    ${Get_Contact_Phone_TextBox}=    Get Text    ${PopupWindow_Contact_Phone_TextBox}
+    ${Get_Contact_Email_TextBox}=    Get Text    ${PopupWindow_Contact_Email_TextBox}
+    Should Be Empty    ${Get_System_Code_TextBox}
+    Should Be Empty    ${Get_Organization_Code_TextBox}
+    Should Be Empty    ${Get_Organization_Name_TextBox}
+    Should Be Empty    ${Get_Organization_Address_TextBox}
+    Should Be Empty    ${Get_Contact_Phone_TextBox}
+    Should Be Empty    ${Get_Contact_Email_TextBox}
+    Sleep    2
 
 *** Keywords ***
 Click Medical Organization Maintain Button
