@@ -61,6 +61,8 @@ Check Page
     ${Get_Organization_Name}=    Get Text    ${Organization_CodeName_Lable_ID}
     ${Get_Query_Button_Name}=    Get Text    ${Query_Button_ID}
     ${Get_Refill_Button_Name}=    Get Text    ${Refill_Button_ID}
+    Element Should Be Visible    ${Organization_Code_Dropdown_ID}
+    Element Should Be Visible    ${Organization_CodeName_Dropdown_ID}
     Should Be Equal    ${Verify_Tab}    ${Get_Tab}
     Should Be Equal    ${Verify_Organization_Code_Div}    ${Get_Organization_Code_Div}
     Should Be Equal    ${Verify_Organization_Code}    ${Get_Organization_Code}
