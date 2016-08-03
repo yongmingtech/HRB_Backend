@@ -1,6 +1,8 @@
 *** Setting ***
+Documentation     主要測試醫療機構維護
 Test Setup        Click Medical Organization Maintain Button
 Test Teardown     Close All Browsers
+Metadata          Version    0.1
 Resource          ../Login.robot
 Resource          ../DataBase.robot
 
@@ -33,7 +35,7 @@ ${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
 
 *** Test Cases ***
 Check Page
-    Log    Initalize variable
+    Log    準備驗證參數
     ${Verify_Tab}=    Convert To String    醫療機構維護
     ${Verify_Organization_Code_Div}=    Convert To String    醫療機構查詢
     ${Verify_Organization_Code}=    Convert To String    機構代碼:
@@ -51,7 +53,8 @@ Check Page
     ${Verify_Contact_Email_Column}=    Convert To String    聯絡信箱
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
-    Log    Verify Medical Organization Maintain
+    Log    Verify 醫療機構維護裡面的Div
+    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
     ${Get_Tab}=    Get Text    ${Organization_Maintain_Tab_ID}
     ${Get_Organization_Code_Div}=    Get Text    ${Organization_Query_Div_ID}
     ${Get_Organization_Code}=    Get Text    ${Organization_Code_Lable_ID}
@@ -64,7 +67,7 @@ Check Page
     Should Be Equal    ${Verify_Organization_Name}    ${Get_Organization_Name}
     Should Be Equal    ${Verify_Query_Button_Name}    ${Get_Query_Button_Name}
     Should Be Equal    ${Verify_Refill_Button_Name}    ${Get_Refill_Button_Name}
-    Log    Verify Medical Organization
+    Log    Verify 醫療機構裡面Div
     ${Get_Medical_Organization_Div}=    Get Text    ${Medical_Organization_Div}
     ${Get_Insert_Button}=    Get Text    ${Insert_Button}
     ${Get_Delete_Button}=    Get Text    ${Delete_Button}
@@ -83,8 +86,7 @@ Check Page
     Should Be Equal    ${Verify_Organization_Address_Column}    ${Get_Organization_Address_Column}
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
-    Sleep    1
-    Log    Verify DataGrid align
+    Log    Verify 醫療機構裡面的Gridview文字對齊
     ${Get_System_Code_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[4]/div@style
     ${Get_Organization_Code_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[5]/div@style
     ${Get_Organization_Name_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[6]/div@style
@@ -97,9 +99,9 @@ Check Page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Organization_Address_Align}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Contact_Phone_Align}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Contact_Email_Align}
-    Log    Verify the pupon window
+    Log    Verify 醫療機構維護跳窗
     Double Click Element    ${Click_one_Cell}
-    Sleep    1
+    Wait Until Element Is Visible    ${PopupWindow_System_Code_Column}    ${G_Wait_For_Element_Timeout}
     ${Get_System_Code_Column}=    Get Text    ${PopupWindow_System_Code_Column}
     ${Get_Organization_Code_Column}=    Get Text    ${PopupWindow_Organization_Code_Column}
     ${Get_Organization_Name_Column}=    Get Text    ${PopupWindow_Organization_Name_Column}
@@ -116,7 +118,7 @@ Check Page
 *** Keywords ***
 Click Medical Organization Maintain Button
     Open Broser and Login automatically
-    Sleep    5
+    Wait Until Element Is Visible    ${Medical_Organization_Maintain_Button_ID}    ${G_Wait_For_Element_Timeout}
     ${Medical_Organization_Maintain_Button}=    Set Variable    ${Medical_Organization_Maintain_Button_ID}
     Wait Until Element Is Visible    ${Medical_Organization_Maintain_Button}    ${G_Wait_For_Element_Timeout}
     Mouse Over    ${Medical_Organization_Maintain_Button}
