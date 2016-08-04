@@ -169,8 +169,8 @@ Refill Form
 Insert Two Records
     Connect Database
     Add Two Record In DB
-    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}'
-    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}'
+    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1
+    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}' and active_flag=1
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
@@ -181,23 +181,43 @@ Query Organization Code and Name
     Add Two Record In DB
     Log    Verify 查詢機構代碼
     Input Text    ${Organization_Code_Dropdown_ID}    ${TestData_Organization_Code_1}
-    Click Element    id=button-1054-btnInnerEl
+    Click Element    ${Query_Button_ID}
     Sleep    2
     ${Get_Code}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
     Should Be Equal    ${TestData_Organization_Code_1}    ${Get_Code}
     Log    Verify 查詢機構名稱
-    Input Text    id=hospitalNameComboBox-1052-inputEl    ${TestData_Organization_Name_1}
-    Click Element    id=button-1054-btnInnerEl
+    Input Text    ${Organization_CodeName_Dropdown_ID}    ${TestData_Organization_Name_1}
+    Click Element    ${Query_Button_ID}
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
     Log    Verify 查詢機構代碼和名稱
     Input Text    ${Organization_Code_Dropdown_ID}    \
-    Click Element    id=button-1054-btnInnerEl
+    Click Element    ${Query_Button_ID}
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
     [Teardown]    Run Keywords    Close All Browsers
+
+Delete Record
+    Log    Verify 測試刪除
+    Connect Database
+    Add Two Record In DB
+    ${Verify_Message}    Set Variable    是否確定刪除 2 筆資料 ?
+    Sleep    1
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[2]/td[2]/div/img
+    Click Element    ${Delete_Button}
+    Sleep    3
+    ${Get_Message}=    Get Text    id=messagebox-1001-displayfield-inputEl
+    Should Be Equal    ${Verify_Message}    ${Get_Message}
+    Click Element    button-1006-btnIconEl
+    Sleep    3
+    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1
+    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}' and active_flag=1
+    Log    Verify 資料庫是否有剛新增的兩筆資料
+    Check If Not Exists In Database    ${queryBasic_Hospital_TestData_1}
+    Check If Not Exists In Database    ${queryBasic_Hospital_TestData_2}
 
 *** Keywords ***
 Click Medical Organization Maintain Button
