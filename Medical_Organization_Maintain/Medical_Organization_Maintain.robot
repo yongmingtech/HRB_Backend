@@ -152,6 +152,7 @@ Refill Form
     Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
     Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
     Click Element    ${PopupWindow_Refill_Button}
+    Log    Verify 跳窗重新填的資料是否清空
     ${Get_System_Code_TextBox}=    Get Text    ${PopupWindow_System_Code_TextBox}
     ${Get_Organization_Code_TextBox}=    Get Text    ${PopupWindow_Organization_Code_TextBox}
     ${Get_Organization_Name_TextBox}=    Get Text    ${PopupWindow_Organization_Name_TextBox}
@@ -167,11 +168,36 @@ Refill Form
 
 Insert Two Records
     Connect Database
-    Execute Sql String    ${Delete_Basic_Hospital_TestData}
     Add Two Record In DB
-    ${queryResults}    Execute Sql String    ${Query_Basic_Hospital}
-    Log Many    ${queryResults}
+    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}'
+    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}'
+    Log    Verify 資料庫是否有剛新增的兩筆資料
+    Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
+    Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
     [Teardown]    Run Keywords    Close All Browsers    Disconnect From Database
+
+Query Organization Code and Name
+    Connect Database
+    Add Two Record In DB
+    Log    Verify 查詢機構代碼
+    Input Text    ${Organization_Code_Dropdown_ID}    ${TestData_Organization_Code_1}
+    Click Element    id=button-1054-btnInnerEl
+    Sleep    2
+    ${Get_Code}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    Should Be Equal    ${TestData_Organization_Code_1}    ${Get_Code}
+    Log    Verify 查詢機構名稱
+    Input Text    id=hospitalNameComboBox-1052-inputEl    ${TestData_Organization_Name_1}
+    Click Element    id=button-1054-btnInnerEl
+    Sleep    2
+    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
+    Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
+    Log    Verify 查詢機構代碼和名稱
+    Input Text    ${Organization_Code_Dropdown_ID}    \
+    Click Element    id=button-1054-btnInnerEl
+    Sleep    2
+    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
+    Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
+    [Teardown]    Run Keywords    Close All Browsers
 
 *** Keywords ***
 Click Medical Organization Maintain Button
@@ -188,6 +214,9 @@ Click Insert Button
     Wait Until Element Is Visible    ${PopupWindow_System_Code_TextBox}
 
 Add Two Record In DB
+    Log    先清空測試資料
+    Execute Sql String    ${Delete_Basic_Hospital_TestData}
+    Log    加入兩筆測試資料
     Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
     Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
