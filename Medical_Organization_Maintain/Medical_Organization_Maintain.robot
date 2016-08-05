@@ -2,6 +2,9 @@
 Documentation     主要測試醫療機構維護
 ...               1. Check Page 主要測試裡面所有的字型和字型的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
 ...               2. Refill Form 主要是在新增資料時，測試重填按鈕是否生效
+...               3. Insert Two Records 主要是新增兩筆資料，最後驗證是從DB檢查
+...               4. Query Organization Code and Name 主要先新增兩筆資料，然後再做機構代碼和名稱的查詢
+...               5. Delete Record 主要是先新增兩筆資料，再透過UI去刪除資料，最後在從下指令查詢資料是否還在DB
 Test Setup        Click Medical Organization Maintain Button
 Test Teardown     Close All Browsers
 Metadata          Version    0.1
@@ -192,7 +195,7 @@ Query Organization Code and Name
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
     Log    Verify 查詢機構代碼和名稱
-    Input Text    ${Organization_Code_Dropdown_ID}    \
+    Input Text    ${Organization_Code_Dropdown_ID}    ${EMPTY}
     Click Element    ${Query_Button_ID}
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
@@ -218,6 +221,20 @@ Delete Record
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_1}
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_2}
+
+Sort By Organization Name
+    Log    Verify 組織名稱排序
+    Connect Database
+    Add Two Record In DB
+    Sleep    3
+    ${Organization_Name_List}    Create List
+    : FOR    ${Index}    IN RANGE    1    3
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${Index}]/td[6]/div
+    \    Append To List    ${Organization_Name_List}    ${Get_Name}
+    Log Many    ${Organization_Name_List}
+    ${Result}=    Query    ${Query_organization_Name_By_ASC}
+    ${Verify_List}    Convert To List    ${Result}
+    [Teardown]    Run Keywords    Close All Browsers
 
 *** Keywords ***
 Click Medical Organization Maintain Button
