@@ -31,19 +31,24 @@ ${Organization_Name_Column}    gridcolumn-1077-textEl    #機構名稱
 ${Organization_Address_Column}    gridcolumn-1078-textEl    #機構地址
 ${Contact_Phone_Column}    gridcolumn-1079-textEl    #連絡電話
 ${Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
+${Support_Check_Health_Column}    booleancolumn-1081-textEl    #提供健檢服務
 ${Click_one_Cell_XPATH}    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+${PopupWindow_Support_Check_Healty_Checkobx}    checkboxfield-1095-inputEl    #跳窗 提供健檢 Checkbox
+${PopupWindow_Support_Check_Healty_Column}    checkboxfield-1095-labelEl    #跳窗 提供健檢
 ${PopupWindow_System_Code_Column}    gridcolumn-1075-textEl    #跳窗 系統內碼
 ${PopupWindow_Organization_Code_Column}    gridcolumn-1076-textEl    #跳窗 機構代碼
 ${PopupWindow_Organization_Name_Column}    gridcolumn-1077-textEl    #跳窗 機構名稱
 ${PopupWindow_Organization_Address_Column}    gridcolumn-1078-textEl    #跳窗 機構地址
 ${PopupWindow_Contact_Phone_Column}    gridcolumn-1079-textEl    #跳窗 連絡電話
 ${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #跳窗 聯絡信箱
+${PopupWindow_Kanban_Column}    textareafield-1103-labelEl    #跳窗 公告訊息
 ${PopupWindow_System_Code_TextBox}    textfield-1096-inputEl    #跳窗 系統內碼 TextBox
 ${PopupWindow_Organization_Code_TextBox}    textfield-1097-inputEl    #跳窗 機構代碼 TextBox
 ${PopupWindow_Organization_Name_TextBox}    textfield-1098-inputEl    #跳窗 機構名稱 TextBox
 ${PopupWindow_Organization_Address_TextBox}    textareafield-1099-inputEl    #跳窗 機構地址 TextBox
 ${PopupWindow_Contact_Phone_TextBox}    textareafield-1100-inputEl    #跳窗 連絡電話 TextBox
 ${PopupWindow_Contact_Email_TextBox}    textareafield-1101-inputEl    #跳窗 聯絡信箱 TextBox
+${PopupWindow_Kanban_TextBox}    textareafield-1102-inputEl    #跳窗 公告訊息 TextBox
 ${PopupWindow_Refill_Button}    button-1106-btnInnerEl    #跳窗 重填 Button
 ${PopupWindow_Insert_Button}    button-1104-btnInnerEl    #跳窗 新增 Button
 ${PagenationToolBar}    pagingtoolbar-1057-innerCt    # Pagenation Tool Bar
@@ -53,12 +58,14 @@ ${TestData_Organization_Name_1}    (TestData_1)    # 測試資料 機構名稱  
 ${TestData_Organization_Address_1}    address.    # 測試資料 機構地址
 ${TestData_Contact_Phone_1}    7533967    # 測試資料 連絡電話
 ${TestData_Contact_Email_1}    test@yamail.com    # 測試資料    聯絡信箱
+${TestData_Kanban_1}    123    # 測試資料    公告訊息
 ${TestData_System_Code_2}    _hlthealthy_2    # 測試資料 系統內碼
 ${TestData_Organization_Code_2}    876543210    # 測試資料 機構代碼
 ${TestData_Organization_Name_2}    (TestData_2)    # 測試資料 機構名稱    (排序)
 ${TestData_Organization_Address_2}    address    # 測試資料 機構地址
 ${TestData_Contact_Phone_2}    5937081    # 測試資料 連絡電話
 ${TestData_Contact_Email_2}    test@yamail.com    # 測試資料    聯絡信箱
+${TestData_Kanban_2}    456    # 測試資料    公告訊息
 
 *** Test Cases ***
 Check Page
@@ -72,12 +79,14 @@ Check Page
     ${Verify_Medical_Organization_Div}=    Convert To String    醫療機構
     ${Verify_Insert_Button}=    Convert To String    新增
     ${Verify_Delete_Button}=    Convert To String    刪除
+    ${Verify_Support_Check_Healty_Column}=    Convert To String    提供健檢:
     ${Verify_System_Code_Column}=    Convert To String    系統內碼
     ${Verify_Organization_Code_Column}=    Convert To String    機構代碼
     ${Verify_Organization_Name_Column}=    Convert To String    機構名稱
     ${Verify_Organization_Address_Column}=    Convert To String    機構地址
-    ${Verify_Contact_Phone_Column}=    Convert To String    連絡電話
+    ${Verify_Contact_Phone_Column}=    Convert To String    聯絡電話
     ${Verify_Contact_Email_Column}=    Convert To String    聯絡信箱
+    ${Verify_Kanban_Column}=    Convert To String    公告訊息:
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
     Log    Verify 醫療機構維護裡面的Div
@@ -132,18 +141,22 @@ Check Page
     Log    Verify 醫療機構維護跳窗
     Double Click Element    xpath=${Click_one_Cell_XPATH}
     Wait Until Element Is Visible    ${PopupWindow_System_Code_Column}    ${G_Wait_For_Element_Timeout}
+    ${Get_Support_Check_Healty_Column}=    Get Text    ${PopupWindow_Support_Check_Healty_Column}
     ${Get_System_Code_Column}=    Get Text    ${PopupWindow_System_Code_Column}
     ${Get_Organization_Code_Column}=    Get Text    ${PopupWindow_Organization_Code_Column}
     ${Get_Organization_Name_Column}=    Get Text    ${PopupWindow_Organization_Name_Column}
     ${Get_Organization_Address_Column}=    Get Text    ${PopupWindow_Organization_Address_Column}
     ${Get_Contact_Phone_Column}=    Get Text    ${PopupWindow_Contact_Phone_Column}
     ${Get_Contact_Email_Column}=    Get Text    ${PopupWindow_Contact_Email_Column}
+    ${Get_Kanbann_Column}=    Get Text    ${PopupWindow_Kanban_Column}
+    Should Be Equal    ${Verify_Support_Check_Healty_Column}    ${Get_Support_Check_Healty_Column}
     Should Be Equal    ${Verify_System_Code_Column}    ${Get_System_Code_Column}
     Should Be Equal    ${Verify_Organization_Code_Column}    ${Get_Organization_Code_Column}
     Should Be Equal    ${Verify_Organization_Name_Column}    ${Get_Organization_Name_Column}
     Should Be Equal    ${Verify_Organization_Address_Column}    ${Get_Organization_Address_Column}
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
+    Should Be Equal    ${Verify_Kanban_Column}    ${Get_Kanbann_Column}
 
 Refill Form
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
@@ -154,7 +167,9 @@ Refill Form
     Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
     Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
     Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
+    Input Text    ${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
     Click Element    ${PopupWindow_Refill_Button}
+    Sleep    1
     Log    Verify 跳窗重新填的資料是否清空
     ${Get_System_Code_TextBox}=    Get Text    ${PopupWindow_System_Code_TextBox}
     ${Get_Organization_Code_TextBox}=    Get Text    ${PopupWindow_Organization_Code_TextBox}
@@ -162,18 +177,20 @@ Refill Form
     ${Get_Organization_Address_TextBox}=    Get Text    ${PopupWindow_Organization_Address_TextBox}
     ${Get_Contact_Phone_TextBox}=    Get Text    ${PopupWindow_Contact_Phone_TextBox}
     ${Get_Contact_Email_TextBox}=    Get Text    ${PopupWindow_Contact_Email_TextBox}
+    ${Get_Kanban_TextBox}=    Get Text    ${PopupWindow_Kanban_TextBox}
     Should Be Empty    ${Get_System_Code_TextBox}
     Should Be Empty    ${Get_Organization_Code_TextBox}
     Should Be Empty    ${Get_Organization_Name_TextBox}
     Should Be Empty    ${Get_Organization_Address_TextBox}
     Should Be Empty    ${Get_Contact_Phone_TextBox}
     Should Be Empty    ${Get_Contact_Email_TextBox}
+    Should Be Empty    ${Get_Kanban_TextBox}
 
 Insert Two Records
     Connect Database
     Add Two Record In DB
-    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1
-    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}' and active_flag=1
+    ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1 and announcement='${TestData_Kanban_1}' and is_chk_hosp= 'Y'
+    ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}' and active_flag=1 and announcement='${TestData_Kanban_2}' and is_chk_hosp= 'N'
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
@@ -256,21 +273,24 @@ Add Two Record In DB
     Log    加入兩筆測試資料
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
+    Click Element    ${PopupWindow_Support_Check_Healty_Checkobx}
     Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
     Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
     Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
     Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
     Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
     Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
+    Input Text    ${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
     Click Element    ${PopupWindow_Insert_Button}
     Sleep    2
     Click Element    ${Insert_Button}
     Sleep    2
-    Input Text    textfield-1110-inputEl    ${TestData_System_Code_2}
-    Input Text    textfield-1111-inputEl    ${TestData_Organization_Code_2}
-    Input Text    textfield-1112-inputEl    ${TestData_Organization_Name_2}
-    Input Text    textareafield-1113-inputEl    ${TestData_Organization_Address_2}
-    Input Text    textareafield-1114-inputEl    ${TestData_Contact_Phone_2}
-    Input Text    textareafield-1115-inputEl    ${TestData_Contact_Email_2}
-    Click Element    button-1117-btnInnerEl
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${TestData_System_Code_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_Organization_Code_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Name_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_2}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Kanban_2}
+    Click Element    xpath=html/body/div[11]/div[3]/div/div/div[1]/div/a/span[1]
     Sleep    1
