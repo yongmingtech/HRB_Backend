@@ -1,12 +1,13 @@
 *** Setting ***
 Documentation     主要測試醫療機構維護
-...               1. Check Page 主要測試裡面所有的字型和字型的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
+...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
 ...               2. Refill Form 主要是在新增資料時，測試重填按鈕是否生效
 ...               3. Insert Two Records 主要是新增兩筆資料，最後驗證是從DB檢查
 ...               4. Query Organization Code and Name 主要先新增兩筆資料，然後再做機構代碼和名稱的查詢
-...               5. Delete Record 主要是先新增兩筆資料，再透過UI去刪除資料，最後在從下指令查詢資料是否還在DB
+...               5. Delete Record- 主要是先新增兩筆資料，再透過UI去刪除資料，最後在從下指令查詢資料是否還在DB
+Suite Teardown    Disconnect From Database
 Test Setup        Click Medical Organization Maintain Button
-Test Teardown     Close All Browsers
+Test Teardown
 Metadata          Version    0.1
 Resource          ../Login.robot
 Resource          ../DataBase.robot
@@ -66,6 +67,13 @@ ${TestData_Organization_Address_2}    address    # 測試資料 機構地址
 ${TestData_Contact_Phone_2}    5937081    # 測試資料 連絡電話
 ${TestData_Contact_Email_2}    test@yamail.com    # 測試資料    聯絡信箱
 ${TestData_Kanban_2}    456    # 測試資料    公告訊息
+${TestData_System_Code_3}    _hlthealthy_3    # 測試資料 系統內碼
+${TestData_Organization_Code_3}    876543211    # 測試資料 機構代碼
+${TestData_Organization_Name_3}    (TestData_3)    # 測試資料 機構名稱    (排序)
+${TestData_Organization_Address_3}    address    # 測試資料 機構地址
+${TestData_Contact_Phone_3}    5937081    # 測試資料 連絡電話
+${TestData_Contact_Email_3}    test@yamail.com    # 測試資料    聯絡信箱
+${TestData_Kanban_3}    777    # 測試資料    公告訊息
 
 *** Test Cases ***
 Check Page
@@ -157,6 +165,7 @@ Check Page
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
     Should Be Equal    ${Verify_Kanban_Column}    ${Get_Kanbann_Column}
+    [Teardown]    Close All Browsers
 
 Refill Form
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
@@ -185,6 +194,7 @@ Refill Form
     Should Be Empty    ${Get_Contact_Phone_TextBox}
     Should Be Empty    ${Get_Contact_Email_TextBox}
     Should Be Empty    ${Get_Kanban_TextBox}
+    [Teardown]    Close All Browsers
 
 Insert Two Records
     Connect Database
@@ -194,7 +204,7 @@ Insert Two Records
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
-    [Teardown]    Run Keywords    Close All Browsers    Disconnect From Database
+    [Teardown]    Close All Browsers
 
 Query Organization Code and Name
     Connect Database
@@ -217,7 +227,7 @@ Query Organization Code and Name
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
-    [Teardown]    Run Keywords    Close All Browsers
+    [Teardown]    Close All Browsers
 
 Delete Record
     Log    Verify 測試刪除
@@ -238,6 +248,7 @@ Delete Record
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_1}
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_2}
+    [Teardown]    Close All Browsers
 
 Sort By Organization Name
     Log    Verify 組織名稱排序
@@ -251,7 +262,27 @@ Sort By Organization Name
     Log Many    ${Organization_Name_List}
     ${Result}=    Query    ${Query_organization_Name_By_ASC}
     ${Verify_List}    Convert To List    ${Result}
-    [Teardown]    Run Keywords    Close All Browsers
+    [Teardown]    Close All Browsers
+
+Update Form
+    Log    Verify 驗證醫療機構維護跳窗是否能更新
+    Connect Database
+    Add Two Record In DB
+    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[2]/td[1]/div
+    Sleep    2
+    Click Element    xpath=html/body/div[11]/div[2]/div/div/span/div/table[1]/tbody/tr/td[2]/input
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_System_Code_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Code_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/input    ${TestData_Organization_Name_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_3}
+    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[9]/tbody/tr/td[2]/textarea    ${TestData_Kanban_3}
+    Click Element    xpath=html/body/div[11]/div[3]/div/div/div[2]/div/a/span[1]
+    Sleep    2
+    ${queryBasic_Hospital_TestData_3}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_3}' and addr='${TestData_Organization_Address_3}' and hospital_code='${TestData_System_Code_3}' and phone='${TestData_Contact_Phone_3}' and email='${TestData_Contact_Email_3}' and nhi_code='${TestData_Organization_Code_3}' and active_flag=1 and announcement='${TestData_Kanban_3}' and is_chk_hosp= 'Y'
+    Check If Exists In DataBase    ${queryBasic_Hospital_TestData_3}
+    [Teardown]    Close All Browsers
 
 *** Keywords ***
 Click Medical Organization Maintain Button
