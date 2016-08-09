@@ -14,7 +14,7 @@ Resource          DB_Query.robot
 
 *** Variables ***
 ${Medical_Organization_Maintain_Button_ID}    button-1016-btnIconEl
-${Organization_Maintain_Tab_ID}    tab-1087-btnInnerEl    # 醫療機構維護 Tab
+${Organization_Maintain_Tab_XPATH}    html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    # 醫療機構維護 Tab
 ${Organization_Query_Div_ID}    basicHospitalSearchForm-1050_header_hd-textEl    # 醫療機構查詢 Div
 ${Organization_Code_Lable_ID}    nhiCodeComboBox-1051-labelEl    # 機構代碼 label
 ${Organization_Code_Dropdown_ID}    nhiCodeComboBox-1051-inputEl    # 機構代碼 Dropdown
@@ -23,29 +23,29 @@ ${Organization_CodeName_Dropdown_ID}    hospitalNameComboBox-1052-inputEl    #�
 ${Query_Button_ID}    button-1054-btnInnerEl    #查詢按鈕
 ${Refill_Button_ID}    button-1055-btnInnerEl    #重填按鈕
 ${Medical_Organization_Div}    basicHospitalGrid-1056_header_hd-textEl    #醫療機構 Div
-${Insert_Button}    button-1083-btnInnerEl    #新增按鈕
-${Delete_Button}    button-1085-btnInnerEl    #刪除按鈕
+${Insert_Button}    button-1084-btnInnerEl    #新增按鈕
+${Delete_Button}    button-1086-btnInnerEl    #刪除按鈕
 ${System_Code_Column}    gridcolumn-1075-textEl    #系統內碼
 ${Organization_Code_Column}    gridcolumn-1076-textEl    #機構代碼
 ${Organization_Name_Column}    gridcolumn-1077-textEl    #機構名稱
 ${Organization_Address_Column}    gridcolumn-1078-textEl    #機構地址
 ${Contact_Phone_Column}    gridcolumn-1079-textEl    #連絡電話
 ${Contact_Email_Column}    gridcolumn-1080-textEl    #聯絡信箱
-${Click_one_Cell}    gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5
+${Click_one_Cell_XPATH}    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
 ${PopupWindow_System_Code_Column}    gridcolumn-1075-textEl    #跳窗 系統內碼
 ${PopupWindow_Organization_Code_Column}    gridcolumn-1076-textEl    #跳窗 機構代碼
 ${PopupWindow_Organization_Name_Column}    gridcolumn-1077-textEl    #跳窗 機構名稱
 ${PopupWindow_Organization_Address_Column}    gridcolumn-1078-textEl    #跳窗 機構地址
 ${PopupWindow_Contact_Phone_Column}    gridcolumn-1079-textEl    #跳窗 連絡電話
 ${PopupWindow_Contact_Email_Column}    gridcolumn-1080-textEl    #跳窗 聯絡信箱
-${PopupWindow_System_Code_TextBox}    textfield-1094-inputEl    #跳窗 系統內碼 TextBox
-${PopupWindow_Organization_Code_TextBox}    textfield-1095-inputEl    #跳窗 機構代碼 TextBox
-${PopupWindow_Organization_Name_TextBox}    textfield-1096-inputEl    #跳窗 機構名稱 TextBox
-${PopupWindow_Organization_Address_TextBox}    textareafield-1097-inputEl    #跳窗 機構地址 TextBox
-${PopupWindow_Contact_Phone_TextBox}    textareafield-1098-inputEl    #跳窗 連絡電話 TextBox
-${PopupWindow_Contact_Email_TextBox}    textareafield-1099-inputEl    #跳窗 聯絡信箱 TextBox
-${PopupWindow_Refill_Button}    button-1103-btnInnerEl    #跳窗 重填 Button
-${PopupWindow_Insert_Button}    button-1101-btnInnerEl    #跳窗 新增 Button
+${PopupWindow_System_Code_TextBox}    textfield-1096-inputEl    #跳窗 系統內碼 TextBox
+${PopupWindow_Organization_Code_TextBox}    textfield-1097-inputEl    #跳窗 機構代碼 TextBox
+${PopupWindow_Organization_Name_TextBox}    textfield-1098-inputEl    #跳窗 機構名稱 TextBox
+${PopupWindow_Organization_Address_TextBox}    textareafield-1099-inputEl    #跳窗 機構地址 TextBox
+${PopupWindow_Contact_Phone_TextBox}    textareafield-1100-inputEl    #跳窗 連絡電話 TextBox
+${PopupWindow_Contact_Email_TextBox}    textareafield-1101-inputEl    #跳窗 聯絡信箱 TextBox
+${PopupWindow_Refill_Button}    button-1106-btnInnerEl    #跳窗 重填 Button
+${PopupWindow_Insert_Button}    button-1104-btnInnerEl    #跳窗 新增 Button
 ${PagenationToolBar}    pagingtoolbar-1057-innerCt    # Pagenation Tool Bar
 ${TestData_System_Code_1}    _hlthealthy_1    # 測試資料 系統內碼
 ${TestData_Organization_Code_1}    012345678    # 測試資料 機構代碼
@@ -81,8 +81,8 @@ Check Page
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
     Log    Verify 醫療機構維護裡面的Div
-    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
-    ${Get_Tab}=    Get Text    ${Organization_Maintain_Tab_ID}
+    Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
+    ${Get_Tab}=    Get Text    xpath=${Organization_Maintain_Tab_XPATH}
     ${Get_Organization_Code_Div}=    Get Text    ${Organization_Query_Div_ID}
     ${Get_Organization_Code}=    Get Text    ${Organization_Code_Lable_ID}
     ${Get_Organization_Name}=    Get Text    ${Organization_CodeName_Lable_ID}
@@ -117,12 +117,12 @@ Check Page
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
     Log    Verify 醫療機構裡面的Gridview文字對齊
-    ${Get_System_Code_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[4]/div@style
-    ${Get_Organization_Code_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[5]/div@style
-    ${Get_Organization_Name_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[6]/div@style
-    ${Get_Organization_Address_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[7]/div@style
-    ${Get_Contact_Phone_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[8]/div@style
-    ${Get_Contact_Email_Align}=    Get Element Attribute    xpath=//*[@id="gridview-1081-record-8a401fa1-bfba-45c4-a2e3-642f5eef67c5"]/td[9]/div@style
+    ${Get_System_Code_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
+    ${Get_Organization_Code_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
+    ${Get_Organization_Name_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div@style
+    ${Get_Organization_Address_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[7]/div@style
+    ${Get_Contact_Phone_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[8]/div@style
+    ${Get_Contact_Email_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[9]/div@style
     Should Be Equal    ${Verify_Align_Center}    ${Get_System_Code_Align}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organization_Code_Align}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Organization_Name_Align}
@@ -130,7 +130,7 @@ Check Page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Contact_Phone_Align}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Contact_Email_Align}
     Log    Verify 醫療機構維護跳窗
-    Double Click Element    ${Click_one_Cell}
+    Double Click Element    xpath=${Click_one_Cell_XPATH}
     Wait Until Element Is Visible    ${PopupWindow_System_Code_Column}    ${G_Wait_For_Element_Timeout}
     ${Get_System_Code_Column}=    Get Text    ${PopupWindow_System_Code_Column}
     ${Get_Organization_Code_Column}=    Get Text    ${PopupWindow_Organization_Code_Column}
@@ -146,7 +146,7 @@ Check Page
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
 
 Refill Form
-    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
     Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
     Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
@@ -254,7 +254,7 @@ Add Two Record In DB
     Log    先清空測試資料
     Execute Sql String    ${Delete_Basic_Hospital_TestData}
     Log    加入兩筆測試資料
-    Wait Until Element Is Visible    ${Organization_Maintain_Tab_ID}    ${G_Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
     Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
     Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
