@@ -5,6 +5,8 @@ Documentation     主要測試醫療機構維護
 ...               3. Insert Two Records 主要是新增兩筆資料，最後驗證是從DB檢查
 ...               4. Query Organization Code and Name 主要先新增兩筆資料，然後再做機構代碼和名稱的查詢
 ...               5. Delete Record- 主要是先新增兩筆資料，再透過UI去刪除資料，最後在從下指令查詢資料是否還在DB
+...               6. Sort By Organization Name - 主要驗證機構名稱和資料庫是否比數一樣
+...               7. Update Form - 主要是測試資料能否更新
 Suite Teardown    Disconnect From Database
 Test Setup        Click Medical Organization Maintain Button
 Test Teardown
@@ -77,6 +79,13 @@ ${TestData_Kanban_3}    777    # 測試資料    公告訊息
 
 *** Test Cases ***
 Check Page
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構整個頁面的文字對齊和文字是否按造規格顯示
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者在醫療機構裡面點選其中一筆資料
+    ...
+    ...    Verify :
+    ...    機構整個頁面和跳窗的文字對齊和文字是否按造規格顯示
     Log    準備驗證參數
     ${Verify_Tab}=    Convert To String    醫療機構維護
     ${Verify_Organization_Code_Div}=    Convert To String    醫療機構查詢
@@ -168,6 +177,16 @@ Check Page
     [Teardown]    Close All Browsers
 
 Refill Form
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構整在新增一筆資料時如果按下重填是否能清空
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下重填按鈕
+    ...
+    ...    Verify :
+    ...    醫療機構維護跳窗必須全部清空
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
     Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
@@ -197,6 +216,17 @@ Refill Form
     [Teardown]    Close All Browsers
 
 Insert Two Records
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構新增兩筆資料
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下新增按鈕
+    ...    6. 重複步驟 3 ~ 6
+    ...
+    ...    Verify :
+    ...    新增的資料是否已存在在資料庫
     Connect Database
     Add Two Record In DB
     ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1 and announcement='${TestData_Kanban_1}' and is_chk_hosp= 'Y'
@@ -207,6 +237,19 @@ Insert Two Records
     [Teardown]    Close All Browsers
 
 Query Organization Code and Name
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構新增兩筆資料
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下新增按鈕
+    ...    6. 重複步驟 3 ~ 6
+    ...    7. 查詢機構代碼用測試資料
+    ...    8. 查詢機構代碼和機構名稱用測試資料
+    ...
+    ...    Verify :
+    ...    查詢時是否能正常顯示
     Connect Database
     Add Two Record In DB
     Log    Verify 查詢機構代碼
@@ -230,6 +273,20 @@ Query Organization Code and Name
     [Teardown]    Close All Browsers
 
 Delete Record
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構新增兩筆資料
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下新增按鈕
+    ...    6. 重複步驟 3 ~ 6
+    ...    7. 回到醫療機構畫面，點選測試資料第一和第二筆
+    ...    8. 按下刪除
+    ...
+    ...    Verify :
+    ...    1. 刪除時是否有顯是刪除兩筆資料資訊
+    ...    2. 檢查刪除的資料的active_flag是否為0
     Log    Verify 測試刪除
     Connect Database
     Add Two Record In DB
@@ -251,6 +308,18 @@ Delete Record
     [Teardown]    Close All Browsers
 
 Sort By Organization Name
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構新增兩筆資料
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下新增按鈕
+    ...    6. 重複步驟 3 ~ 6
+    ...
+    ...
+    ...    Verify :
+    ...    驗證機溝名稱的下拉選單筆數是否和DB查詢出來的筆數一致
     Log    Verify 組織名稱排序
     Connect Database
     Add Two Record In DB
@@ -265,6 +334,21 @@ Sort By Organization Name
     [Teardown]    Close All Browsers
 
 Update Form
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構新增兩筆資料
+    ...    1. 使用者點擊左上角醫療機構維護
+    ...    2. 使用者按下新增按鈕
+    ...    3. 畫面上顯示醫療機構維護跳窗
+    ...    4. 使用者在跳窗中的欄位填寫所有資料
+    ...    5. 使用者按下新增按鈕
+    ...    6. 重複步驟 3 ~ 6
+    ...    7. 回到醫療機構畫面，點選測試資料第二筆
+    ...    8. 顯示出跳窗
+    ...    9. 全部資料全部更新
+    ...    10. 按下確定按鈕
+    ...
+    ...    Verify :
+    ...    更新後的資料是否能正確存在DB中
     Log    Verify 驗證醫療機構維護跳窗是否能更新
     Connect Database
     Add Two Record In DB
