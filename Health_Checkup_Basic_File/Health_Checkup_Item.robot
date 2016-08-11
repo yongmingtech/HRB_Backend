@@ -30,6 +30,25 @@ ${Health_Checkup_Detail_Item_WorkerItem_Column}    booleancolumn-1106-textEl    
 ${Health_Checkup_Detail_Item_DataType_Column}    gridcolumn-1107-textEl    #健檢細項 DIV 下的 資料類型    Column
 ${Health_Checkup_Detail_Item_OrgSystem_Column}    templatecolumn-1108-textEl    #健檢細項 DIV 下的 器官系統    Column
 ${Health_Checkup_Detail_Item_Description_Column}    gridcolumn-1109-titleEl    #健檢細項 DIV 下的 說明
+${PopupWindow_BigItem_Code_Title}    maintainFormWindow-1122_header_hd-textEl    #跳窗    健檢大項維護的Tile
+${PopupWindow_BigItem_Code_Label}    textfield-1124-labelEl    #跳窗    健檢大項維護
+${PopupWindow_BigItem_Name_English_Label}    textfield-1125-labelEl    #跳窗    健檢大項維護
+${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1127-labelEl    #跳窗    健檢大項維護
+${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1126-labelEl    #跳窗    健檢大項維護
+${PopupWindow_BigItem_Close_Button}    button-1132-btnInnerEl    #跳窗    健檢大項維護的關閉按鈕
+${PopupWindow_Detail_Title}    maintainFormWindow-1136_header_hd-textEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Name_Label}    displayfield-1139-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Item_Label}    checkboxfield-1140-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_LOINC_Label}    textfield-1141-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_HCode_Label}    textfield-1142-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_DCode_Label}    textfield-1143-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_English_Label}    textfield-1144-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Tranditional_Chinese_Label}    textfield-1145-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Simple_Chinese_Label}    textfield-1146-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1147-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
+${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
 
 *** Test Cases ***
 Check page
@@ -138,7 +157,68 @@ Check page
     Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_DataType_Style}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_OrgSystem_Style}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Detail_Item_Description_Style}
+    Log    Verify 健檢大項 跳窗
+    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    ${Verify_Big_Item_Title}    Convert To String    健檢大項維護
+    ${Verify_Big_Item_Code}    Convert To String    *大項代碼:
+    ${Verify_Big_Name_Code_English}    Convert To String    *大項名稱(英文):
+    ${Verify_Big_Name_Code_Simple_Chinese}    Convert To String    *大項名稱(簡中):
+    ${Verify_Big_Name_Code_Tranditional_Chinese}    Convert To String    *大項名稱(繁中):
+    ${Verify_Big_Item_Title}    Get Text    ${PopupWindow_BigItem_Code_Title}
+    ${Get_PopupWindow_BigItem_Code_Label}    Get Text    ${PopupWindow_BigItem_Code_Label}
+    ${Get_PopupWindow_BigItem_Name_English_Label}    Get Text    ${PopupWindow_BigItem_Name_English_Label}
+    ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}    Get Text    ${PopupWindow_BigItem_Name_Simple_Chinese_Label}
+    ${Get_PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    Get Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}
+    Should Be Equal    ${Verify_Big_Item_Title}    ${Verify_Big_Item_Title}
+    Should Be Equal    ${Verify_Big_Item_Code}    ${Get_PopupWindow_BigItem_Code_Label}
+    Should Be Equal    ${Verify_Big_Name_Code_English}    ${Get_PopupWindow_BigItem_Name_English_Label}
+    Should Be Equal    ${Verify_Big_Name_Code_Simple_Chinese}    ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}
+    Should Be Equal    ${Verify_Big_Name_Code_Tranditional_Chinese}    ${Get_PopupWindow_BigItem_Name_Tranditional_Chinese_Label}
+    Click Element    ${PopupWindow_BigItem_Close_Button}
+    Log    Verify 健檢大項 跳窗
+    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
     Sleep    1
+    ${Verify_Detail_Title}    Convert To String    健檢細項維護
+    ${Verify_Detail_Name_Label}    Convert To String    大項名稱:
+    ${Verify_Detail_Item_Label}    Convert To String    勞檢項目:
+    ${Verify_Detail_LOINC_Label}    Convert To String    LOINC:
+    ${Verify_Detail_HCode_Label}    Convert To String    健保碼:
+    ${Verify_Detail_DCode_Label}    Convert To String    *細項代碼:
+    ${Verify_Detail_English_Label}    Convert To String    *細項名稱(英文):
+    ${Verify_Detail_Tranditional_Chinese_Label}    Convert To String    *細項名稱(繁中):
+    ${Verify_Detail_Simple_Chinese_Label}    Convert To String    *細項名稱(簡中):
+    ${Verify_Detail_DataType_Label}    Convert To String    *資料類型:
+    ${Verify_Detail_Description_Label}    Convert To String    說明:
+    ${Verify_Detail_OwnOrg_Div}    Convert To String    所屬器官系統
+    ${Verify_Detail_OwnOrg_Column}    Convert To String    器官名稱
+    ${Get_Detail_Title}    Get Text    ${PopupWindow_Detail_Title}
+    ${Get_Detail_Name_Label}    Get Text    ${PopupWindow_Detail_Name_Label}
+    ${Get_Detail_Item_Label}    Get Text    ${PopupWindow_Detail_Item_Label}
+    ${Get_Detail_LOINC_Label}    Get Text    ${PopupWindow_Detail_LOINC_Label}
+    ${Get_Detail_HCode_Label}    Get Text    ${PopupWindow_Detail_HCode_Label}
+    ${Get_Detail_DCode_Label}    Get Text    ${PopupWindow_Detail_DCode_Label}
+    ${Get_Detail_English_Label}    Get Text    ${PopupWindow_Detail_English_Label}
+    ${Get_Detail_Tranditional_Chinese_Label}    Get Text    ${PopupWindow_Detail_Tranditional_Chinese_Label}
+    ${Get_Detail_Simple_Chinese_Label}    Get Text    ${PopupWindow_Detail_Simple_Chinese_Label}
+    ${Get_Detail_DataType_Label}    Get Text    ${PopupWindow_Detail_DataType_Label}
+    ${Get_Detail_Description_Label}    Get Text    ${PopupWindow_Detail_Description_Label}
+    ${Get_Detail_OwnOrg_Div}    Get Text    ${PopupWindow_Detail_OwnOrg_Div}
+    ${Get_Detail_OwnOrg_Column}    Get Text    ${PopupWindow_Detail_OwnOrg_Column}
+    ${Get_Detail_OwnOrg_Style}    Get Element Attribute    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr[1]/td[3]/div@style
+    Should Be Equal    ${Verify_Detail_Title}    ${Get_Detail_Title}
+    Should Be Equal    ${Verify_Detail_Name_Label}    ${Get_Detail_Name_Label}
+    Should Be Equal    ${Verify_Detail_Item_Label}    ${Get_Detail_Item_Label}
+    Should Be Equal    ${Verify_Detail_LOINC_Label}    ${Get_Detail_LOINC_Label}
+    Should Be Equal    ${Verify_Detail_HCode_Label}    ${Get_Detail_HCode_Label}
+    Should Be Equal    ${Verify_Detail_DCode_Label}    ${Get_Detail_DCode_Label}
+    Should Be Equal    ${Verify_Detail_English_Label}    ${Get_Detail_English_Label}
+    Should Be Equal    ${Verify_Detail_Tranditional_Chinese_Label}    ${Get_Detail_Tranditional_Chinese_Label}
+    Should Be Equal    ${Verify_Detail_Simple_Chinese_Label}    ${Get_Detail_Simple_Chinese_Label}
+    Should Be Equal    ${Verify_Detail_DataType_Label}    ${Get_Detail_DataType_Label}
+    Should Be Equal    ${Verify_Detail_Description_Label}    ${Get_Detail_Description_Label}
+    Should Be Equal    ${Verify_Detail_OwnOrg_Div}    ${Get_Detail_OwnOrg_Div}
+    Should Be Equal    ${Verify_Detail_OwnOrg_Column}    ${Get_Detail_OwnOrg_Column}
+    Should Be Equal    ${Verify_Align_Left}    ${Get_Detail_OwnOrg_Style}
     [Teardown]    Close Browser
 
 *** Keywords ***
@@ -149,4 +229,4 @@ Click Health Checkup Item Button
     Click Element    ${Health_Checkup_Basic_File_ID}
     Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Health_Checkup_Item_ID}
-    Sleep    3
+    Sleep    1
