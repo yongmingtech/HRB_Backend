@@ -40,6 +40,9 @@ Check page
     ...
     ...    Verify :
     ...    機構整個頁面和跳窗的文字對齊和文字是否按造規格顯示
+    Log    宣告共用變數
+    ${Verify_Align_Center}    Convert To String    text-align: center;
+    ${Verify_Align_Left}    Convert To String    text-align: left;
     Log    Verify Tab
     ${Verify_Tab}=    Convert To String    健檢項目
     ${Get_Tab}=    Get Text    xpath=${Health_Checkup_Item_Tab_XPATH}
@@ -75,6 +78,8 @@ Check page
     ${Get_Health_Checkup_Big_Item_Name_Column}    Get Text    ${Health_Checkup_Big_Item_Name_Column}
     ${Get_Health_Checkup_Big_Item_Insert_Button}=    Get Text    ${Health_Checkup_Big_Item_Insert_Button}
     ${Get_Health_Checkup_Big_Item_Delete_Button}=    Get Text    ${Health_Checkup_Big_Item_Delete_Button}
+    ${Get_Health_Checkup_Big_Item_Code_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
+    ${Get_Health_Checkup_Big_Item_Name_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
     Should Be Equal    ${Verify_Health_Checkup_Big_Item_DIV}    ${Get_Health_Checkup_Big_Item_DIV}
     Should Be Equal    ${Verify_Health_Checkup_Big_Item_Insert_Button}    ${Get_Health_Checkup_Big_Item_Insert_Button}
     Should Be Equal    ${Verify_Health_Checkup_Big_Item_Delete_Button}    ${Get_Health_Checkup_Big_Item_Delete_Button}
@@ -82,6 +87,8 @@ Check page
     Should Be Equal    ${Verify_Health_Checkup_Big_Item_Name_Column}    ${Get_Health_Checkup_Big_Item_Name_Column}
     Should Be Equal    ${Verify_Insert_Button}    ${Get_Health_Checkup_Big_Item_Insert_Button}
     Should Be Equal    ${Verify_Delete_Button}    ${Get_Health_Checkup_Big_Item_Delete_Button}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Big_Item_Code_Style}
+    Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Big_Item_Name_Style}
     Log    Verify 健檢細項 DIV
     ${Verify_Health_Checkup_Detail_Item_DIV}    Convert To String    健檢細項
     ${Verify_Health_Checkup_Detail_Item_LOINC_Column}    Convert To String    LOINC
@@ -103,6 +110,15 @@ Check page
     ${Get_Health_Checkup_Detail_Item_DataType_Column}    Get Text    ${Health_Checkup_Detail_Item_DataType_Column}
     ${Get_Health_Checkup_Detail_Item_OrgSystem_Column}    Get Text    ${Health_Checkup_Detail_Item_OrgSystem_Column}
     ${Get_Health_Checkup_Detail_Item_Description_Column}    Get Text    ${Health_Checkup_Detail_Item_Description_Column}
+    Log    Check align
+    ${Get_Health_Checkup_Detail_Item_LOINC_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
+    ${Get_Health_Checkup_Detail_Item_Code_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
+    ${Get_Health_Checkup_Detail_Item_DetailCode_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[6]/div@style
+    ${Get_Health_Checkup_Detail_Item_DetailName_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[7]/div@style
+    ${Get_Health_Checkup_Detail_Item_WorkerItem_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[8]/div@style
+    ${Get_Health_Checkup_Detail_Item_DataType_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[9]/div@style
+    ${Get_Health_Checkup_Detail_Item_OrgSystem_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[10]/div@style
+    ${Get_Health_Checkup_Detail_Item_Description_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[11]/div@style
     Should Be Equal    ${Verify_Health_Checkup_Detail_Item_DIV}    ${Verify_Health_Checkup_Detail_Item_DIV}
     Should Be Equal    ${Verify_Health_Checkup_Detail_Item_LOINC_Column}    ${Verify_Health_Checkup_Detail_Item_LOINC_Column}
     Should Be Equal    ${Verify_Health_Checkup_Detail_Item_Code_Column}    ${Verify_Health_Checkup_Detail_Item_Code_Column}
@@ -114,8 +130,16 @@ Check page
     Should Be Equal    ${Verify_Health_Checkup_Detail_Item_Description_Column}    ${Get_Health_Checkup_Detail_Item_Description_Column}
     Should Be Equal    ${Verify_Insert_Button}    ${Get_Health_Checkup_Detail_Item_Insert_Button}
     Should Be Equal    ${Verify_Delete_Button}    ${Get_Health_Checkup_Detail_Item_Delete_Button}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_LOINC_Style}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_Code_Style}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_DetailCode_Style}
+    Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Detail_Item_DetailName_Style}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_WorkerItem_Style}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_DataType_Style}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_OrgSystem_Style}
+    Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Detail_Item_Description_Style}
     Sleep    1
-    Close Browser
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Click Health Checkup Item Button
