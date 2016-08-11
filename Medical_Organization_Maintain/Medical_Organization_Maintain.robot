@@ -323,14 +323,18 @@ Sort By Organization Name
     Log    Verify 組織名稱排序
     Connect Database
     Add Two Record In DB
-    Sleep    3
+    Sleep    1
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
     ${Organization_Name_List}    Create List
-    : FOR    ${Index}    IN RANGE    1    3
+    : FOR    ${Index}    IN RANGE    1    ${Get_Organization_Count}+1
     \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${Index}]/td[6]/div
     \    Append To List    ${Organization_Name_List}    ${Get_Name}
-    Log Many    ${Organization_Name_List}
-    ${Result}=    Query    ${Query_organization_Name_By_ASC}
-    ${Verify_List}    Convert To List    ${Result}
+    ${Query_Basic_hospital}=    Set Variable    select Top ${Get_Organization_Count} hospital_name from Basic_Hospital where active_flag = 1 order by hospital_name
+    ${Result}=    Query    ${Query_Basic_hospital}
+    :FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}
+    \    ${Verify_from_DB}    Convert To String    ${Result[${Index}][0]}
+    \    ${Get_from_Web}    Convert To String    ${Organization_Name_List[${Index}]}
+    \    Should Be Equal    ${Verify_from_DB}    ${Get_from_Web}
     [Teardown]    Close All Browsers
 
 Update Form
