@@ -223,6 +223,37 @@ Check page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Detail_OwnOrg_Style}
     [Teardown]    Close Browser
 
+Sort By Item Code
+    Connect Database
+    ${Get_Item_Code_Count}=    Get Matching Xpath Count    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
+    ${Get_Item_Code_List}    Create List
+    : FOR    ${INDEX}    IN RANGE    1    ${Get_Item_Code_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${INDEX}]/td[4]/div
+    \    Append To List    ${Get_Item_Code_List}    ${Get_Name}
+    ${Query_Basic_CheckGroup}=    Set Variable    select Top ${Get_Item_Code_Count} group_code from Basic_CheckGroup where active_flag=1 order by group_code asc \ \
+    ${Result}    Query    ${Query_Basic_CheckGroup}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Item_Code_Count}
+    \    ${Verify_From_DB}    Convert To String    ${Result[${Index}][0]}
+    \    ${Get_From_Web}    Convert To String    ${Get_Item_Code_List[${Index}]}
+    \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
+    [Teardown]    Close Browser
+
+Sort By Detail Code
+    Connect Database
+    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Detail_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr
+    ${Get_Detail_List}    Create List
+    : FOR    ${Index}    IN RANGE    1    ${Get_Detail_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[${Index}]/td[6]/div
+    \    Append To List    ${Get_Detail_List}    ${Get_Name}
+    ${Query_Basic_Item}    Set Variable    select item_code \ from Basic_CheckItem where group_id = (select id from Basic_CheckGroup where group_code='${Get_Big_Item_Code}' ) and active_flag=1 order by item_code asc \
+    ${Result}    Query    ${Query_Basic_Item}
+    : FOR    ${INDEX}    IN RANGE    0    ${Get_Detail_Count}
+    \    ${Verify_From_DB}    Convert To String    ${Result[${index}][0]}
+    \    ${Verify_From_Web}    Convert To String    ${Get_Detail_List[${INDEX}]}
+    \    Should Be Equal    ${Verify_From_DB}    ${Verify_From_Web}
+    [Teardown]    Close Browser
+
 *** Keywords ***
 Click Health Checkup Item Button
     Open Broser and Login automatically
