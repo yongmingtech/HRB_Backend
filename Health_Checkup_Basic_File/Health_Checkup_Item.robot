@@ -51,6 +51,7 @@ ${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1147-labelEl    #跳�
 ${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
 ${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
+${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
 
 *** Test Cases ***
 Check page
@@ -224,6 +225,11 @@ Check page
     [Teardown]    Close Browser
 
 Sort By Item Code
+    [Documentation]    Test case Description :
+    ...    主要驗證健檢大項的大項代碼是否由小到大排列
+    ...
+    ...    Verify :
+    ...    大項代碼應該由小到大排列
     Connect Database
     ${Get_Item_Code_Count}=    Get Matching Xpath Count    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
     ${Get_Item_Code_List}    Create List
@@ -239,6 +245,11 @@ Sort By Item Code
     [Teardown]    Close Browser
 
 Sort By Detail Code
+    [Documentation]    Test case Description :
+    ...    主要驗證健檢細項的細項代碼是否由小到大排列
+    ...
+    ...    Verify :
+    ...    細項代碼應該由小到大排列
     Connect Database
     ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Detail_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr
@@ -255,6 +266,13 @@ Sort By Detail Code
     [Teardown]    Close Browser
 
 Sort By Organ Name
+    [Documentation]    Test case Description :
+    ...    1. 使用者點擊健檢細項裡面的第一筆資料
+    ...    2. 跳出健檢細項維護的視窗
+    ...    3. 驗證所屬器官系統的器官名稱是否由小到大排序
+    ...
+    ...    Verify :
+    ...    器官名稱應該由小到大排序
     Connect Database
     Click Element    button-1112-btnInnerEl
     Sleep    1
@@ -269,6 +287,24 @@ Sort By Organ Name
     \    ${Verify_From_DB}    Convert To String    ${Result[${Index}][0]}
     \    ${Get_From_Web}    Convert To String    ${Get_Organ_Name_List[${Index}]}
     \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
+    [Teardown]    Close Browser
+
+Query Detail Name
+    Connect Database
+    Input Text    ${Health_Checkup_Name_Dropdown}    ${Test_Query_Detail_Name}
+    Click Element    ${Query_Button}
+    Sleep    1
+    Log    Verify 健檢大項是否有資料
+    ${Query_Basic_CheckGroup}    Set Variable    select group_code,group_name_zh_tw from Basic_CheckGroup where group_name_zh_tw='${Test_Query_Detail_Name}'
+    ${Query_Item_Result}    Query    ${Query_Basic_CheckGroup}
+    ${Get_Item_Code_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    ${Get_Item_Code_From_DB}    Convert To String    ${Query_Item_Result[0][0]}
+    ${Get_Item_Name_From_DB}    Convert To String    ${Query_Item_Result[0][1]}
+    Should Be Equal    ${Get_Item_Code_From_Web}    ${Get_Item_Code_From_DB}
+    Should Be Equal    ${Get_Item_Name_From_Web}    ${Get_Item_Name_From_DB}
+    Log    Verify 健檢細項是否有資料
+    Sleep    5
     [Teardown]    Close Browser
 
 *** Keywords ***
