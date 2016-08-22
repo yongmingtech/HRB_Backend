@@ -33,11 +33,17 @@ ${Health_Checkup_Detail_Item_DataType_Column}    gridcolumn-1107-textEl    #健�
 ${Health_Checkup_Detail_Item_OrgSystem_Column}    templatecolumn-1108-textEl    #健檢細項 DIV 下的 器官系統    Column
 ${Health_Checkup_Detail_Item_Description_Column}    gridcolumn-1109-titleEl    #健檢細項 DIV 下的 說明
 ${PopupWindow_BigItem_Code_Title}    maintainFormWindow-1122_header_hd-textEl    #跳窗    健檢大項維護的Tile
-${PopupWindow_BigItem_Code_Label}    textfield-1124-labelEl    #跳窗    健檢大項維護
-${PopupWindow_BigItem_Name_English_Label}    textfield-1125-labelEl    #跳窗    健檢大項維護
-${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1127-labelEl    #跳窗    健檢大項維護
-${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1126-labelEl    #跳窗    健檢大項維護
+${PopupWindow_BigItem_Code_Label}    textfield-1124-labelEl    #跳窗    健檢大項維護 代碼
+${PopupWindow_BigItem_Name_English_Label}    textfield-1125-labelEl    #跳窗    健檢大項維護 大項名稱(英文)
+${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1127-labelEl    #跳窗    健檢大項維護 大項名稱(簡中)
+${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1126-labelEl    #跳窗    健檢大項維護 大項名稱(繁中)
+${PopupWindow_BigItem_Code_TextBox}    textfield-1124-inputEl    #跳窗    健檢大項維護 代碼 TextBox
+${PopupWindow_BigItem_Name_English_TextBox}    textfield-1125-inputEl    #跳窗    健檢大項維護 大項名稱(英文) TextBox
+${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    textfield-1127-inputEl    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
+${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    textfield-1126-inputEl    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
+${PopupWindow_BigItem_Insert_Button}    button-1129-btnInnerEl    #跳窗    健檢大項維護 新增按鈕 Button
 ${PopupWindow_BigItem_Close_Button}    button-1132-btnInnerEl    #跳窗    健檢大項維護的關閉按鈕
+${PopupWindow_BigItem_OK_Button}    button-1006-btnIconEl
 ${PopupWindow_Detail_Title}    maintainFormWindow-1136_header_hd-textEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_Name_Label}    displayfield-1139-labelEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_Item_Label}    checkboxfield-1140-labelEl    #跳窗    健檢細項維護的Tile
@@ -52,6 +58,10 @@ ${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗
 ${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
 ${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
 ${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
+${Test_ItemCode}    (A01)
+${Test_Item_Name_English}    Test
+${Test_Item_Name_Simply_Chinese}    Test_1
+${Test_Item_Name_Tranditional_Chinese}    Test_2
 
 *** Test Cases ***
 Check page
@@ -290,6 +300,13 @@ Sort By Organ Name
     [Teardown]    Close Browser
 
 Query Detail Name
+    [Documentation]    Test case Description :
+    ...    1. 使用者點擊健檢細項裡面的第一筆資料
+    ...    2. 跳出健檢細項維護的視窗
+    ...    3. 驗證所屬器官系統的器官名稱是否由小到大排序
+    ...
+    ...    Verify :
+    ...    器官名稱應該由小到大排序
     Connect Database
     Input Text    ${Health_Checkup_Name_Dropdown}    ${Test_Query_Detail_Name}
     Click Element    ${Query_Button}
@@ -305,6 +322,48 @@ Query Detail Name
     Should Be Equal    ${Get_Item_Name_From_Web}    ${Get_Item_Name_From_DB}
     Log    Verify 健檢細項是否有資料
     Sleep    5
+    [Teardown]    Close Browser
+
+Insert Record in Big Item
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 輸入資料後並按下確定
+    ...    4. 驗證資料是否有在資料庫中
+    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    6. 在畫面中刪除資料
+    ...    7. 檢查資料是否在DB中有被成功移除
+    ...
+    ...    Verify :
+    ...    新增是和刪除和網頁是否正確
+    Connect Database
+    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
+    Execute Sql String    ${Delete_Big_Item}
+    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    Log    輸入資料
+    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    ${PopupWindow_BigItem_Insert_Button}
+    Log    驗正輸入資料是否存在DB
+    Sleep    2
+    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
+    Check If Exists In Database    ${Query_Big_Item}
+    Log    檢查網頁資料是否正確
+    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
+    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
+    Log    UI 作刪除
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
+    Click Element    ${Health_Checkup_Big_Item_Delete_Button}
+    Sleep    2
+    Click Element    ${PopupWindow_BigItem_OK_Button}
+    Sleep    2
+    Log    驗正輸入資料不應該再DB
+    Check If Not Exists In Database    ${Query_Big_Item}
     [Teardown]    Close Browser
 
 *** Keywords ***
