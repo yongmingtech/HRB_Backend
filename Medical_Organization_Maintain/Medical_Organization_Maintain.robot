@@ -76,6 +76,8 @@ ${TestData_Organization_Address_3}    address    # 測試資料 機構地址
 ${TestData_Contact_Phone_3}    5937081    # 測試資料 連絡電話
 ${TestData_Contact_Email_3}    test@yamail.com    # 測試資料    聯絡信箱
 ${TestData_Kanban_3}    777    # 測試資料    公告訊息
+${wait_for_element}    xpath=html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input
+${wait_for_element_1}    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
 
 *** Test Cases ***
 Check Page
@@ -143,6 +145,7 @@ Check Page
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
     Log    Verify 醫療機構裡面的Gridview文字對齊
+    Wait Until Element Is Visible    ${wait_for_element_1}
     ${Get_System_Code_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
     ${Get_Organization_Code_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
     ${Get_Organization_Name_Align}=    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div@style
@@ -331,7 +334,7 @@ Sort By Organization Name
     \    Append To List    ${Organization_Name_List}    ${Get_Name}
     ${Query_Basic_hospital}=    Set Variable    select Top ${Get_Organization_Count} hospital_name from Basic_Hospital where active_flag = 1 order by hospital_name
     ${Result}=    Query    ${Query_Basic_hospital}
-    :FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}
     \    ${Verify_from_DB}    Convert To String    ${Result[${Index}][0]}
     \    ${Get_from_Web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    Should Be Equal    ${Verify_from_DB}    ${Get_from_Web}
@@ -404,6 +407,7 @@ Add Two Record In DB
     Sleep    2
     Click Element    ${Insert_Button}
     Sleep    2
+    Wait Until Element Is Visible    ${wait_for_element}
     Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${TestData_System_Code_2}
     Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_Organization_Code_2}
     Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Name_2}
