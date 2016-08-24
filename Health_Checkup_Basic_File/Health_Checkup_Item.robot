@@ -499,7 +499,7 @@ Refill Form For Detail Item
     Click Element    ${PopupWindow_Detail_Refill_Button}
     Log    取得資料
     ${Get_Detail_LOINC_TextBox}    Get Text    xpath=${PopupWindow_Detail_LOINC_TextBox}
-    ${Get_Detail_HCode_TextBox}    Get Text     xpath=${PopupWindow_Detail_HCode_TextBox}
+    ${Get_Detail_HCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_HCode_TextBox}
     ${Get_Detail_DCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_DCode_TextBox}
     ${Get_Detail_English_TextBox}    Get Text    xpath=${PopupWindow_Detail_English_TextBox}
     ${Get_Detail_Tranditional_Chinese_TextBox}    Get Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}
@@ -515,9 +515,35 @@ Refill Form For Detail Item
     Should Be Empty    ${Get_Detail_Simple_Chinese_TextBox}
     CheckBox Should Not Be Selected    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
     Should Be Empty    ${Get_Detail_Description_TextArea}
-    :FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
-    \    CheckBox Should Not Be Selected    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
+    Sleep    1
+    ${None_Value}    Convert To String    None
+    : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
+    \    ${Get_CheckBox}    Get Text    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
+    \    Should Be Empty    ${Get_CheckBox}
     [Teardown]    Close Browser
+
+Insert Record In Detail Item
+    Connect Database
+    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code like '%(A0%'
+    Execute Sql String    ${Delete_Big_Item}
+    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    Log    輸入資料
+    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    ${PopupWindow_BigItem_Insert_Button}
+    Log    在健檢細項中輸入資料
+    Log    驗正輸入資料是否存在DB
+    Sleep    2
+    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
+    Check If Exists In Database    ${Query_Big_Item}
+    Log    檢查網頁資料是否正確
+    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
+    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
 
 *** Keywords ***
 Click Health Checkup Item Button
