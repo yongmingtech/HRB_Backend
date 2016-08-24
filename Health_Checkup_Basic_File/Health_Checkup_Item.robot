@@ -43,7 +43,8 @@ ${PopupWindow_BigItem_Name_English_TextBox}    textfield-1125-inputEl    #跳窗
 ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    textfield-1127-inputEl    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
 ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    textfield-1126-inputEl    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
 ${PopupWindow_BigItem_Insert_Button}    button-1129-btnInnerEl    #跳窗    健檢大項維護 新增按鈕 Button
-${PopupWindow_BigItem_Close_Button}    button-1132-btnInnerEl    #跳窗    健檢大項維護的關閉按鈕
+${PopupWindow_BigItem_Close_Button}    button-1132-btnInnerEl    #跳窗    健檢大項維護的關閉按鈕 Button
+${PopupWindow_BigItem_Refill_Button}    button-1131-btnInnerEl    #跳窗    健檢大項維護的重填按鈕 Button
 ${PopupWindow_BigItem_OK_Button}    button-1006-btnIconEl
 ${PopupWindow_Detail_Title}    maintainFormWindow-1136_header_hd-textEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_Name_Label}    displayfield-1139-labelEl    #跳窗    健檢細項維護的Tile
@@ -431,6 +432,33 @@ Alert Big Item Form
     Sleep    2
     Log    驗正輸入資料不應該再DB
     Check If Not Exists In Database    ${Query_Big_Item}
+    [Teardown]    Close Browser
+
+Refill Form For Big Item
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 在所有欄位中輸入資料
+    ...    4. 按下重填按鈕
+    ...
+    ...    Verify :
+    ...    所有欄位應該要被清空
+    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    Log    輸入資料
+    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    ${PopupWindow_BigItem_Refill_Button}
+    ${Get_BigItem_Code}    Get Text    ${PopupWindow_BigItem_Code_TextBox}
+    ${Get_BigItem_Name_English}    Get Text    ${PopupWindow_BigItem_Name_English_TextBox}
+    ${Get_BigItem_Name_Simple_Chinese}    Get Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}
+    ${Get_BigItem_Name_Tranditional_Chinese}    Get Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}
+    Should Be Empty    ${Get_BigItem_Code}
+    Should Be Empty    ${Get_BigItem_Name_English}
+    Should Be Empty    ${Get_BigItem_Name_Simple_Chinese}
+    Should Be Empty    ${Get_BigItem_Name_Tranditional_Chinese}
     [Teardown]    Close Browser
 
 *** Keywords ***
