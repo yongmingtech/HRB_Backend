@@ -3,6 +3,7 @@ Documentation     主要測試健檢基本檔的基本項目
 ...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關物件是否存在
 Suite Teardown
 Test Setup        Click Health Checkup Item Button
+Test Teardown
 Force Tags
 Metadata          Version    0.1
 Resource          ../Login.robot
@@ -59,6 +60,16 @@ ${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1147-labelEl    #跳�
 ${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
 ${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
+${PopupWindow_Detail_Laber_Item_CheckBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
+${PopupWindow_Detail_LOINC_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
+${PopupWindow_Detail_HCode_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
+${PopupWindow_Detail_DCode_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
+${PopupWindow_Detail_English_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
+${PopupWindow_Detail_Tranditional_Chinese_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
+${PopupWindow_Detail_Simple_Chinese_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
+${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗    #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_Description_TextArea}    html/body/div[13]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
+${PopupWindow_Detail_Refill_Button}    button-1147-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
 ${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
 ${Test_ItemCode}    (A01)
 ${Test_Item_Name_English}    Test
@@ -459,6 +470,53 @@ Refill Form For Big Item
     Should Be Empty    ${Get_BigItem_Name_English}
     Should Be Empty    ${Get_BigItem_Name_Simple_Chinese}
     Should Be Empty    ${Get_BigItem_Name_Tranditional_Chinese}
+    [Teardown]    Close Browser
+
+Refill Form For Detail Item
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢細項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢細項維護的相關資訊
+    ...    3. 在所有欄位中輸入資料
+    ...    4. 按下重填按鈕
+    ...
+    ...    Verify :
+    ...    所有欄位應該要被清空
+    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_Title}    ${G_Wait_For_Element_Timeout}
+    ${Get_CheckBox_Count}    Get Matching Xpath Count    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr
+    Log    輸入資料
+    : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
+    \    Click Element    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div
+    Click Element    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
+    Input Text    xpath=${PopupWindow_Detail_LOINC_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_Detail_HCode_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_Detail_DCode_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_Detail_English_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}    ${Test_ItemCode}
+    Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
+    Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_ItemCode}
+    Click Element    ${PopupWindow_Detail_Refill_Button}
+    Log    取得資料
+    ${Get_Detail_LOINC_TextBox}    Get Text    xpath=${PopupWindow_Detail_LOINC_TextBox}
+    ${Get_Detail_HCode_TextBox}    Get Text     xpath=${PopupWindow_Detail_HCode_TextBox}
+    ${Get_Detail_DCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_DCode_TextBox}
+    ${Get_Detail_English_TextBox}    Get Text    xpath=${PopupWindow_Detail_English_TextBox}
+    ${Get_Detail_Tranditional_Chinese_TextBox}    Get Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}
+    ${Get_Detail_Simple_Chinese_TextBox}    Get Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}
+    ${Get_Detail_Description_TextArea}    Get Text    xpath=${PopupWindow_Detail_Description_TextArea}
+    Log    驗證欄位
+    CheckBox Should Not Be Selected    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
+    Should Be Empty    ${Get_Detail_LOINC_TextBox}
+    Should Be Empty    ${Get_Detail_HCode_TextBox}
+    Should Be Empty    ${Get_Detail_DCode_TextBox}
+    Should Be Empty    ${Get_Detail_English_TextBox}
+    Should Be Empty    ${Get_Detail_Tranditional_Chinese_TextBox}
+    Should Be Empty    ${Get_Detail_Simple_Chinese_TextBox}
+    CheckBox Should Not Be Selected    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
+    Should Be Empty    ${Get_Detail_Description_TextArea}
+    :FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
+    \    CheckBox Should Not Be Selected    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
     [Teardown]    Close Browser
 
 *** Keywords ***
