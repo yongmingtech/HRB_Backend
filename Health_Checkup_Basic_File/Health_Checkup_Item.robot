@@ -1,6 +1,7 @@
 *** Setting ***
 Documentation     主要測試健檢基本檔的基本項目
 ...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關物件是否存在
+Suite Setup
 Suite Teardown
 Test Setup        Click Health Checkup Item Button
 Test Teardown
@@ -60,16 +61,17 @@ ${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1147-labelEl    #跳�
 ${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗    健檢細項維護的Tile
 ${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
 ${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
-${PopupWindow_Detail_Laber_Item_CheckBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
-${PopupWindow_Detail_LOINC_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
-${PopupWindow_Detail_HCode_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
-${PopupWindow_Detail_DCode_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
-${PopupWindow_Detail_English_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
-${PopupWindow_Detail_Tranditional_Chinese_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
-${PopupWindow_Detail_Simple_Chinese_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
-${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗    #健檢細項維護的資料類型(數字)
-${PopupWindow_Detail_Description_TextArea}    html/body/div[13]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
+${PopupWindow_Detail_Laber_Item_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
+${PopupWindow_Detail_LOINC_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
+${PopupWindow_Detail_HCode_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
+${PopupWindow_Detail_DCode_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
+${PopupWindow_Detail_English_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
+${PopupWindow_Detail_Tranditional_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
+${PopupWindow_Detail_Simple_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
+${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗    #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_Description_TextArea}    html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
 ${PopupWindow_Detail_Refill_Button}    button-1147-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
+${PopupWindow_Detail_Insert_Button}    button-1145-btnInnerEl    #跳窗 健檢細項維護的新增按鈕 Button
 ${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
 ${Test_ItemCode}    (A01)
 ${Test_Item_Name_English}    Test
@@ -79,6 +81,13 @@ ${Test_ItemCode_2}    (A02)
 ${Test_Item_Name_English_2}    Test2
 ${Test_Item_Name_Simply_Chinese_2}    Test_A
 ${Test_Item_Name_Tranditional_Chinese_2}    Test_B
+${Test_PopupWindow_Detail_LOINC}    TEST_LOINC
+${Test_PopupWindow_Detail_HCode}    ABC123
+${Test_PopupWindow_Detail_DCode}    123456
+${Test_PopupWindow_Detail_English}    Health
+${Test_PopupWindow_Detail_Tranditional_Chinese}    健康
+${Test_PopupWindow_Detail_Simple_Chinese}    健康管理
+${Test_PopupWindow_Detail_Description}    主要測試健檢細項
 
 *** Test Cases ***
 Check page
@@ -89,6 +98,8 @@ Check page
     ...
     ...    Verify :
     ...    機構整個頁面和跳窗的文字對齊和文字是否按造規格顯示
+    Log    Remove Test Data
+    Remove Test Data
     Log    宣告共用變數
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
@@ -301,7 +312,7 @@ Sort By Organ Name
     ...    Verify :
     ...    器官名稱應該由小到大排序
     Connect Database
-    Click Element    button-1112-btnInnerEl
+    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
     Sleep    1
     ${Get_Organ_Name_Count}=    Get Matching Xpath Count    html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr
     ${Get_Organ_Name_List}    Create List
@@ -442,12 +453,13 @@ Refill Form For Detail Item
     ...
     ...    Verify :
     ...    所有欄位應該要被清空
+    Insert One Record In Big Item
     Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_Title}    ${G_Wait_For_Element_Timeout}
-    ${Get_CheckBox_Count}    Get Matching Xpath Count    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr
+    Wait Until Element Is Visible    ${PopupWindow_Detail_Title}    ${G_Wait_For_Element_Timeout}
+    ${Get_CheckBox_Count}    Get Matching Xpath Count    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr
     Log    輸入資料
     : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
-    \    Click Element    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div
+    \    Click Element    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div
     Click Element    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_LOINC_TextBox}    ${Test_ItemCode}
     Input Text    xpath=${PopupWindow_Detail_HCode_TextBox}    ${Test_ItemCode}
@@ -457,7 +469,7 @@ Refill Form For Detail Item
     Input Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}    ${Test_ItemCode}
     Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_ItemCode}
-    Click Element    ${PopupWindow_Detail_Refill_Button}
+    Click Element    id=button-1161-btnInnerEl
     Log    取得資料
     ${Get_Detail_LOINC_TextBox}    Get Text    xpath=${PopupWindow_Detail_LOINC_TextBox}
     ${Get_Detail_HCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_HCode_TextBox}
@@ -479,32 +491,54 @@ Refill Form For Detail Item
     Sleep    1
     ${None_Value}    Convert To String    None
     : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
-    \    ${Get_CheckBox}    Get Text    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
+    \    ${Get_CheckBox}    Get Text    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
     \    Should Be Empty    ${Get_CheckBox}
     [Teardown]    Close Browser
 
 Insert Record In Detail Item
-    Connect Database
-    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code like '%(A0%'
-    Execute Sql String    ${Delete_Big_Item}
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
-    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
-    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
-    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
-    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
-    Click Element    ${PopupWindow_BigItem_Insert_Button}
-    Log    在健檢細項中輸入資料
-    Log    驗正輸入資料是否存在DB
-    Sleep    2
-    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
-    Check If Exists In Database    ${Query_Big_Item}
-    Log    檢查網頁資料是否正確
-    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
-    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 輸入資料後並按下確定
+    ...    4. 驗證資料是否有在資料庫中
+    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    6. 使用者在健檢細項中點擊新增按鈕
+    ...    7. 輸入資料後並按下新增
+    ...
+    ...    Verify :
+    ...    健檢細項應該和輸入的值一樣
+    Insert One Record In Big Item
+    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
+    Sleep    5
+    Click Element    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
+    Input Text    xpath=${PopupWindow_Detail_LOINC_TextBox}    ${Test_PopupWindow_Detail_LOINC}
+    Input Text    xpath=${PopupWindow_Detail_HCode_TextBox}    ${Test_PopupWindow_Detail_HCode}
+    Input Text    xpath=${PopupWindow_Detail_DCode_TextBox}    ${Test_PopupWindow_Detail_DCode}
+    Input Text    xpath=${PopupWindow_Detail_English_TextBox}    ${Test_PopupWindow_Detail_English}
+    Input Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}    ${Test_PopupWindow_Detail_Tranditional_Chinese}
+    Input Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}    ${Test_PopupWindow_Detail_Simple_Chinese}
+    Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
+    Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_PopupWindow_Detail_Description}
+    Click Element    id=button-1159-btnInnerEl
+    Sleep    3
+    Log    驗證網頁資料
+    ${Verify_DataType}    Convert To String    數字
+    ${Verify_Label_Item}    Convert To String    Y
+    ${Get_LOINC}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[4]/div
+    ${Get_Health_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[5]/div
+    ${Get_Detail_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[6]/div
+    ${Get_Detail_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[7]/div
+    ${Get_Label_Item}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[8]/div
+    ${Get_DataType}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[9]/div
+    ${Get_Description}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[11]/div
+    Should Be Equal    ${Test_PopupWindow_Detail_LOINC}    ${Get_LOINC}
+    Should Be Equal    ${Test_PopupWindow_Detail_HCode}    ${Get_Health_Code}
+    Should Be Equal    ${Test_PopupWindow_Detail_DCode}    ${Get_Detail_Code}
+    Should Be Equal    ${Test_PopupWindow_Detail_Tranditional_Chinese}    ${Get_Detail_Name}
+    Should Be Equal    ${Verify_Label_Item}    ${Get_Label_Item}
+    Should Be Equal    ${Verify_DataType}    ${Get_DataType}
+    Should Be Equal    ${Test_PopupWindow_Detail_Description}    ${Get_Description}
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Click Health Checkup Item Button
@@ -517,9 +551,7 @@ Click Health Checkup Item Button
     Sleep    1
 
 Insert One Record In Big Item
-    Connect Database
-    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
-    Execute Sql String    ${Delete_Big_Item}
+    Remove Test Data
     Click Element    ${Health_Checkup_Big_Item_Insert_Button}
     Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
     Log    輸入資料
@@ -542,3 +574,10 @@ Check Big Item Record IS NOT IN DB
     Log    驗正輸入資料不應該再DB
     ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
     Check If Not Exists In Database    ${Query_Big_Item}
+
+Remove Test Data
+    Connect Database
+    ${Delete_Detail_Item}    Set Variable    delete from Basic_CheckItem where ID=( select id from Basic_CheckItem where group_id=(select id from Basic_CheckGroup where group_code='${Test_ItemCode}')) \
+    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
+    Execute Sql String    ${Delete_Detail_Item}
+    Execute Sql String    ${Delete_Big_Item}
