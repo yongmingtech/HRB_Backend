@@ -353,34 +353,14 @@ Insert Record in Big Item
     ...
     ...    Verify :
     ...    新增是和刪除和網頁是否正確
-    Connect Database
-    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
-    Execute Sql String    ${Delete_Big_Item}
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
-    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
-    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
-    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
-    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
-    Click Element    ${PopupWindow_BigItem_Insert_Button}
-    Log    驗正輸入資料是否存在DB
-    Sleep    2
-    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
-    Check If Exists In Database    ${Query_Big_Item}
-    Log    檢查網頁資料是否正確
-    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
-    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
+    Insert One Record In Big Item
     Log    UI 作刪除
     Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
     Click Element    ${Health_Checkup_Big_Item_Delete_Button}
     Sleep    2
     Click Element    ${PopupWindow_BigItem_OK_Button}
-    Sleep    2
-    Log    驗正輸入資料不應該再DB
-    Check If Not Exists In Database    ${Query_Big_Item}
+    Sleep    1
+    Check Big Item Record IS NOT IN DB
     [Teardown]    Close Browser
 
 Alert Big Item Form
@@ -398,26 +378,7 @@ Alert Big Item Form
     ...
     ...    Verify :
     ...    新增是和刪除和網頁是否正確
-    Connect Database
-    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code like '%(A0%'
-    Execute Sql String    ${Delete_Big_Item}
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
-    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
-    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
-    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
-    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
-    Click Element    ${PopupWindow_BigItem_Insert_Button}
-    Log    驗正輸入資料是否存在DB
-    Sleep    2
-    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
-    Check If Exists In Database    ${Query_Big_Item}
-    Log    檢查網頁資料是否正確
-    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
-    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
+    Insert One Record In Big Item
     Log    點擊第一筆資料準備做修改
     Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[1]/div
     Sleep    1
@@ -554,3 +515,30 @@ Click Health Checkup Item Button
     Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Health_Checkup_Item_ID}
     Sleep    1
+
+Insert One Record In Big Item
+    Connect Database
+    ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
+    Execute Sql String    ${Delete_Big_Item}
+    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    Log    輸入資料
+    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    ${PopupWindow_BigItem_Insert_Button}
+    Log    驗正輸入資料是否存在DB
+    Sleep    2
+    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
+    Check If Exists In Database    ${Query_Big_Item}
+    Log    檢查網頁資料是否正確
+    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
+    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese}    ${Get_Item_Name}
+
+Check Big Item Record IS NOT IN DB
+    Log    驗正輸入資料不應該再DB
+    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
+    Check If Not Exists In Database    ${Query_Big_Item}
