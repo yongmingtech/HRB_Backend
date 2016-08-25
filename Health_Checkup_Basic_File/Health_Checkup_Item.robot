@@ -88,6 +88,7 @@ ${Test_PopupWindow_Detail_English}    Health
 ${Test_PopupWindow_Detail_Tranditional_Chinese}    健康
 ${Test_PopupWindow_Detail_Simple_Chinese}    健康管理
 ${Test_PopupWindow_Detail_Description}    主要測試健檢細項
+${Test_Temp}      _Test
 
 *** Test Cases ***
 Check page
@@ -508,8 +509,57 @@ Insert Record In Detail Item
     ...    Verify :
     ...    健檢細項應該和輸入的值一樣
     Insert One Record In Big Item
+    Insert One Record In Detail Item
+    [Teardown]    Close Browser
+
+Alter Detail Item Form
+    Insert One Record In Big Item
+    Insert One Record In Detail Item
+    Sleep    1
+    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[5]/div
+    Sleep    1
+    Click Element    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/input    ${Test_Temp}
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[2]/input    ${Test_Temp}
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[2]/input    ${Test_Temp}
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    ${Test_Temp}
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    ${Test_Temp}
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    ${Test_Temp}
+    Click Element    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[2]/table/tbody/tr/td[2]/input
+    Input Text    xpath=html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    ${Test_Temp}
+    Click Element    xpath=html/body/div[14]/div[3]/div/div/div[2]/div/a/span[1]
+    Sleep    2
+    Log    驗證網頁資料
+    ${Verify_DataType}    Convert To String    文字
+    ${Get_LOINC}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[4]/div
+    ${Get_Health_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[5]/div
+    ${Get_Detail_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[6]/div
+    ${Get_Detail_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[7]/div
+    ${Get_Label_Item}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[8]/div
+    ${Get_DataType}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[9]/div
+    ${Get_Description}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr/td[11]/div
+    Should Be Equal    ${Test_Temp}    ${Get_LOINC}
+    Should Be Equal    ${Test_Temp}    ${Get_Health_Code}
+    Should Be Equal    ${Test_Temp}    ${Get_Detail_Code}
+    Should Be Equal    ${Test_Temp}    ${Get_Detail_Name}
+    Should Be Equal    ${Verify_DataType}    ${Get_DataType}
+    Should Be Equal    ${Test_Temp}    ${Get_Description}
+    Sleep    3
+    [Teardown]    Close Browser
+
+*** Keywords ***
+Click Health Checkup Item Button
+    Open Broser and Login automatically
+    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${Health_Checkup_Basic_File_ID}
+    Click Element    ${Health_Checkup_Basic_File_ID}
+    Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
+    Click Element    ${Health_Checkup_Item_ID}
+    Sleep    1
+
+Insert One Record In Detail Item
     Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
-    Sleep    5
+    Sleep    1
     Click Element    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_LOINC_TextBox}    ${Test_PopupWindow_Detail_LOINC}
     Input Text    xpath=${PopupWindow_Detail_HCode_TextBox}    ${Test_PopupWindow_Detail_HCode}
@@ -520,7 +570,7 @@ Insert Record In Detail Item
     Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_PopupWindow_Detail_Description}
     Click Element    id=button-1159-btnInnerEl
-    Sleep    3
+    Sleep    1
     Log    驗證網頁資料
     ${Verify_DataType}    Convert To String    數字
     ${Verify_Label_Item}    Convert To String    Y
@@ -538,17 +588,6 @@ Insert Record In Detail Item
     Should Be Equal    ${Verify_Label_Item}    ${Get_Label_Item}
     Should Be Equal    ${Verify_DataType}    ${Get_DataType}
     Should Be Equal    ${Test_PopupWindow_Detail_Description}    ${Get_Description}
-    [Teardown]    Close Browser
-
-*** Keywords ***
-Click Health Checkup Item Button
-    Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${Health_Checkup_Basic_File_ID}
-    Click Element    ${Health_Checkup_Basic_File_ID}
-    Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${Health_Checkup_Item_ID}
-    Sleep    1
 
 Insert One Record In Big Item
     Remove Test Data
