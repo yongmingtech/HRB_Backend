@@ -9,9 +9,9 @@ Resource          Library.robot
 
 *** Variables ***
 ${DELAY}          0
-${SERVER}         http://10.32.86.132:8080/    # Backend
-${User_Name}      FC750
-${User_Password}    0406
+${SERVER}         http://192.168.2.71:8060/    # Backend
+${User_Name}      ALISON
+${User_Password}    02260406
 ${Submit_Button}    button-1014-btnIconEl
 
 *** Keywords ***

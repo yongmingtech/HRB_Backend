@@ -337,11 +337,13 @@ Query Detail Name
     ...    Verify :
     ...    器官名稱應該由小到大排序
     Connect Database
-    Input Text    ${Health_Checkup_Name_Dropdown}    ${Test_Query_Detail_Name}
+    Insert One Record In Big Item
+    Insert One Record In Detail Item
+    Input Text    ${Health_Checkup_Name_Dropdown}    ${Test_PopupWindow_Detail_Tranditional_Chinese}
     Click Element    ${Query_Button}
     Sleep    1
     Log    Verify 健檢大項是否有資料
-    ${Query_Basic_CheckGroup}    Set Variable    select group_code,group_name_zh_tw from Basic_CheckGroup where group_name_zh_tw='${Test_Query_Detail_Name}'
+    ${Query_Basic_CheckGroup}    Set Variable    select group_code,group_name_zh_tw from Basic_CheckGroup where group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}'
     ${Query_Item_Result}    Query    ${Query_Basic_CheckGroup}
     ${Get_Item_Code_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Item_Name_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
@@ -350,7 +352,6 @@ Query Detail Name
     Should Be Equal    ${Get_Item_Code_From_Web}    ${Get_Item_Code_From_DB}
     Should Be Equal    ${Get_Item_Name_From_Web}    ${Get_Item_Name_From_DB}
     Log    Verify 健檢細項是否有資料
-    Sleep    5
     [Teardown]    Close Browser
 
 Insert Record in Big Item
@@ -513,6 +514,20 @@ Insert Record In Detail Item
     [Teardown]    Close Browser
 
 Alter Detail Item Form
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 輸入資料後並按下確定
+    ...    4. 驗證資料是否有在資料庫中
+    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    6. 使用者在健檢細項中點擊新增按鈕
+    ...    7. 輸入資料後並按下新增
+    ...    8. 點擊健檢細項
+    ...    9. 重新編集資料
+    ...    10. 按下確認
+    ...
+    ...    Verify :
+    ...    健檢細項應該和重新輸入的值一樣
     Insert One Record In Big Item
     Insert One Record In Detail Item
     Sleep    1
