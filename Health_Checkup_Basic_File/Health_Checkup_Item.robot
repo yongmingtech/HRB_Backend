@@ -68,7 +68,7 @@ ${PopupWindow_Detail_DCode_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/
 ${PopupWindow_Detail_English_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
 ${PopupWindow_Detail_Tranditional_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
 ${PopupWindow_Detail_Simple_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
-${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗    #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
 ${PopupWindow_Detail_Description_TextArea}    html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
 ${PopupWindow_Detail_Refill_Button}    button-1147-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
 ${PopupWindow_Detail_Insert_Button}    button-1145-btnInnerEl    #跳窗 健檢細項維護的新增按鈕 Button
