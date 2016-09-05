@@ -98,7 +98,7 @@ Check Page
     ${Verify_Medical_Organization_Div}=    Convert To String    醫療機構
     ${Verify_Insert_Button}=    Convert To String    新增
     ${Verify_Delete_Button}=    Convert To String    刪除
-    ${Verify_Support_Check_Healty_Column}=    Convert To String    提供健檢:
+    ${Verify_Support_Check_Healty_Column}=    Convert To String    提供健檢服務:
     ${Verify_System_Code_Column}=    Convert To String    系統內碼
     ${Verify_Organization_Code_Column}=    Convert To String    機構代碼
     ${Verify_Organization_Name_Column}=    Convert To String    機構名稱

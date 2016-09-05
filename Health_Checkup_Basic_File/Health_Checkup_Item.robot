@@ -159,7 +159,7 @@ Check page
     ${Verify_Health_Checkup_Detail_Item_WorkerItem_Column}    Convert To String    勞檢項目
     ${Verify_Health_Checkup_Detail_Item_DataType_Column}    Convert To String    資料類型
     ${Verify_Health_Checkup_Detail_Item_OrgSystem_Column}    Convert To String    器官系統
-    ${Verify_Health_Checkup_Detail_Item_Description_Column}    Convert To String    說明
+    ${Verify_Health_Checkup_Detail_Item_Description_Column}    Convert To String    細項說明
     ${Get_Health_Checkup_Detail_Item_DIV}    Get Text    ${Health_Checkup_Detail_Item_DIV}
     ${Get_Health_Checkup_Detail_Item_Insert_Button}    Get Text    ${Health_Checkup_Detail_Item_Insert_Button}
     ${Get_Health_Checkup_Detail_Item_Delete_Button}    Get Text    ${Health_Checkup_Detail_Item_Delete_Button}
@@ -221,7 +221,7 @@ Check page
     Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
     Sleep    1
     ${Verify_Detail_Title}    Convert To String    健檢細項維護
-    ${Verify_Detail_Name_Label}    Convert To String    大項名稱:
+    ${Verify_Detail_Name_Label}    Convert To String    大項分類:
     ${Verify_Detail_Item_Label}    Convert To String    勞檢項目:
     ${Verify_Detail_LOINC_Label}    Convert To String    LOINC:
     ${Verify_Detail_HCode_Label}    Convert To String    健保碼:
@@ -230,7 +230,7 @@ Check page
     ${Verify_Detail_Tranditional_Chinese_Label}    Convert To String    *細項名稱(繁中):
     ${Verify_Detail_Simple_Chinese_Label}    Convert To String    *細項名稱(簡中):
     ${Verify_Detail_DataType_Label}    Convert To String    *資料類型:
-    ${Verify_Detail_Description_Label}    Convert To String    說明:
+    ${Verify_Detail_Description_Label}    Convert To String    細項說明:
     ${Verify_Detail_OwnOrg_Div}    Convert To String    所屬器官系統
     ${Verify_Detail_OwnOrg_Column}    Convert To String    器官名稱
     ${Get_Detail_Title}    Get Text    ${PopupWindow_Detail_Title}
