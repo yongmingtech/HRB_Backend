@@ -29,6 +29,14 @@ ${PopupWindow_Organ_System_DetailName_Column}    gridcolumn-1119-textEl
 ${PopupWindow_Organ_System_Refill_Button}    button-1124-btnInnerEl    #跳窗-重填-按鈕
 ${TestData_Organ_Code_TextBox}    _A123456
 ${TestData_Organ_Name_TextBox}    _測試
+${Tab}            tab-1086-btnInnerEl    #Tab
+${Organ_System_DIV}    basicOrganGrid-1050_header_hd    #器官系統 Column
+${Organ_System_Code_Column}    gridcolumn-1069-textEl    #器官代碼 Column
+${Organ_System_Name_Column}    gridcolumn-1070-textEl    #器官名稱 Column
+${Organ_System_Sexy_Column}    gridcolumn-1071-textEl    #限定性別 Column
+${Organ_System_IsDisplay_Column}    gridcolumn-1072-textEl    #是否顯示 Column
+${Organ_System_Insert_Button}    button-1075-btnInnerEl    #新增按鈕
+${Organ_System_Delete_Button}    button-1077-btnInnerEl    #刪除按鈕
 
 *** Test Cases ***
 Sort By Organ Code
@@ -80,6 +88,41 @@ Refill Form For Big Organ System
     Should Be Empty    ${Get_Organ_Name_TextBox}
     Should Be Equal    ${Verify_Sex}    ${Get_Sex_TextBox}
     Should Be Empty    ${Get_Radio_Button}
+    [Teardown]    Close Browser
+
+Check Page
+    Log    Declare the Variable
+    ${Verify_Align_Center}    Convert To String    text-align: center;
+    ${Verify_Align_Left}    Convert To String    text-align: left;
+    Log    驗證Tab
+    ${Verify_Tab}    Convert To String    器官系統
+    ${Get_Tab_Name}    Get Text    ${Tab}
+    Should Be Equal    ${Verify_Tab}    ${Get_Tab_Name}
+    Log    驗證器官系統 Div
+    ${Get_Organ_System_DIV}    Get Text    ${Organ_System_DIV}
+    Should Be Equal    ${Verify_Tab}    ${Get_Organ_System_DIV}
+    ${Verify_Organ_System_Code}    Convert To String    器官代碼
+    ${Verify_Organ_System_Name}    Convert To String    器官名稱
+    ${Verify_Organ_System_Sexy}    Convert To String    限定性別
+    ${Verify_Organ_System_IsDisplay}    Convert To String    是否顯示
+    ${Get_Organ_System_Code}    Get Text    ${Organ_System_Code_Column}
+    ${Get_Organ_System_Name}    Get Text    ${Organ_System_Name_Column}
+    ${Get_Organ_System_Sexy}    Get Text    ${Organ_System_Sexy_Column}
+    ${Get_Organ_System_IsDisplay}    Get Text    ${Organ_System_IsDisplay_Column}
+    Should Be Equal    ${Verify_Organ_System_Code}    ${Get_Organ_System_Code}
+    Should Be Equal    ${Verify_Organ_System_Name}    ${Get_Organ_System_Name}
+    Should Be Equal    ${Verify_Organ_System_Sexy}    ${Get_Organ_System_Sexy}
+    Should Be Equal    ${Verify_Organ_System_IsDisplay}    ${Get_Organ_System_IsDisplay}
+    ${Get_Organ_System_Code_Align}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
+    ${Get_Organ_System_Name_Align}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
+    ${Get_Organ_System_Sexy_Align}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[6]/div@style
+    ${Get_Organ_System_IsDisplay_Align}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[7]/div@style
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_Code_Align}
+    Should Be Equal    ${Verify_Align_Left}    ${Get_Organ_System_Name_Align}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_Sexy_Align}
+    Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_IsDisplay_Align}
+    Element Should Be Visible    ${Organ_System_Insert_Button}
+    Element Should Be Visible    ${Organ_System_Delete_Button}
     [Teardown]    Close Browser
 
 *** Keywords ***
