@@ -27,6 +27,7 @@ ${PopupWindow_Organ_Display_N_RadioButton}    radiofield-1112-inputEl    #跳窗
 ${PopupWindow_Organ_System_DetailCode_Column}    gridcolumn-1118-textEl
 ${PopupWindow_Organ_System_DetailName_Column}    gridcolumn-1119-textEl
 ${PopupWindow_Organ_System_Refill_Button}    button-1124-btnInnerEl    #跳窗-重填-按鈕
+${PopupWindow_Organ_System_Insert_Button}    button-1122-btnInnerEl    #跳窗-新增-按鈕
 ${TestData_Organ_Code_TextBox}    _A123456
 ${TestData_Organ_Name_TextBox}    _測試
 ${Tab}            tab-1086-btnInnerEl    #Tab
@@ -77,7 +78,7 @@ Refill Form For Big Organ System
     Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
     Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
     Click Element    xpath=html/body/div[17]/div/ul/li[3]
-    Click Element    ${PopupWindow_Organ_System_Refill_Button}
+    Click Element    ${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
     Log    Verify 資料
     ${Verify_Sex}    Convert To String    不限
     ${Get_Organ_Code_TextBox}    Get Text    ${PopupWindow_Organ_Code_TextBox}
@@ -123,7 +124,7 @@ Check Page
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_IsDisplay_Align}
     Element Should Be Visible    ${Organ_System_Insert_Button}    # Verify Insert Button
     Element Should Be Visible    ${Organ_System_Delete_Button}    # Verify Delete Button
-    Log     Verify 健檢細項 DIV    #Start Verify 健檢細項 DIV
+    Log    Verify 健檢細項 DIV    #Start Verify 健檢細項 DIV
     ${Verify_Health_Item_Tab}    Convert To String    健檢項目
     ${Get_Health_Item_Tab}    Get Text    id=basicCheckGroupGroupingFormatGrid-1079_header_hd-textEl
     Should Be Equal    ${Verify_Health_Item_Tab}    ${Get_Health_Item_Tab}
@@ -162,6 +163,23 @@ Check Page
     Element Should Be Visible    id=radiofield-1112-inputEl    # 驗證 跳窗 裡面的Radio Button
     [Teardown]    Close Browser
 
+Insert Record In Organ System
+    Insert One Record In Organ System
+    Log    Check WebPage
+    Sleep    2
+    ${Verify_Sex}    Convert To String    女
+    ${Verify_IsDisply}    Convert To String    是
+    ${Get_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    ${Get_Sex}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[6]/div
+    ${Get_IsDisplay}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[7]/div
+    Should Be Equal    ${TestData_Organ_Code_TextBox}    ${Get_Code}
+    Should Be Equal    ${TestData_Organ_Name_TextBox}    ${Get_Name}
+    Should Be Equal    ${Verify_Sex}    ${Get_Sex}
+    Should Be Equal    ${Verify_IsDisply}    ${Get_IsDisplay}
+    Remove Test Data
+    [Teardown]    Close Browser
+
 *** Keywords ***
 Click Organ System
     Open Broser and Login automatically
@@ -170,3 +188,24 @@ Click Organ System
     Click Element    ${Health_Checkup_Basic_File_ID}
     Wait Until Element Is Visible    ${Organ_System_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Organ_System_Item_ID}
+
+Insert One Record In Organ System
+    Remove Test Data
+    Click Element    ${Organ_System_Insert_Button}
+    Wait Until Element Is Visible    ${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
+    Log    輸入資料
+    Input Text    ${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
+    Input Text    ${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
+    Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
+    Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
+    Click Element    xpath=html/body/div[17]/div/ul/li[3]
+    Click Element    ${PopupWindow_Organ_System_Insert_Button}
+    Sleep    1
+    Log    Check DB
+    ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'
+    Check If Exists In Database    ${Query_Organ_System}
+
+Remove Test Data
+    Connect Database
+    ${Delete_Organ_System}    Set Variable    delete from Basic_Organ where organ_code ='${TestData_Organ_Code_TextBox}'
+    Execute Sql String    ${Delete_Organ_System}
