@@ -121,8 +121,45 @@ Check Page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Organ_System_Name_Align}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_Sexy_Align}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_IsDisplay_Align}
-    Element Should Be Visible    ${Organ_System_Insert_Button}
-    Element Should Be Visible    ${Organ_System_Delete_Button}
+    Element Should Be Visible    ${Organ_System_Insert_Button}    # Verify Insert Button
+    Element Should Be Visible    ${Organ_System_Delete_Button}    # Verify Delete Button
+    Log     Verify 健檢細項 DIV    #Start Verify 健檢細項 DIV
+    ${Verify_Health_Item_Tab}    Convert To String    健檢項目
+    ${Get_Health_Item_Tab}    Get Text    id=basicCheckGroupGroupingFormatGrid-1079_header_hd-textEl
+    Should Be Equal    ${Verify_Health_Item_Tab}    ${Get_Health_Item_Tab}
+    ${Verify_Detail_Item_Code}    Convert To String    細項代碼
+    ${Verify_Detail_Item_Name}    Convert To String    細項名稱
+    ${Get_Detail_Item_Code}    Get Text    id=gridcolumn-1083-textEl
+    ${Get_Detail_Item_Name}    Get Text    id=gridcolumn-1084-textEl
+    Should Be Equal    ${Verify_Detail_Item_Code}    ${Get_Detail_Item_Code}
+    Should Be Equal    ${Verify_Detail_Item_Name}    ${Get_Detail_Item_Name}    #End Verify 健檢細項 DIV
+    Log    Verify 驗證跳窗    #Start Verify 驗證跳窗
+    Click Element    ${Organ_System_Insert_Button}    # Click Insert Button
+    Wait Until Element Is Visible    id=maintainFormWindow-1105_header_hd-textEl    10
+    ${Verify_Organ_System_MainTain_Tab}    Convert To String    器官系統維護
+    ${Get_Organ_System_MainTain_Tab}    Get Text    id=maintainFormWindow-1105_header_hd-textEl
+    Should Be Equal    ${Verify_Organ_System_MainTain_Tab}    ${Get_Organ_System_MainTain_Tab}
+    ${Verify_Organ_System_Code}    Convert To String    *器官代碼:
+    ${Verify_Organ_System_Name}    Convert To String    *器官名稱:
+    ${Verify_Organ_System_Sexy}    Convert To String    限定性別
+    ${Verify_Organ_System_IsDisplay}    Convert To String    *是否顯示:
+    ${Get_Organ_System_Code}    Get Text    id=textfield-1107-labelEl
+    ${Get_Organ_System_Name}    Get Text    id=textfield-1108-labelEl
+    ${Verify_Organ_System_Sexy}    Get Text    id=genderComboBox-1109-labelEl
+    ${Verify_Organ_System_IsDisplay}    Get Text    id=trueFalseRadioGroup-1110-labelEl
+    Should Be Equal    ${Verify_Organ_System_Code}    ${Get_Organ_System_Code}
+    Should Be Equal    ${Verify_Organ_System_Name}    ${Get_Organ_System_Name}
+    Should Be Equal    ${Verify_Organ_System_Sexy}    ${Verify_Organ_System_Sexy}
+    Should Be Equal    ${Verify_Organ_System_IsDisplay}    ${Verify_Organ_System_IsDisplay}
+    ${Get_Detail_Item_Code}    Get Text    id=gridcolumn-1118-textEl    # 驗證 跳窗 裡面的Column
+    ${Get_Detail_Item_Name}    Get Text    id=gridcolumn-1119-textEl
+    Should Be Equal    ${Verify_Detail_Item_Code}    ${Get_Detail_Item_Code}
+    Should Be Equal    ${Verify_Detail_Item_Name}    ${Get_Detail_Item_Name}
+    Element Should Be Visible    id=textfield-1107-inputEl    # 驗證 跳窗 裡面的TextBox
+    Element Should Be Visible    id=textfield-1108-inputEl    # 驗證 跳窗 裡面的TextBox
+    Element Should Be Visible    id=genderComboBox-1109-inputEl    # 驗證 跳窗 裡面的限定性別Combobox
+    Element Should Be Visible    id=radiofield-1111-inputEl    # 驗證 跳窗 裡面的Radio Button
+    Element Should Be Visible    id=radiofield-1112-inputEl    # 驗證 跳窗 裡面的Radio Button
     [Teardown]    Close Browser
 
 *** Keywords ***
