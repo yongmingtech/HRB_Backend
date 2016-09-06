@@ -290,6 +290,7 @@ Sort By Detail Code
     ...    Verify :
     ...    細項代碼應該由小到大排列
     Connect Database
+    Sleep    1
     ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Detail_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr
     ${Get_Detail_List}    Create List
