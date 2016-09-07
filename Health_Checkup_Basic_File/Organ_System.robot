@@ -4,7 +4,7 @@ Documentation     主要測試健檢基本檔的基本項目
 Suite Setup
 Suite Teardown
 Test Setup        Click Organ System
-Test Teardown
+Test Teardown     Close Web Browser
 Force Tags
 Metadata          Version    0.1
 Resource          ../Login.robot
@@ -73,11 +73,7 @@ Refill Form For Big Organ System
     Click Element    ${Organ_System_Insert_Button}
     Wait Until Element Is Visible    ${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
     Log    輸入資料
-    Input Text    ${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
-    Input Text    ${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
-    Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
-    Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
-    Click Element    xpath=html/body/div[17]/div/ul/li[3]
+    Fill Test Data In Organ System
     Click Element    ${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
     Log    Verify 資料
     ${Verify_Sex}    Convert To String    不限
@@ -177,20 +173,22 @@ Insert Record In Organ System
     ...    1. 新增後會檢查Basic_Organ是否有存到DB
     ...    2. 檢查網頁資料是否和新增的吻合
     Insert One Record In Organ System
-    Log    Check WebPage
-    Sleep    2
-    ${Verify_Sex}    Convert To String    女
-    ${Verify_IsDisply}    Convert To String    是
-    ${Get_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    ${Get_Sex}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[6]/div
-    ${Get_IsDisplay}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[7]/div
-    Should Be Equal    ${TestData_Organ_Code_TextBox}    ${Get_Code}
-    Should Be Equal    ${TestData_Organ_Name_TextBox}    ${Get_Name}
-    Should Be Equal    ${Verify_Sex}    ${Get_Sex}
-    Should Be Equal    ${Verify_IsDisply}    ${Get_IsDisplay}
     Remove Test Data
     [Teardown]    Close Browser
+
+Delete Record In Organ System
+    Insert One Record In Organ System
+    Sleep    1
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[2]/div/img    #Click the first checkbox
+    Click Element    id=button-1077-btnInnerEl    #Click the delete button
+    Wait Until Element Is Visible    id=button-1006-btnIconEl    ${G_Wait_For_Element_Timeout}    #Jump the popup windows, then click the OK button
+    Click Element    id=button-1006-btnIconEl
+    Sleep    2
+    ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'
+    Check If Not Exists In Database    ${Query_Organ_System}
+    Remove Test Data
+    Disconnect From Database
+    [Teardown]
 
 *** Keywords ***
 Click Organ System
@@ -206,18 +204,36 @@ Insert One Record In Organ System
     Click Element    ${Organ_System_Insert_Button}
     Wait Until Element Is Visible    ${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
     Log    輸入資料
-    Input Text    ${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
-    Input Text    ${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
-    Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
-    Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
-    Click Element    xpath=html/body/div[17]/div/ul/li[3]
-    Click Element    ${PopupWindow_Organ_System_Insert_Button}
+    Fill Test Data In Organ System
+    Click Element    ${PopupWindow_Organ_System_Insert_Button}    #按下新增按鈕
     Sleep    1
     Log    Check DB
     ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'
     Check If Exists In Database    ${Query_Organ_System}
+    Log    Check WebPage
+    Sleep    1
+    ${Verify_Sex}    Convert To String    女
+    ${Verify_IsDisply}    Convert To String    是
+    ${Get_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    ${Get_Sex}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[6]/div
+    ${Get_IsDisplay}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[7]/div
+    Should Be Equal    ${TestData_Organ_Code_TextBox}    ${Get_Code}
+    Should Be Equal    ${TestData_Organ_Name_TextBox}    ${Get_Name}
+    Should Be Equal    ${Verify_Sex}    ${Get_Sex}
+    Should Be Equal    ${Verify_IsDisply}    ${Get_IsDisplay}
 
 Remove Test Data
     Connect Database
     ${Delete_Organ_System}    Set Variable    delete from Basic_Organ where organ_code ='${TestData_Organ_Code_TextBox}'
     Execute Sql String    ${Delete_Organ_System}
+
+Fill Test Data In Organ System
+    Input Text    ${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
+    Input Text    ${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
+    Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
+    Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
+    Click Element    xpath=html/body/div[17]/div/ul/li[3]
+
+Close Web Browser
+    Close Browser
