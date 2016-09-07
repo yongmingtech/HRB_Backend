@@ -92,6 +92,12 @@ Refill Form For Big Organ System
     [Teardown]    Close Browser
 
 Check Page
+    [Documentation]    Test case Description :
+    ...    主要驗證器官所有頁面的文字對齊和文字
+    ...
+    ...    Verify :
+    ...    1. 文字和欄位的對齊模式
+    ...    2. 驗證跳窗文字是否跟規格一樣
     Log    Declare the Variable
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
@@ -164,6 +170,12 @@ Check Page
     [Teardown]    Close Browser
 
 Insert Record In Organ System
+    [Documentation]    Test case Description :
+    ...    主要驗證器官是否可以新增
+    ...
+    ...    Verify :
+    ...    1. 新增後會檢查Basic_Organ是否有存到DB
+    ...    2. 檢查網頁資料是否和新增的吻合
     Insert One Record In Organ System
     Log    Check WebPage
     Sleep    2
