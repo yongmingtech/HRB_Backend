@@ -1,5 +1,7 @@
 *** Setting ***
-Documentation     主要測試健檢基本檔的基本項目
+Documentation     健檢基本檔 -> 建檢項目
+...
+...               主要測試健檢基本檔的基本項目
 ...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關物件是否存在.
 Suite Setup
 Suite Teardown
