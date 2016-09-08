@@ -91,7 +91,7 @@ ${Test_PopupWindow_Detail_Description}    主要測試健檢細項
 ${Test_Temp}      _Test
 
 *** Test Cases ***
-Check page
+Check Page
     [Documentation]    Test case Description :
     ...    主要測試健檢基本檔下的健檢項目，測試整個頁面的文字對齊和文字是否按造規格顯示
     ...    1. 使用者點擊健檢基本檔

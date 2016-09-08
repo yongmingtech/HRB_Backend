@@ -32,7 +32,7 @@ ${chkreport_list_hospital}    gridcolumn-1090-textEl    # 醫療機構
 ${chkreport_list_checkupdate}    datecolumn-1091-textEl    # 健檢日期
 
 *** Test Cases ***
-checkk page
+Check Page
     ${Verify_HEADER_chkreport}=    Convert To String    健檢資料查詢
     ${Verify_HEADER_chkreportlist}=    Convert To String    健檢清單
     ${Verify_chkreport_sch_hospital}=    Convert To String    醫療機構:
