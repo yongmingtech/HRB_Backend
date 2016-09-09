@@ -177,7 +177,7 @@ Check Page
     Should Be Equal    ${Verify_Contact_Phone_Column}    ${Get_Contact_Phone_Column}
     Should Be Equal    ${Verify_Contact_Email_Column}    ${Get_Contact_Email_Column}
     Should Be Equal    ${Verify_Kanban_Column}    ${Get_Kanbann_Column}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Refill Form
     [Documentation]    Test case Description :
@@ -216,7 +216,7 @@ Refill Form
     Should Be Empty    ${Get_Contact_Phone_TextBox}
     Should Be Empty    ${Get_Contact_Email_TextBox}
     Should Be Empty    ${Get_Kanban_TextBox}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Insert Two Records
     [Documentation]    Test case Description :
@@ -237,7 +237,7 @@ Insert Two Records
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Query Organization Code and Name
     [Documentation]    Test case Description :
@@ -273,7 +273,7 @@ Query Organization Code and Name
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Delete Record
     [Documentation]    Test case Description :
@@ -308,7 +308,7 @@ Delete Record
     Log    Verify 資料庫是否有剛新增的兩筆資料
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_1}
     Check If Not Exists In Database    ${queryBasic_Hospital_TestData_2}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Sort By Organization Name
     [Documentation]    Test case Description :
@@ -338,7 +338,7 @@ Sort By Organization Name
     \    ${Verify_from_DB}    Convert To String    ${Result[${Index}][0]}
     \    ${Get_from_Web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    Should Be Equal    ${Verify_from_DB}    ${Get_from_Web}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
 
 Update Form
     [Documentation]    Test case Description :
@@ -373,7 +373,33 @@ Update Form
     Sleep    2
     ${queryBasic_Hospital_TestData_3}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_3}' and addr='${TestData_Organization_Address_3}' and hospital_code='${TestData_System_Code_3}' and phone='${TestData_Contact_Phone_3}' and email='${TestData_Contact_Email_3}' and nhi_code='${TestData_Organization_Code_3}' and active_flag=1 and announcement='${TestData_Kanban_3}' and is_chk_hosp= 'Y'
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_3}
-    [Teardown]    Close All Browsers
+    [Teardown]    Close Browser
+
+Query Not Found
+    [Documentation]    Test case Description :
+    ...    主要測試醫療機構在查詢機構代碼和機構名稱必須都要顯示 無符合條件紀錄
+    ...    1. 機構代碼欄位中輸入測試資料
+    ...    2. 機構名稱欄位中輸入測試資料
+    ...
+    ...
+    ...    Verify :
+    ...    1. 在查詢機構代碼應該要顯示無符合條件紀錄
+    ...    2. 在查詢機構名稱應該要顯示無符合條件紀錄
+    ${Verify_Data_Not_Found}    Convert To String    無符合條件紀錄
+    #驗證機構代碼輸入無效value，查詢後應該無資料
+    INPUT TEXT    ${Organization_Code_Dropdown_ID}    _這是測試資料
+    Click Element    ${Query_Button_ID}
+    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div    ${G_Wait_For_Element_Timeout}
+    ${Get_Data_Not_Found}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div
+    Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
+    Click Element    ${Refill_Button_ID}
+    #驗證機構名稱輸入無效value，查詢後應該無資料
+    INPUT TEXT    ${Organization_CodeName_Dropdown_ID}    _這是測試資料
+    Click Element    ${Query_Button_ID}
+    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div    ${G_Wait_For_Element_Timeout}
+    ${Get_Data_Not_Found}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div
+    Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Click Medical Organization Maintain Button
