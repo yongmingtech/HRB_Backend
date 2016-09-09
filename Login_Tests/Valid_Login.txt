@@ -4,4 +4,11 @@ Resource          ../Login.robot
 
 *** Test Cases ***
 Valid Login
+    [Documentation]    Test case Description :
+    ...    主要測試是否能登入
+    ...
+    ...    Verify :
+    ...    登入成功並看到頁面登出按鈕
     Open Broser and Login automatically
+    Wait Until Element Is Visible    id=button-1047-btnIconEl    ${G_Wait_For_Element_Timeout}
+    Element Should Be Visible    id=button-1047-btnIconEl
