@@ -9,27 +9,29 @@ Resource          ../Login.robot
 Resource          ../DataBase.robot
 
 *** Variables ***
-${Chk_Report_ID}    button-1045-btnIconEl
-${HEADER_chkreport}    chkReportMainSearchForm-1050_header_hd-textEl    # 健檢資料健檢查詢
-${HEADER_chkreportlist}    chkReportMainGrid-1066_header_hd-textEl    # 健檢清單
-${chkreport_sch_hospital}    hospitalComboBox-1051-labelEl    # 健檢查詢 醫療機構:
-${chkreport_sch_crm}    crmSystemL1basicComboBox-1052-labelEl    # 健檢查詢 健檢類型:
-${chkreport_sch_rangedate}    rangeDatepicker-1053-labelEl    # 健檢查詢 健檢日期:
-${chkreport_sch_rangef}    datefield-1054-inputEl    # 健檢查詢 2016/01/01
-${chkreport_sch_ranget}    datefield-1056-inputEl    # 健檢查詢 2016/12/31
-${chkreport_sch_rolebasic}    roleBasicComboBox-1057-labelEl    # 健檢查詢 客戶類型:
-${chkreport_sch_comp}    companyComboBox-1058-labelEl    # 健檢查詢 企業:
-${chkreport_sch_dept}    deptBasicComboBox-1059-labelEl    # 健檢查詢 法人:
-${chkreport_sch_cusacc}    textfield-1060-labelEl    # 健檢查詢 客戶帳號:
-${chkreport_sch_cusname}    textfield-1061-labelEl    # 健檢查詢 客戶姓名:
-${chkreport_list_no}    rownumberer-1082-textEl    # No
-${chkreport_list_checkupType}    gridcolumn-1085-textEl    # 健檢類型
-${chkreport_list_dept}    gridcolumn-1086-textEl    # 法人
-${chkreport_list_customtype}    gridcolumn-1087-textEl    # 客戶類型
-${chkreport_list_cusID}    gridcolumn-1088-textEl    # 客戶帳號
-${chkreport_list_cusname}    gridcolumn-1089-textEl    # 客戶姓名
-${chkreport_list_hospital}    gridcolumn-1090-textEl    # 醫療機構
-${chkreport_list_checkupdate}    datecolumn-1091-textEl    # 健檢日期
+${Chk_Report_ID1}    button-1031-btnEl    # 健檢管理
+${Chk_Report_ID2}    menuitem-1030-textEl    # 健檢資料維護
+${Subpage_chkupreport}    tab-1136-btnInnerEl
+${HEADER_chkreport}    chkReportMainSearchForm-1078_header_hd-textEl    # 健檢資料健檢查詢
+${HEADER_chkreportlist}    chkReportMainGrid-1094_header_hd-textEl    # 健檢清單
+${chkreport_sch_hospital}    hospitalComboBox-1079-labelEl    # 健檢查詢 醫療機構:
+${chkreport_sch_crm}    crmSystemL1basicComboBox-1080-labelEl    # 健檢查詢 健檢類型:
+${chkreport_sch_rangedate}    rangeDatepicker-1081-labelEl    # 健檢查詢 健檢日期:
+${chkreport_sch_rangef}    datefield-1082-inputEl    # 健檢查詢 2016/01/01
+${chkreport_sch_ranget}    datefield-1084-inputEl    # 健檢查詢 2016/12/31
+${chkreport_sch_rolebasic}    roleBasicComboBox-1085-labelEl    # 健檢查詢 客戶類型:
+${chkreport_sch_comp}    companyComboBox-1086-labelEl    # 健檢查詢 企業:
+${chkreport_sch_dept}    deptBasicComboBox-1087-labelEl    # 健檢查詢 法人:
+${chkreport_sch_cusacc}    textfield-1088-labelEl    # 健檢查詢 客戶帳號:
+${chkreport_sch_cusname}    textfield-1089-labelEl    # 健檢查詢 客戶姓名:
+${chkreport_list_no}    rownumberer-1110-textEl    # No
+${chkreport_list_checkupType}    gridcolumn-1113-textEl    # 健檢類型
+${chkreport_list_dept}    gridcolumn-1114-textEl    # 法人
+${chkreport_list_customtype}    gridcolumn-1115-textEl    # 客戶類型
+${chkreport_list_cusID}    gridcolumn-1116-textEl    # 客戶帳號
+${chkreport_list_cusname}    gridcolumn-1117-textEl    # 客戶姓名
+${chkreport_list_hospital}    gridcolumn-1118-textEl    # 醫療機構
+${chkreport_list_checkupdate}    datecolumn-1119-textEl    # 健檢日期
 
 *** Test Cases ***
 Check Page
@@ -93,11 +95,17 @@ Check Page
     Should Be Equal    ${Verify_chkreport_list_cusname}    ${Get_list_cusname}
     Should Be Equal    ${Verify_chkreport_list_hospital}    ${Get_list_hospital}
     Should Be Equal    ${Verify_chkreport_list_checkupdate}    ${Get_list_checkupdate}
-    [Teardown]    Close Browser
+    [Teardown]    close web browser
 
 *** Keywords ***
 Click Chk Report Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Chk_Report_ID}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${Chk_Report_ID}
+    Wait Until Element Is Visible    ${Chk_Report_ID1}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${Chk_Report_ID1}
+    Click Element    ${Chk_Report_ID1}
+    Wait Until Element Is Visible    ${Chk_Report_ID2}    ${G_Wait_For_Element_Timeout}
+    Click Element    ${Chk_Report_ID2}
     Sleep    1
+
+close web browser
+    close browser
