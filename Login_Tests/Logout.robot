@@ -10,8 +10,8 @@ Logout
     ...    Verify :
     ...    登出成功並看到頁面輸入帳號的欄位
     Open Broser and Login automatically
-    Wait Until Element Is Visible    id=button-1047-btnIconEl    ${G_Wait_For_Element_Timeout}    #登出
-    Click Element    id=button-1047-btnIconEl
+    Wait Until Element Is Visible    id=${Logout_Button}    ${G_Wait_For_Element_Timeout}    #登出
+    Click Element    id=${Logout_Button}
     #等待輸入按鈕出現
     Wait Until Element Is Visible    id=textfield-1011-inputEl    ${G_Wait_For_Element_Timeout}
     Element Should Be Visible    id=textfield-1011-inputEl

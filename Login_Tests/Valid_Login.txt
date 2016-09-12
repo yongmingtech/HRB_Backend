@@ -10,5 +10,5 @@ Valid Login
     ...    Verify :
     ...    登入成功並看到頁面登出按鈕
     Open Broser and Login automatically
-    Wait Until Element Is Visible    id=button-1047-btnIconEl    ${G_Wait_For_Element_Timeout}
-    Element Should Be Visible    id=button-1047-btnIconEl
+    Wait Until Element Is Visible    id=${Logout_Button}    ${G_Wait_For_Element_Timeout}    #等待登出按鈕
+    Element Should Be Visible    id=${Logout_Button}

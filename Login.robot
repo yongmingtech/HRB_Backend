@@ -13,6 +13,7 @@ ${SERVER}         http://192.168.2.71:8060/    # Backend
 ${User_Name}      ALISON
 ${User_Password}    02260406
 ${Submit_Button}    button-1014-btnIconEl
+${Logout_Button}    button-1075-btnIconEl
 
 *** Keywords ***
 Open Broser to Login Page
