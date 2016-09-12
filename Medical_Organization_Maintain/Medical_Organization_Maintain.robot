@@ -83,7 +83,6 @@ ${TestData_Organization_Address_3}    address    # 測試資料 機構地址
 ${TestData_Contact_Phone_3}    5937081    # 測試資料 連絡電話
 ${TestData_Contact_Email_3}    test@yamail.com    # 測試資料    聯絡信箱
 ${TestData_Kanban_3}    777    # 測試資料    公告訊息
-${wait_for_element}    xpath=html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input
 
 *** Test Cases ***
 Check Page
@@ -433,30 +432,29 @@ Click Insert Button
     Wait Until Element Is Visible    xpath=${PopupWindow_System_Code_TextBox}    ${G_Wait_For_Element_Timeout}
 
 Add Two Record In DB
-    Log    先清空測試資料
+    #先清空測試資料
     Execute Sql String    ${Delete_Basic_Hospital_TestData}
-    Log    加入兩筆測試資料
+    #加入兩筆測試資料
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
-    Click Element    ${PopupWindow_Support_Check_Healty_Checkobx}
-    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
-    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
-    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
-    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
-    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
-    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
-    Input Text    ${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
-    Click Element    ${PopupWindow_Insert_Button}
+    Click Element    xpath=${PopupWindow_Support_Check_Healty_Checkobx}
+    Input Text    xpath=${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
+    Input Text    xpath=${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
+    Input Text    xpath=${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
+    Input Text    xpath=${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
+    Input Text    xpath=${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
+    Input Text    xpath=${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
+    Input Text    xpath=${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
+    Click Element    xpath=${PopupWindow_Insert_Button}
     Sleep    2
-    Click Element    ${Insert_Button}
-    Sleep    2
-    Wait Until Element Is Visible    ${wait_for_element}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${TestData_System_Code_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_Organization_Code_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Name_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_2}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Kanban_2}
-    Click Element    xpath=html/body/div[11]/div[3]/div/div/div[1]/div/a/span[1]
+    Click Element    xpath=${Insert_Button_XPATH}
+    Wait Until Element Is Visible    xpath=html/body/div[12]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${TestData_System_Code_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_Organization_Code_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Name_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_2}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Kanban_2}
+    Click Element    xpath=html/body/div[12]/div[3]/div/div/div[1]/div/a/span[1]    #新增 元素
     Sleep    1
