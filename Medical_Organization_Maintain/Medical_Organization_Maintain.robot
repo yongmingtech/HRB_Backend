@@ -50,16 +50,16 @@ ${PopupWindow_Organization_Address_XPATH}    html/body/div[11]/div[2]/div/div/sp
 ${PopupWindow_Contact_Phone_XPATH}    html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[1]/label    #跳窗 連絡電話
 ${PopupWindow_Contact_Email_XPATH}    html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[1]/label    #跳窗 聯絡信箱
 ${PopupWindow_Kanban_XPATH}    html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[1]/label    #跳窗 公告訊息
-${PopupWindow_Support_Check_Healty_Checkobx}    checkboxfield-1095-inputEl    #跳窗 提供健檢 Checkbox
-${PopupWindow_System_Code_TextBox}    textfield-1096-inputEl    #跳窗 系統內碼 TextBox
-${PopupWindow_Organization_Code_TextBox}    textfield-1097-inputEl    #跳窗 機構代碼 TextBox
-${PopupWindow_Organization_Name_TextBox}    textfield-1098-inputEl    #跳窗 機構名稱 TextBox
-${PopupWindow_Organization_Address_TextBox}    textareafield-1099-inputEl    #跳窗 機構地址 TextBox
-${PopupWindow_Contact_Phone_TextBox}    textareafield-1100-inputEl    #跳窗 連絡電話 TextBox
-${PopupWindow_Contact_Email_TextBox}    textareafield-1101-inputEl    #跳窗 聯絡信箱 TextBox
-${PopupWindow_Kanban_TextBox}    textareafield-1102-inputEl    #跳窗 公告訊息 TextBox
-${PopupWindow_Refill_Button}    button-1106-btnInnerEl    #跳窗 重填 Button
-${PopupWindow_Insert_Button}    button-1104-btnInnerEl    #跳窗 新增 Button
+${PopupWindow_Support_Check_Healty_Checkobx}    html/body/div[11]/div[2]/div/div/span/div/table[1]/tbody/tr/td[2]/input    #跳窗 提供健檢 Checkbox
+${PopupWindow_System_Code_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    #跳窗 系統內碼 TextBox
+${PopupWindow_Organization_Code_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗 機構代碼 TextBox
+${PopupWindow_Organization_Name_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗 機構名稱 TextBox
+${PopupWindow_Organization_Address_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/textarea    #跳窗 機構地址 TextBox
+${PopupWindow_Contact_Phone_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    #跳窗 連絡電話 TextBox
+${PopupWindow_Contact_Email_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    #跳窗 聯絡信箱 TextBox
+${PopupWindow_Kanban_TextBox}    html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    #跳窗 公告訊息 TextBox
+${PopupWindow_Refill_Button}    html/body/div[11]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗 重填 Button
+${PopupWindow_Insert_Button}    html/body/div[11]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗 新增 Button
 #End 醫療機構維護 跳窗
 ${PagenationToolBar}    pagingtoolbar-1057-innerCt    # Pagenation Tool Bar
 ${TestData_System_Code_1}    _hlthealthy_1    # 測試資料 系統內碼
@@ -118,7 +118,7 @@ Check Page
     ${Verify_System_Code_PuponWindow}    Convert To String    *系統內碼:    #驗證跳窗
     ${Verify_Organization_Code_PuponWindow}    Convert To String    機構代碼:    #驗證跳窗
     ${Verify_Organization_Name_PuponWindow}    Convert To String    *機構名稱:    #驗證跳窗
-    ${Verify_Organization_Address_PuponWindow}     Convert To String    機構地址:
+    ${Verify_Organization_Address_PuponWindow}    Convert To String    機構地址:
     ${Verify_Contact_Phone_PuponWindow}    Convert To String    聯絡電話:
     ${Verify_Contact_Email_PuponWindow}    Convert To String    聯絡信箱:
     ${Verify_Kanban_PuponWindow}    Convert To String    公告訊息:
@@ -210,23 +210,23 @@ Refill Form
     ...    醫療機構維護跳窗必須全部清空
     Wait Until Element Is Visible    xpath=${Organization_Maintain_Tab_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Insert Button
-    Input Text    ${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
-    Input Text    ${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
-    Input Text    ${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
-    Input Text    ${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
-    Input Text    ${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
-    Input Text    ${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
-    Input Text    ${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
-    Click Element    ${PopupWindow_Refill_Button}
+    Input Text    xpath=${PopupWindow_System_Code_TextBox}    ${TestData_System_Code_1}
+    Input Text    xpath=${PopupWindow_Organization_Code_TextBox}    ${TestData_Organization_Code_1}
+    Input Text    xpath=${PopupWindow_Organization_Name_TextBox}    ${TestData_Organization_Name_1}
+    Input Text    xpath=${PopupWindow_Organization_Address_TextBox}    ${TestData_Organization_Address_1}
+    Input Text    xpath=${PopupWindow_Contact_Phone_TextBox}    ${TestData_Contact_Phone_1}
+    Input Text    xpath=${PopupWindow_Contact_Email_TextBox}    ${TestData_Contact_Email_1}
+    Input Text    xpath=${PopupWindow_Kanban_TextBox}    ${TestData_Kanban_1}
+    Click Element    xpath=${PopupWindow_Refill_Button}
     Sleep    1
-    Log    Verify 跳窗重新填的資料是否清空
-    ${Get_System_Code_TextBox}=    Get Text    ${PopupWindow_System_Code_TextBox}
-    ${Get_Organization_Code_TextBox}=    Get Text    ${PopupWindow_Organization_Code_TextBox}
-    ${Get_Organization_Name_TextBox}=    Get Text    ${PopupWindow_Organization_Name_TextBox}
-    ${Get_Organization_Address_TextBox}=    Get Text    ${PopupWindow_Organization_Address_TextBox}
-    ${Get_Contact_Phone_TextBox}=    Get Text    ${PopupWindow_Contact_Phone_TextBox}
-    ${Get_Contact_Email_TextBox}=    Get Text    ${PopupWindow_Contact_Email_TextBox}
-    ${Get_Kanban_TextBox}=    Get Text    ${PopupWindow_Kanban_TextBox}
+    #Verify 跳窗重新填的資料是否清空
+    ${Get_System_Code_TextBox}    Get Text    xpath=${PopupWindow_System_Code_TextBox}
+    ${Get_Organization_Code_TextBox}    Get Text    xpath=${PopupWindow_Organization_Code_TextBox}
+    ${Get_Organization_Name_TextBox}    Get Text    xpath=${PopupWindow_Organization_Name_TextBox}
+    ${Get_Organization_Address_TextBox}    Get Text    xpath=${PopupWindow_Organization_Address_TextBox}
+    ${Get_Contact_Phone_TextBox}    Get Text    xpath=${PopupWindow_Contact_Phone_TextBox}
+    ${Get_Contact_Email_TextBox}    Get Text    xpath=${PopupWindow_Contact_Email_TextBox}
+    ${Get_Kanban_TextBox}    Get Text    xpath=${PopupWindow_Kanban_TextBox}
     Should Be Empty    ${Get_System_Code_TextBox}
     Should Be Empty    ${Get_Organization_Code_TextBox}
     Should Be Empty    ${Get_Organization_Name_TextBox}
@@ -429,8 +429,8 @@ Click Medical Organization Maintain Button
     Click Element    ${Medical_Organization_Maintain_Button_ID}    #點擊 醫療機構維護
 
 Click Insert Button
-    Click Element    ${Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_System_Code_TextBox}
+    Click Element    xpath=${Insert_Button_XPATH}
+    Wait Until Element Is Visible    xpath=${PopupWindow_System_Code_TextBox}    ${G_Wait_For_Element_Timeout}
 
 Add Two Record In DB
     Log    先清空測試資料
