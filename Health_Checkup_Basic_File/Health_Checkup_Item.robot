@@ -13,67 +13,69 @@ Resource          ../Login.robot
 Resource          ../DataBase.robot
 
 *** Variables ***
-${Health_Checkup_Basic_File_ID}    button-1022-btnIconEl
-${Health_Checkup_Item_ID}    menuitem-1019-textEl
-${Health_Checkup_Item_Tab_XPATH}    html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    # 健檢項目 Tab
-${Health_Checkup_Item_DIV}    basicCheckGroupSearchForm-1050_header_hd-textEl    # 健檢大項查詢    DIV
-${Health_Checkup_Name_Label}    checkItemNameComboBox-1051-labelEl    # 健檢細項名稱 Label
-${Health_Checkup_Name_Dropdown}    checkItemNameComboBox-1051-inputEl    # 健檢細項名稱 Dropdown
-${Query_Button}    button-1054-btnInnerEl    # 查詢按鈕 Button
-${Refill_Button}    button-1055-btnInnerEl    # 重填按鈕 Button
-${Health_Checkup_Big_Item_DIV}    basicCheckGroupGrid-1056_header_hd-textEl    # 健檢大項 DIV
-${Health_Checkup_Big_Item_Insert_Button}    button-1079-btnInnerEl    #新增按鈕 Button
-${Health_Checkup_Big_Item_Delete_Button}    button-1081-btnInnerEl    #刪除按鈕 Button
-${Health_Checkup_Big_Item_Code_Column}    gridcolumn-1075-textEl    #大項代碼 Column
-${Health_Checkup_Big_Item_Name_Column}    gridcolumn-1076-textEl    #大項名稱 Column
-${Health_Checkup_Detail_Item_DIV}    basicCheckItemGrid-1083_header_hd-textEl    # 健檢細項 DIV
-${Health_Checkup_Detail_Item_Insert_Button}    button-1112-btnInnerEl    #健檢細項 DIV 下的 新增按鈕 Button
-${Health_Checkup_Detail_Item_Delete_Button}    button-1114-btnInnerEl    #健檢細項 DIV 下的 刪除按鈕 Button
-${Health_Checkup_Detail_Item_LOINC_Column}    gridcolumn-1102-textEl    #健檢細項 DIV 下的 LOINC    Column
-${Health_Checkup_Detail_Item_Code_Column}    gridcolumn-1103-textEl    #健檢細項 DIV 下的 健保碼    Column
-${Health_Checkup_Detail_Item_DetailCode_Column}    gridcolumn-1104-textEl    #健檢細項 DIV 下的 細項代碼    Column
-${Health_Checkup_Detail_Item_DetailName_Column}    gridcolumn-1105-textEl    #健檢細項 DIV 下的 細項名稱    Column
-${Health_Checkup_Detail_Item_WorkerItem_Column}    booleancolumn-1106-textEl    #健檢細項 DIV 下的 勞檢項目    Column
-${Health_Checkup_Detail_Item_DataType_Column}    gridcolumn-1107-textEl    #健檢細項 DIV 下的 資料類型    Column
-${Health_Checkup_Detail_Item_OrgSystem_Column}    templatecolumn-1108-textEl    #健檢細項 DIV 下的 器官系統    Column
-${Health_Checkup_Detail_Item_Description_Column}    gridcolumn-1109-titleEl    #健檢細項 DIV 下的 說明
-${PopupWindow_BigItem_Code_Title}    maintainFormWindow-1122_header_hd-textEl    #跳窗    健檢大項維護的Tile
-${PopupWindow_BigItem_Code_Label}    textfield-1124-labelEl    #跳窗    健檢大項維護 代碼
-${PopupWindow_BigItem_Name_English_Label}    textfield-1125-labelEl    #跳窗    健檢大項維護 大項名稱(英文)
-${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1127-labelEl    #跳窗    健檢大項維護 大項名稱(簡中)
-${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1126-labelEl    #跳窗    健檢大項維護 大項名稱(繁中)
-${PopupWindow_BigItem_Code_TextBox}    textfield-1124-inputEl    #跳窗    健檢大項維護 代碼 TextBox
-${PopupWindow_BigItem_Name_English_TextBox}    textfield-1125-inputEl    #跳窗    健檢大項維護 大項名稱(英文) TextBox
-${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    textfield-1127-inputEl    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
-${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    textfield-1126-inputEl    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
-${PopupWindow_BigItem_Insert_Button}    button-1129-btnInnerEl    #跳窗    健檢大項維護 新增按鈕 Button
-${PopupWindow_BigItem_Close_Button}    button-1132-btnInnerEl    #跳窗    健檢大項維護的關閉按鈕 Button
-${PopupWindow_BigItem_Refill_Button}    button-1131-btnInnerEl    #跳窗    健檢大項維護的重填按鈕 Button
-${PopupWindow_BigItem_OK_Button}    button-1006-btnIconEl
-${PopupWindow_Detail_Title}    maintainFormWindow-1136_header_hd-textEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Name_Label}    displayfield-1139-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Item_Label}    checkboxfield-1140-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_LOINC_Label}    textfield-1141-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_HCode_Label}    textfield-1142-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_DCode_Label}    textfield-1143-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_English_Label}    textfield-1144-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Tranditional_Chinese_Label}    textfield-1145-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Simple_Chinese_Label}    textfield-1146-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1147-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Description_Label}    textareafield-1151-labelEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1152_header_hd-textEl    #跳窗 所屬器官Div
-${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1156-textEl    #跳窗 所屬器官Column
-${PopupWindow_Detail_Laber_Item_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
-${PopupWindow_Detail_LOINC_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
-${PopupWindow_Detail_HCode_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
-${PopupWindow_Detail_DCode_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
-${PopupWindow_Detail_English_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
-${PopupWindow_Detail_Tranditional_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
-${PopupWindow_Detail_Simple_Chinese_TextBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
-${PopupWindow_Detail_DataType_Number_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
-${PopupWindow_Detail_Description_TextArea}    html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
-${PopupWindow_Detail_Refill_Button}    button-1147-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
-${PopupWindow_Detail_Insert_Button}    button-1145-btnInnerEl    #跳窗 健檢細項維護的新增按鈕 Button
+${Health_Checkup_Basic_File_ID}    button-1019-btnEl
+${Health_Checkup_Basic_File_ID2}    menuitem-1016-textEl
+${Health_Checkup_Item_Tab_XPATH}    //div[2]/div/div/div/a/span    # 健檢項目 Tab
+${Health_Checkup_Item_DIV}    basicCheckGroupSearchForm-1078_header_hd-textEl    # 健檢大項查詢    DIV
+${Health_Checkup_Name_Label}    checkItemNameComboBox-1079-labelEl    # 健檢細項名稱 Label
+${Health_Checkup_Name_Dropdown}    checkItemNameComboBox-1079-inputEl    # 健檢細項名稱 Dropdown
+${Query_Button}    button-1082-btnInnerEl    # 查詢按鈕 Button
+${Refill_Button}    button-1083-btnInnerEl    # 重填按鈕 Button
+${Health_Checkup_Big_Item_DIV}    basicCheckGroupGrid-1084_header_hd-textEl    # 健檢大項 DIV
+${Health_Checkup_Big_Item_Insert_Button}    button-1107-btnInnerEl    #新增按鈕 Button
+${Health_Checkup_Big_Item_Delete_Button}    button-1109-btnInnerEl    #刪除按鈕 Button
+${Health_Checkup_Big_Item_Code_Column}    gridcolumn-1103-textEl    #大項代碼 Column
+${Health_Checkup_Big_Item_Name_Column}    gridcolumn-1104-textEl    #大項名稱 Column
+${Health_Checkup_Detail_Item_DIV}    basicCheckItemGrid-1111_header_hd-textEl    # 健檢細項 DIV
+${Health_Checkup_Detail_Item_Insert_Button}    button-1140-btnInnerEl    #健檢細項 DIV 下的 新增按鈕 Button
+${Health_Checkup_Detail_Item_Delete_Button}    button-1142-btnInnerEl    #健檢細項 DIV 下的 刪除按鈕 Button
+${Health_Checkup_Detail_Item_LOINC_Column}    gridcolumn-1130-textEl    #健檢細項 DIV 下的 LOINC    Column
+${Health_Checkup_Detail_Item_Code_Column}    gridcolumn-1131-textEl    #健檢細項 DIV 下的 健保碼    Column
+${Health_Checkup_Detail_Item_DetailCode_Column}    gridcolumn-1132-textEl    #健檢細項 DIV 下的 細項代碼    Column
+${Health_Checkup_Detail_Item_DetailName_Column}    gridcolumn-1133-textEl    #健檢細項 DIV 下的 細項名稱    Column
+${Health_Checkup_Detail_Item_WorkerItem_Column}    booleancolumn-1134-textEl    #健檢細項 DIV 下的 勞檢項目    Column
+${Health_Checkup_Detail_Item_DataType_Column}    gridcolumn-1135-textEl    #健檢細項 DIV 下的 資料類型    Column
+${Health_Checkup_Detail_Item_OrgSystem_Column}    templatecolumn-1136-textEl    #健檢細項 DIV 下的 器官系統    Column
+${Health_Checkup_Detail_Item_Description_Column}    gridcolumn-1137-titleEl    #健檢細項 DIV 下的 說明
+${PopupWindow_BigItem_Code_Title}    maintainFormWindow-1150_header_hd-textEl    #跳窗    健檢大項維護的Tile
+${PopupWindow_BigItem_Code_Label}    textfield-1152-labelEl    #跳窗    健檢大項維護 代碼
+${PopupWindow_BigItem_Name_English_Label}    textfield-1153-labelEl    #跳窗    健檢大項維護 大項名稱(英文)
+${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1155-labelEl    #跳窗    健檢大項維護 大項名稱(簡中)
+${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1154-labelEl    #跳窗    健檢大項維護 大項名稱(繁中)
+${PopupWindow_BigItem_Code_TextBox}    textfield-1152-inputEl    #跳窗    健檢大項維護 代碼 TextBox
+${PopupWindow_BigItem_Name_English_TextBox}    textfield-1153-inputEl    #跳窗    健檢大項維護 大項名稱(英文) TextBox
+${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    textfield-1155-inputEl    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
+${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    textfield-1154-inputEl    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
+${PopupWindow_BigItem_Insert_Button}    button-1157-btnInnerEl    #跳窗    健檢大項維護 新增按鈕 Button
+${PopupWindow_BigItem_Close_Button}    button-1160-btnInnerEl    跳窗    健檢大項維護的關閉按鈕 Button
+${PopupWindow_BigItem_Refill_Button}    button-1159-btnInnerEl    #跳窗    健檢大項維護的重填按鈕 Button
+${PopupWindow_BigItem_OK_Button}    button-1005-btnIconEl    #跳窗    健檢大項維護的警告確認按鈕 Button (必填欄位未填)
+${PopupWindow_Detail_Title}    maintainFormWindow-1150_header_hd-textEl    #跳窗    健檢細項維護的Tile
+${PopupWindow_Detail_Name_Label}    displayfield-1153-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_Item_Label}    checkboxfield-1154-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_LOINC_Label}    textfield-1155-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_HCode_Label}    textfield-1156-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_DCode_Label}    textfield-1157-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_English_Label}    textfield-1158-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_Tranditional_Chinese_Label}    textfield-1159-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_Simple_Chinese_Label}    textfield-1160-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1161-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_Description_Label}    textareafield-1165-labelEl    #跳窗    健檢細項維護的Title
+${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1166_header_hd-textEl    #跳窗 所屬器官Div
+${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1170-textEl    #跳窗 所屬器官Column
+${PopupWindow_Detail_Laber_Item_CheckBox}    //table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
+${PopupWindow_Detail_LOINC_TextBox}    //table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
+${PopupWindow_Detail_HCode_TextBox}    //table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
+${PopupWindow_Detail_DCode_TextBox}    //table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
+${PopupWindow_Detail_English_TextBox}    //table[7]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(英文) TextBox
+${PopupWindow_Detail_Tranditional_Chinese_TextBox}    //table[8]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(繁中) TextBox
+${PopupWindow_Detail_Simple_Chinese_TextBox}    //table[9]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的細項名稱(簡中)TextBox
+${PopupWindow_Detail_DataType_Number_CheckBox}    //td/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_DataType_writing_CheckBox}    //td[2]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_DataType_writingblock_CheckBox}    //td[3]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
+${PopupWindow_Detail_Description_TextArea}    //textarea    #跳窗    健檢細項維護的說明 TextArea
+${PopupWindow_Detail_Refill_Button}    button-1175-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
+${PopupWindow_Detail_Insert_Button}    button-1173-btnInnerEl    #跳窗 健檢細項維護的新增按鈕 Button
 ${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
 ${Test_ItemCode}    (A01)
 ${Test_Item_Name_English}    Test
@@ -204,12 +206,12 @@ Check Page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Detail_Item_Description_Style}
     Log    Verify 健檢大項 跳窗
     Click Element    ${Health_Checkup_Big_Item_Insert_Button}
+    ${Verify_Big_Item_Title}    Get Text    ${PopupWindow_BigItem_Code_Title}
     ${Verify_Big_Item_Title}    Convert To String    健檢大項維護
     ${Verify_Big_Item_Code}    Convert To String    *大項代碼:
     ${Verify_Big_Name_Code_English}    Convert To String    *大項名稱(英文):
     ${Verify_Big_Name_Code_Simple_Chinese}    Convert To String    *大項名稱(簡中):
     ${Verify_Big_Name_Code_Tranditional_Chinese}    Convert To String    *大項名稱(繁中):
-    ${Verify_Big_Item_Title}    Get Text    ${PopupWindow_BigItem_Code_Title}
     ${Get_PopupWindow_BigItem_Code_Label}    Get Text    ${PopupWindow_BigItem_Code_Label}
     ${Get_PopupWindow_BigItem_Name_English_Label}    Get Text    ${PopupWindow_BigItem_Name_English_Label}
     ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}    Get Text    ${PopupWindow_BigItem_Name_Simple_Chinese_Label}
@@ -572,8 +574,8 @@ Click Health Checkup Item Button
     Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID}    ${G_Wait_For_Element_Timeout}
     Mouse Over    ${Health_Checkup_Basic_File_ID}
     Click Element    ${Health_Checkup_Basic_File_ID}
-    Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${Health_Checkup_Item_ID}
+    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID2}    ${G_Wait_For_Element_Timeout}
+    Click Element    ${Health_Checkup_Basic_File_ID2}
     Sleep    1
 
 Insert One Record In Detail Item
@@ -639,3 +641,6 @@ Remove Test Data
     ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
     Execute Sql String    ${Delete_Detail_Item}
     Execute Sql String    ${Delete_Big_Item}
+
+Close Browser
+    close browser
