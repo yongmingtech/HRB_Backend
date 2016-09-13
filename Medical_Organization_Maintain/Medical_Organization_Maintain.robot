@@ -374,22 +374,22 @@ Update Form
     ...
     ...    Verify :
     ...    更新後的資料是否能正確存在DB中
-    Log    Verify 驗證醫療機構維護跳窗是否能更新
+    #Verify 驗證醫療機構維護跳窗是否能更新
     Connect Database
     Add Two Record In DB
-    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[2]/td[1]/div
-    Sleep    2
-    Click Element    xpath=html/body/div[11]/div[2]/div/div/span/div/table[1]/tbody/tr/td[2]/input
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_System_Code_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Code_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/input    ${TestData_Organization_Name_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_3}
-    Input Text    xpath=html/body/div[11]/div[2]/div/div/span/div/table[9]/tbody/tr/td[2]/textarea    ${TestData_Kanban_3}
-    Click Element    xpath=html/body/div[11]/div[3]/div/div/div[2]/div/a/span[1]
-    Sleep    2
-    ${queryBasic_Hospital_TestData_3}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_3}' and addr='${TestData_Organization_Address_3}' and hospital_code='${TestData_System_Code_3}' and phone='${TestData_Contact_Phone_3}' and email='${TestData_Contact_Email_3}' and nhi_code='${TestData_Organization_Code_3}' and active_flag=1 and announcement='${TestData_Kanban_3}' and is_chk_hosp= 'Y'
+    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[2]/td[4]/div    #點擊第一筆資料
+    Sleep    1
+    Click Element    xpath=html/body/div[12]/div[2]/div/div/span/div/table[1]/tbody/tr/td[2]/input    #提供健檢服務
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${TestData_System_Code_3}    #系統內碼
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${TestData_Organization_Code_3}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/input    ${TestData_Organization_Name_3}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[6]/tbody/tr/td[2]/textarea    ${TestData_Organization_Address_3}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[7]/tbody/tr/td[2]/textarea    ${TestData_Contact_Phone_3}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[8]/tbody/tr/td[2]/textarea    ${TestData_Contact_Email_3}
+    Input Text    xpath=html/body/div[12]/div[2]/div/div/span/div/table[9]/tbody/tr/td[2]/textarea    ${TestData_Kanban_3}
+    Click Element    xpath=html/body/div[12]/div[3]/div/div/div[2]/div/a/span[1]    #修改按鈕
+    Sleep    2    #讓資料寫入到DB
+    ${queryBasic_Hospital_TestData_3}    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_3}' and addr='${TestData_Organization_Address_3}' and hospital_code='${TestData_System_Code_3}' and phone='${TestData_Contact_Phone_3}' and email='${TestData_Contact_Email_3}' and nhi_code='${TestData_Organization_Code_3}' and active_flag=1 and announcement='${TestData_Kanban_3}' and is_chk_hosp= 'Y'
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_3}
     [Teardown]    Close Browser
 
