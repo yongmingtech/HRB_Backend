@@ -571,7 +571,7 @@ Alter Detail Item Form
 *** Keywords ***
 Click Health Checkup Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID}    ${G_Wait_For_Element_Timeout}
+    Wait Until Element Is Visible    ${Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
     Mouse Over    ${Health_Checkup_Basic_File_ID}
     Click Element    ${Health_Checkup_Basic_File_ID}
     Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID2}    ${G_Wait_For_Element_Timeout}

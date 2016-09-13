@@ -424,9 +424,9 @@ Query Not Found
 *** Keywords ***
 Click Medical Organization Maintain Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}    #Menu的基本檔維護
-    Mouse Over    ${Basic_File_MainTain_Tab}
-    Click Element    ${Basic_File_MainTain_Tab}    #點擊 基本檔維護
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}    #Menu的基本檔維護
+    Mouse Over    ${G_Basic_File_MainTain_Tab}
+    Click Element    ${G_Basic_File_MainTain_Tab}    #點擊 基本檔維護
     Wait Until Element Is Visible    ${Medical_Organization_Maintain_Button_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Medical_Organization_Maintain_Button_ID}    #點擊 醫療機構維護
 
