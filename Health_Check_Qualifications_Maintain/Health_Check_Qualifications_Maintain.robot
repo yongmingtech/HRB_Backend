@@ -6,28 +6,28 @@ Resource          ../Login.robot
 Resource          ../DataBase.robot
 
 *** Variables ***
-${checkup_qualifications_button}    button-1031-btnEl    # 健檢管理
-${checkup_qualifications_button2}    menuitem-1022-textEl    # 健檢資格維護
-${checkup_qualifications_tab}    tab-1125-btnInnerEl    # 客戶健檢資格維護
-${HEADER_checkup_qualifications_search}    accountCrLevelSearchForm-1078_header_hd-textEl    # 健檢資格搜尋
-${HEADER_checkup_qualifications_customer}    accountCrLevelFormGrid-1088_header_hd-textEl    # 客戶清單
-${checkup_qualifications_sch_deptName}    deptBasicComboBox-1079-labelEl    # 資格維護 法人:
-${checkup_qualifications_sch_crLevel}    crmSystemL1basicComboBox-1080-labelEl    # 資格維護 *健檢類別:
-${checkup_qualifications_sch_checkupYear}    yearComboBox-1081-labelEl    # 資格維護 健檢年度:
-${checkup_qualifications_sch_accountId}    textfield-1082-labelEl    # 資格維護 客戶帳號:
-${checkup_qualifications_sch_accountName}    textfield-1083-labelEl    # 資格維護 客戶姓名:
-${checkup_qualifications_sch_roleName}    roleBasicComboBox-1084-labelEl    # 資格維護 客戶類型:
-${checkup_qualifications_list_id}    rownumberer-1104-textEl    # 資格維護 No
-${checkup_qualifications_list_deptName}    gridcolumn-1107-textEl    # 資格維護 法人
-${checkup_qualifications_list_sectionName}    gridcolumn-1108-textEl    # 資格維護 部門
-${checkup_qualifications_list_roleName}    gridcolumn-1109-textEl    # 資格維護 客戶類型
-${checkup_qualifications_list_accountId}    gridcolumn-1110-textEl    # 客戶帳號
-${checkup_qualifications_list_accountName}    gridcolumn-1111-textEl    # 客戶姓名
-${checkup_qualifications_list_gender}    gridcolumn-1112-textEl    # 性別
-${checkup_qualifications_list_reservationExist}    booleancolumn-1113-textEl    # 在職狀況
-${checkup_qualifications_list_checkupYear}    gridcolumn-1114-textEl    # 健檢年度
-${checkup_qualifications_list_crLevel}    gridcolumn-1115-textEl    # 健檢類別
-${checkup_qualifications_list_havecheckup}    booleancolumn-1116-textEl    # 是否健檢
+${checkup_qualifications_button}    //div[3]/div/a/span[2]    # 健檢管理
+${checkup_qualifications_button2}    //div[2]/div[2]/div/a/span    # 健檢資格維護
+${checkup_qualifications_tab_XPATH}    //div[2]/div/div/div/a/span    # 客戶健檢資格維護
+${HEADER_checkup_qualifications_search_XPATH}    //div/div/div/span    # 健檢資格搜尋
+${HEADER_checkup_qualifications_customer_XPATH}    //div[3]/div/div/div/div/div/span    # 客戶清單
+${checkup_qualifications_sch_deptName_XPATH}    //label    # 資格維護 法人:
+${checkup_qualifications_sch_crLevel_XPATH}    //td[2]/table/tbody/tr/td/label    # 資格維護 *健檢類別:
+${checkup_qualifications_sch_checkupYear_XPATH}    //td[3]/table/tbody/tr/td/label    # 資格維護 健檢年度:
+${checkup_qualifications_sch_accountId_XPATH}    //td[4]/table/tbody/tr/td/label    # 資格維護 客戶帳號:
+${checkup_qualifications_sch_accountName_XPATH}    //tr[2]/td/table/tbody/tr/td/label    # 資格維護 客戶姓名:
+${checkup_qualifications_sch_roleName_XPATH}    //tr[2]/td[2]/table/tbody/tr/td/label    # 資格維護 客戶類型:
+${checkup_qualifications_list_id_XPATH}    //div[3]/div[3]/div/div/div/div    # 資格維護 No
+${checkup_qualifications_list_deptName_XPATH}    //div[4]/div/span    # 資格維護 法人
+${checkup_qualifications_list_sectionName_XPATH}    //div[5]/div/span    # 資格維護 部門
+${checkup_qualifications_list_roleName_XPATH}    //div[6]/div/span    # 資格維護 客戶類型
+${checkup_qualifications_list_accountId_XPATH}    //div[7]/div/span    # 客戶帳號
+${checkup_qualifications_list_accountName_XPATH}    //div[8]/div/span    # 客戶姓名
+${checkup_qualifications_list_gender_XPATH}    //div[9]/div/span    # 性別
+${checkup_qualifications_list_reservationExist_XPATH}    //div[10]/div/span    # 在職狀況
+${checkup_qualifications_list_checkupYear_XPATH}    //div[11]/div/span    # 健檢年度
+${checkup_qualifications_list_crLevel_XPATH}    //div[12]/div/span    # 健檢類別
+${checkup_qualifications_list_havecheckup_XPATH}    //div[13]/div/span    # 是否健檢
 
 *** Test Cases ***
 check page
@@ -51,26 +51,26 @@ check page
     ${Verify_checkup_qualifications_list_checkupYear}    Convert To String    健檢年度
     ${Verify_checkup_qualifications_list_crLevel}    Convert To String    健檢類別
     ${Verify_checkup_qualifications_list_havecheckup}    Convert To String    是否健檢
-    ${Get_checkup_qualifications_tab}    Get Text    ${checkup_qualifications_tab}
-    ${Get_HEADER_checkup_qualifications_search}    Get Text    ${HEADER_checkup_qualifications_search}
-    ${Get_HEADER_checkup_qualifications_customer}    Get Text    ${HEADER_checkup_qualifications_customer}
-    ${Get_checkup_qualifications_sch_deptName}    Get Text    ${checkup_qualifications_sch_deptName}
-    ${Get_checkup_qualifications_sch_crLevel}    Get Text    ${checkup_qualifications_sch_crLevel}
-    ${Get_checkup_qualifications_sch_checkupYear}    Get Text    ${checkup_qualifications_sch_checkupYear}
-    ${Get_checkup_qualifications_sch_accountId}    Get Text    ${checkup_qualifications_sch_accountId}
-    ${Get_checkup_qualifications_sch_accountName}    Get Text    ${checkup_qualifications_sch_accountName}
-    ${Get_checkup_qualifications_sch_roleName}    Get Text    ${checkup_qualifications_sch_roleName}
-    ${Get_checkup_qualifications_list_id}    Get Text    ${checkup_qualifications_list_id}
-    ${Get_checkup_qualifications_list_deptName}    Get Text    ${checkup_qualifications_list_deptName}
-    ${Get_checkup_qualifications_list_sectionName}    Get Text    ${checkup_qualifications_list_sectionName}
-    ${Get_checkup_qualifications_list_roleName}    Get Text    ${checkup_qualifications_list_roleName}
-    ${Get_checkup_qualifications_list_accountId}    Get Text    ${checkup_qualifications_list_accountId}
-    ${Get_checkup_qualifications_list_accountName}    Get Text    ${checkup_qualifications_list_accountName}
-    ${Get_checkup_qualifications_list_gender}    Get Text    ${checkup_qualifications_list_gender}
-    ${Get_checkup_qualifications_list_reservationExist}    Get Text    ${checkup_qualifications_list_reservationExist}
-    ${Get_checkup_qualifications_list_checkupYear}    Get Text    ${checkup_qualifications_list_checkupYear}
-    ${Get_checkup_qualifications_list_crLevel}    Get Text    ${checkup_qualifications_list_crLevel}
-    ${Get_checkup_qualifications_list_havecheckup}    Get Text    ${checkup_qualifications_list_havecheckup}
+    ${Get_checkup_qualifications_tab}    Get Text    xpath=${checkup_qualifications_tab_XPATH}
+    ${Get_HEADER_checkup_qualifications_search}    Get Text    xpath=${HEADER_checkup_qualifications_search_XPATH}
+    ${Get_HEADER_checkup_qualifications_customer}    Get Text    xpath=${HEADER_checkup_qualifications_customer_XPATH}
+    ${Get_checkup_qualifications_sch_deptName}    Get Text    xpath=${checkup_qualifications_sch_deptName_XPATH}
+    ${Get_checkup_qualifications_sch_crLevel}    Get Text    xpath=${checkup_qualifications_sch_crLevel_XPATH}
+    ${Get_checkup_qualifications_sch_checkupYear}    Get Text    xpath=${checkup_qualifications_sch_checkupYear_XPATH}
+    ${Get_checkup_qualifications_sch_accountId}    Get Text    xpath=${checkup_qualifications_sch_accountId_XPATH}
+    ${Get_checkup_qualifications_sch_accountName}    Get Text    xpath=${checkup_qualifications_sch_accountName_XPATH}
+    ${Get_checkup_qualifications_sch_roleName}    Get Text    xpath=${checkup_qualifications_sch_roleName_XPATH}
+    ${Get_checkup_qualifications_list_id}    Get Text    xpath=${checkup_qualifications_list_id_XPATH}
+    ${Get_checkup_qualifications_list_deptName}    Get Text    xpath=${checkup_qualifications_list_deptName_XPATH}
+    ${Get_checkup_qualifications_list_sectionName}    Get Text    xpath=${checkup_qualifications_list_sectionName_XPATH}
+    ${Get_checkup_qualifications_list_roleName}    Get Text    xpath=${checkup_qualifications_list_roleName_XPATH}
+    ${Get_checkup_qualifications_list_accountId}    Get Text    xpath=${checkup_qualifications_list_accountId_XPATH}
+    ${Get_checkup_qualifications_list_accountName}    Get Text    xpath=${checkup_qualifications_list_accountName_XPATH}
+    ${Get_checkup_qualifications_list_gender}    Get Text    xpath=${checkup_qualifications_list_gender_XPATH}
+    ${Get_checkup_qualifications_list_reservationExist}    Get Text    xpath=${checkup_qualifications_list_reservationExist_XPATH}
+    ${Get_checkup_qualifications_list_checkupYear}    Get Text    xpath=${checkup_qualifications_list_checkupYear_XPATH}
+    ${Get_checkup_qualifications_list_crLevel}    Get Text    xpath=${checkup_qualifications_list_crLevel_XPATH}
+    ${Get_checkup_qualifications_list_havecheckup}    Get Text    xpath=${checkup_qualifications_list_havecheckup_XPATH}
     Should Be Equal    ${Verify_checkup_qualifications_tab}    ${Get_checkup_qualifications_tab}
     Should Be Equal    ${Verify_HEADER_checkup_qualifications_search}    ${Get_HEADER_checkup_qualifications_search}
     Should Be Equal    ${Verify_HEADER_checkup_qualifications_customer}    ${Get_HEADER_checkup_qualifications_customer}
@@ -96,11 +96,11 @@ check page
 *** Keywords ***
 Click checkup_qualifications Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${checkup_qualifications_button}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${checkup_qualifications_button}
-    Click Element    ${checkup_qualifications_button}
-    Wait Until Element Is Visible    ${checkup_qualifications_button2}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${checkup_qualifications_button2}
+    Wait Until Element Is Visible    xpath=${checkup_qualifications_button}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    xpath=${checkup_qualifications_button}
+    Click Element    xpath=${checkup_qualifications_button}
+    Wait Until Element Is Visible    xpath=${checkup_qualifications_button2}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${checkup_qualifications_button2}
     Sleep    1
 
 close web browser
