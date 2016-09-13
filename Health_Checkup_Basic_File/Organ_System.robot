@@ -28,7 +28,7 @@ ${PopupWindow_Organ_Display_N_RadioButton}    radiofield-1112-inputEl    #跳窗
 ${PopupWindow_Organ_System_DetailCode_Column}    gridcolumn-1118-textEl
 ${PopupWindow_Organ_System_DetailName_Column}    gridcolumn-1119-textEl
 ${PopupWindow_Organ_System_Refill_Button}    html/body/div[13]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗-重填-按鈕
-${PopupWindow_Organ_System_Insert_Button}    button-1122-btnInnerEl    #跳窗-新增-按鈕
+${PopupWindow_Organ_System_Insert_Button}    html/body/div[13]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗-新增-按鈕
 ${TestData_Organ_Code_TextBox}    _A123456
 ${TestData_Organ_Name_TextBox}    _測試
 ${Tab}            tab-1086-btnInnerEl    #Tab
@@ -203,17 +203,15 @@ Click Organ System Item Button
 
 Insert One Record In Organ System
     Remove Test Data
-    Click Element    ${Organ_System_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
+    Click Element    xpath=${Organ_System_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
     Fill Test Data In Organ System
-    Click Element    ${PopupWindow_Organ_System_Insert_Button}    #按下新增按鈕
-    Sleep    1
-    Log    Check DB
-    ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'
+    Click Element    xpath=${PopupWindow_Organ_System_Insert_Button}    #按下新增按鈕
+    Sleep    2    #等待資料庫新增
+    ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'    #資料庫查詢語法
+    #驗證資料庫資料
     Check If Exists In Database    ${Query_Organ_System}
-    Log    Check WebPage
-    Sleep    1
+    #驗證網頁資料
     ${Verify_Sex}    Convert To String    女
     ${Verify_IsDisply}    Convert To String    是
     ${Get_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[4]/div
