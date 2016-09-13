@@ -6,7 +6,7 @@ Documentation     健檢基本檔 -> 器官系統
 Suite Setup
 Suite Teardown
 Test Setup        Click Organ System Item Button
-Test Teardown     Close Web Browser
+Test Teardown
 Force Tags
 Metadata          Version    0.1
 Resource          ../Login.robot

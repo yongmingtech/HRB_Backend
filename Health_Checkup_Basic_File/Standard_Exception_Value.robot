@@ -3,7 +3,7 @@ Documentation     健檢基本檔 -> 標準異常值
 Suite Setup
 Suite Teardown
 Test Setup        Click Stand Exception Item Buttton
-Test Teardown     Close Web Browser
+Test Teardown
 Force Tags
 Metadata          Version    0.1
 Resource          ../Login.robot

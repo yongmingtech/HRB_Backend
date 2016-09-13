@@ -13,57 +13,66 @@ Resource          ../Login.robot
 Resource          ../DataBase.robot
 
 *** Variables ***
-${Health_Checkup_Basic_File_ID}    button-1019-btnEl
-${Health_Checkup_Basic_File_ID2}    menuitem-1016-textEl
-${Health_Checkup_Item_Tab_XPATH}    //div[2]/div/div/div/a/span    # 健檢項目 Tab
-${Health_Checkup_Item_DIV}    basicCheckGroupSearchForm-1078_header_hd-textEl    # 健檢大項查詢    DIV
-${Health_Checkup_Name_Label}    checkItemNameComboBox-1079-labelEl    # 健檢細項名稱 Label
-${Health_Checkup_Name_Dropdown}    checkItemNameComboBox-1079-inputEl    # 健檢細項名稱 Dropdown
-${Query_Button}    button-1082-btnInnerEl    # 查詢按鈕 Button
-${Refill_Button}    button-1083-btnInnerEl    # 重填按鈕 Button
-${Health_Checkup_Big_Item_DIV}    basicCheckGroupGrid-1084_header_hd-textEl    # 健檢大項 DIV
-${Health_Checkup_Big_Item_Insert_Button}    button-1107-btnInnerEl    #新增按鈕 Button
-${Health_Checkup_Big_Item_Delete_Button}    button-1109-btnInnerEl    #刪除按鈕 Button
-${Health_Checkup_Big_Item_Code_Column}    gridcolumn-1103-textEl    #大項代碼 Column
-${Health_Checkup_Big_Item_Name_Column}    gridcolumn-1104-textEl    #大項名稱 Column
-${Health_Checkup_Detail_Item_DIV}    basicCheckItemGrid-1111_header_hd-textEl    # 健檢細項 DIV
-${Health_Checkup_Detail_Item_Insert_Button}    button-1140-btnInnerEl    #健檢細項 DIV 下的 新增按鈕 Button
-${Health_Checkup_Detail_Item_Delete_Button}    button-1142-btnInnerEl    #健檢細項 DIV 下的 刪除按鈕 Button
-${Health_Checkup_Detail_Item_LOINC_Column}    gridcolumn-1130-textEl    #健檢細項 DIV 下的 LOINC    Column
-${Health_Checkup_Detail_Item_Code_Column}    gridcolumn-1131-textEl    #健檢細項 DIV 下的 健保碼    Column
-${Health_Checkup_Detail_Item_DetailCode_Column}    gridcolumn-1132-textEl    #健檢細項 DIV 下的 細項代碼    Column
-${Health_Checkup_Detail_Item_DetailName_Column}    gridcolumn-1133-textEl    #健檢細項 DIV 下的 細項名稱    Column
-${Health_Checkup_Detail_Item_WorkerItem_Column}    booleancolumn-1134-textEl    #健檢細項 DIV 下的 勞檢項目    Column
-${Health_Checkup_Detail_Item_DataType_Column}    gridcolumn-1135-textEl    #健檢細項 DIV 下的 資料類型    Column
-${Health_Checkup_Detail_Item_OrgSystem_Column}    templatecolumn-1136-textEl    #健檢細項 DIV 下的 器官系統    Column
-${Health_Checkup_Detail_Item_Description_Column}    gridcolumn-1137-titleEl    #健檢細項 DIV 下的 說明
-${PopupWindow_BigItem_Code_Title}    maintainFormWindow-1150_header_hd-textEl    #跳窗    健檢大項維護的Tile
-${PopupWindow_BigItem_Code_Label}    textfield-1152-labelEl    #跳窗    健檢大項維護 代碼
-${PopupWindow_BigItem_Name_English_Label}    textfield-1153-labelEl    #跳窗    健檢大項維護 大項名稱(英文)
-${PopupWindow_BigItem_Name_Simple_Chinese_Label}    textfield-1155-labelEl    #跳窗    健檢大項維護 大項名稱(簡中)
-${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    textfield-1154-labelEl    #跳窗    健檢大項維護 大項名稱(繁中)
-${PopupWindow_BigItem_Code_TextBox}    textfield-1152-inputEl    #跳窗    健檢大項維護 代碼 TextBox
-${PopupWindow_BigItem_Name_English_TextBox}    textfield-1153-inputEl    #跳窗    健檢大項維護 大項名稱(英文) TextBox
-${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    textfield-1155-inputEl    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
-${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    textfield-1154-inputEl    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
-${PopupWindow_BigItem_Insert_Button}    button-1157-btnInnerEl    #跳窗    健檢大項維護 新增按鈕 Button
-${PopupWindow_BigItem_Close_Button}    button-1160-btnInnerEl    跳窗    健檢大項維護的關閉按鈕 Button
-${PopupWindow_BigItem_Refill_Button}    button-1159-btnInnerEl    #跳窗    健檢大項維護的重填按鈕 Button
+${Health_Checkup_Item_ID}    menuitem-1016-textEl    # menu id
+#TAB
+${Health_Checkup_Item_Tab_XPATH}    html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    # 健檢項目 Tab
+#Begin 健檢大項查詢 DIV
+${Health_Checkup_Item_DIV}    html/body/div[5]/div[2]/div/div/div[1]/div[1]/div/div/div/div[1]/span    # 健檢大項查詢    DIV
+${Health_Checkup_Name_Label}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/table/tbody/tr/td/table/tbody/tr/td[1]/label    # 健檢細項名稱 Label
+${Health_Checkup_Name_Dropdown}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input    # 健檢細項名稱 Dropdown
+${Query_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[1]/div/a/span[1]    # 查詢按鈕 Button
+${Refill_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/a/span[1]    # 重填按鈕 Button
+#End 健檢大項查詢 DIV
+#Begin 健檢大項 DIV
+${Health_Checkup_Big_Item_DIV}    html/body/div[5]/div[2]/div/div/div[3]/div[1]/div/div/div/div/span    # 健檢大項 DIV
+${Health_Checkup_Big_Item_Insert_Button}    html/body/div[5]/div[2]/div/div/div[3]/div[2]/div/div/div[1]/div/a/span[1]    #新增按鈕 Button
+${Health_Checkup_Big_Item_Delete_Button}    html/body/div[5]/div[2]/div/div/div[3]/div[2]/div/div/div[3]/div/a/span[1]    #刪除按鈕 Button
+${Health_Checkup_Big_Item_Code_Column}    html/body/div[5]/div[2]/div/div/div[3]/div[3]/div/div/div[4]/div/span    #大項代碼 Column
+${Health_Checkup_Big_Item_Name_Column}    html/body/div[5]/div[2]/div/div/div[3]/div[3]/div/div/div[5]/div/span    #大項名稱 Column
+#End 健檢大項 DIV
+#Begin 健檢細項 DIV
+${Health_Checkup_Detail_Item_DIV}    html/body/div[5]/div[2]/div/div/div[5]/div[1]/div/div/div/div/span    # 健檢細項 DIV
+${Health_Checkup_Detail_Item_Insert_Button}    html/body/div[5]/div[2]/div/div/div[5]/div[2]/div/div/div[1]/div/a/span[1]    #健檢細項 DIV 下的 新增按鈕 Button
+${Health_Checkup_Detail_Item_Delete_Button}    html/body/div[5]/div[2]/div/div/div[5]/div[2]/div/div/div[3]/div/a/span[1]    #健檢細項 DIV 下的 刪除按鈕 Button
+${Health_Checkup_Detail_Item_LOINC_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[4]/div/span    #健檢細項 DIV 下的 LOINC    Column
+${Health_Checkup_Detail_Item_Code_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[5]/div/span    #健檢細項 DIV 下的 健保碼    Column
+${Health_Checkup_Detail_Item_DetailCode_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[6]/div/span    #健檢細項 DIV 下的 細項代碼    Column
+${Health_Checkup_Detail_Item_DetailName_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[7]/div/span    #健檢細項 DIV 下的 細項名稱    Column
+${Health_Checkup_Detail_Item_WorkerItem_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[8]/div/span    #健檢細項 DIV 下的 勞檢項目    Column
+${Health_Checkup_Detail_Item_DataType_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[9]/div/span    #健檢細項 DIV 下的 資料類型    Column
+${Health_Checkup_Detail_Item_OrgSystem_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[10]/div/span    #健檢細項 DIV 下的 器官系統    Column
+${Health_Checkup_Detail_Item_Description_Column}    html/body/div[5]/div[2]/div/div/div[5]/div[3]/div/div/div[11]/div/span    #健檢細項 DIV 下的 說明
+#End 健檢細項 DIV
+#Begin 跳窗-健檢大項
+${PopupWindow_BigItem_Code_Title}    html/body/div[13]/div[1]/div/div/div/div[1]/span    #跳窗    健檢大項維護的Tile
+${PopupWindow_BigItem_Code_Label}    html/body/div[13]/div[2]/div/div/span/div/table[1]/tbody/tr/td[1]/label    #跳窗    健檢大項維護 代碼
+${PopupWindow_BigItem_Name_English_Label}    html/body/div[13]/div[2]/div/div/span/div/table[2]/tbody/tr/td[1]/label    #跳窗    健檢大項維護 大項名稱(英文)
+${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    html/body/div[13]/div[2]/div/div/span/div/table[3]/tbody/tr/td[1]/label    #跳窗    健檢大項維護 大項名稱(繁中)
+${PopupWindow_BigItem_Name_Simple_Chinese_Label}    html/body/div[13]/div[2]/div/div/span/div/table[4]/tbody/tr/td[1]/label    #跳窗    健檢大項維護 大項名稱(簡中)
+${PopupWindow_BigItem_Code_TextBox}    html/body/div[13]/div[2]/div/div/span/div/table[1]/tbody/tr/td[2]/input    #跳窗    健檢大項維護 代碼 TextBox
+${PopupWindow_BigItem_Name_English_TextBox}    html/body/div[13]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    #跳窗    健檢大項維護 大項名稱(英文) TextBox
+${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    html/body/div[13]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    健檢大項維護 大項名稱(繁中) TextBox
+${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    html/body/div[13]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    #跳窗    健檢大項維護 大項名稱(簡中) TextBox
+${PopupWindow_BigItem_Insert_Button}    html/body/div[13]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗    健檢大項維護 新增按鈕 Button
+${PopupWindow_BigItem_Close_Button}    html/body/div[13]/div[3]/div/div/div[4]/div/a/span[1]    #跳窗    健檢大項維護的關閉按鈕 Button
+${PopupWindow_BigItem_Refill_Button}    html/body/div[13]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗    健檢大項維護的重填按鈕 Button
 ${PopupWindow_BigItem_OK_Button}    button-1005-btnIconEl    #跳窗    健檢大項維護的警告確認按鈕 Button (必填欄位未填)
-${PopupWindow_Detail_Title}    maintainFormWindow-1150_header_hd-textEl    #跳窗    健檢細項維護的Tile
-${PopupWindow_Detail_Name_Label}    displayfield-1153-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_Item_Label}    checkboxfield-1154-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_LOINC_Label}    textfield-1155-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_HCode_Label}    textfield-1156-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_DCode_Label}    textfield-1157-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_English_Label}    textfield-1158-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_Tranditional_Chinese_Label}    textfield-1159-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_Simple_Chinese_Label}    textfield-1160-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_DataType_Label}    itemTypeRadioGroup-1161-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_Description_Label}    textareafield-1165-labelEl    #跳窗    健檢細項維護的Title
-${PopupWindow_Detail_OwnOrg_Div}    basicOrganItemRelOfOrganGrid-1166_header_hd-textEl    #跳窗 所屬器官Div
-${PopupWindow_Detail_OwnOrg_Column}    gridcolumn-1170-textEl    #跳窗 所屬器官Column
-${PopupWindow_Detail_Laber_Item_CheckBox}    //table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
+#End 跳窗-健檢大項
+#Begin 跳窗-健檢細項
+${PopupWindow_Detail_Title}    html/body/div[14]/div[1]/div/div/div/div[1]/span    #跳窗 健檢細項維護的Tile
+${PopupWindow_Detail_Big_Item_Category_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[2]/tbody/tr/td[1]/label    #跳窗-大項分類
+${PopupWindow_Detail_Laber_Item_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[1]/label    #跳窗-勞檢項目
+${PopupWindow_Detail_LOINC_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[1]/label    #跳窗-LONINC
+${PopupWindow_Detail_Healthcare_Code_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[5]/tbody/tr/td[1]/label    #跳窗-健保碼
+${PopupWindow_Detail_Detail_Code_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[6]/tbody/tr/td[1]/label    #跳窗- 細項代碼
+${PopupWindow_Detail_English_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[7]/tbody/tr/td[1]/label    #跳窗- 英文
+${PopupWindow_Detail_Tranditional_Chinese_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[8]/tbody/tr/td[1]/label    #跳窗- 繁中
+${PopupWindow_Detail_Simple_Chinese_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[9]/tbody/tr/td[1]/label    #跳窗- 簡中
+${PopupWindow_Detail_DataType_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[10]/tbody/tr/td[1]/label    #跳窗- 資料類行
+${PopupWindow_Detail_Description_Label}    html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[1]/label    #跳窗- 細項說明
+${PopupWindow_Detail_Own_Organ_Div}    html/body/div[14]/div[2]/div[3]/div[1]/div/div/div/div/span    #跳窗-所屬器官DIV
+${PopupWindow_Detail_Own_Organ_Column}    html/body/div[14]/div[2]/div[3]/div[2]/div/div/div[3]/div/span    #跳窗- 器官名稱
+${PopupWindow_Detail_Laber_Item_CheckBox}    html/body/div[14]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/input    #跳窗    勞檢項目的Checkbox
 ${PopupWindow_Detail_LOINC_TextBox}    //table[4]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 LOINC TextBox
 ${PopupWindow_Detail_HCode_TextBox}    //table[5]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的健保碼: TextBox
 ${PopupWindow_Detail_DCode_TextBox}    //table[6]/tbody/tr/td[2]/input    #跳窗    健檢細項維護的 細項代碼 TextBox
@@ -73,9 +82,10 @@ ${PopupWindow_Detail_Simple_Chinese_TextBox}    //table[9]/tbody/tr/td[2]/input 
 ${PopupWindow_Detail_DataType_Number_CheckBox}    //td/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
 ${PopupWindow_Detail_DataType_writing_CheckBox}    //td[2]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
 ${PopupWindow_Detail_DataType_writingblock_CheckBox}    //td[3]/table/tbody/tr/td[2]/input    #跳窗 | #健檢細項維護的資料類型(數字)
-${PopupWindow_Detail_Description_TextArea}    //textarea    #跳窗    健檢細項維護的說明 TextArea
-${PopupWindow_Detail_Refill_Button}    button-1175-btnInnerEl    #跳窗    健檢細項維護的重填按鈕 Button
-${PopupWindow_Detail_Insert_Button}    button-1173-btnInnerEl    #跳窗 健檢細項維護的新增按鈕 Button
+${PopupWindow_Detail_Description_TextArea}    html/body/div[14]/div[2]/div[1]/div/span/div/table[11]/tbody/tr/td[2]/textarea    #跳窗    健檢細項維護的說明 TextArea
+${PopupWindow_Detail_Refill_Button}    html/body/div[14]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗    健檢細項維護的重填按鈕 Button
+${PopupWindow_Detail_Insert_Button}    html/body/div[14]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗 健檢細項維護的新增按鈕 Button
+#end 跳窗-健檢細項
 ${Test_Query_Detail_Name}    1JR    # 查詢的測試資料
 ${Test_ItemCode}    (A01)
 ${Test_Item_Name_English}    Test
@@ -103,58 +113,54 @@ Check Page
     ...
     ...    Verify :
     ...    機構整個頁面和跳窗的文字對齊和文字是否按造規格顯示
-    Log    Remove Test Data
     Remove Test Data
-    Log    宣告共用變數
+    #宣告共用變數
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
-    Log    Verify Tab
-    ${Verify_Tab}=    Convert To String    健檢項目
-    ${Get_Tab}=    Get Text    xpath=${Health_Checkup_Item_Tab_XPATH}
+    ${Verify_Insert_Button}    Convert To String    新增
+    ${Verify_Delete_Button}    Convert To String    刪除
+    #Verify Tab
+    ${Verify_Tab}    Convert To String    健檢項目
+    ${Get_Tab}    Get Text    xpath=${Health_Checkup_Item_Tab_XPATH}
     Should Be Equal    ${Verify_Tab}    ${Get_Tab}
-    Log    Verify 健檢大項查詢 DIV
-    ${Verify_Health_Checkup_Item_DIV}=    Convert To String    健檢大項查詢
-    ${Verify_Health_Checkup_Name_Label}=    Convert To String    健檢細項名稱:
-    ${Verify_Query_Button}=    Convert To String    查詢
-    ${Verify_Refill_Button}=    Convert To String    重填
-    ${Verify_Insert_Button}=    Convert To String    新增
-    ${Verify_Delete_Button}=    Convert To String    刪除
-    ${Get_Health_Checkup_Item_DIV}=    Get Text    ${Health_Checkup_Item_DIV}
-    ${Get_Health_Checkup_Name_Label}=    Get Text    ${Health_Checkup_Name_Label}
-    ${Get_Query_Button}=    Get Text    ${Query_Button}
-    ${Get_Refill_Button}=    Get Text    ${Refill_Button}
+    #Verify 健檢大項查詢 DIV
+    ${Verify_Health_Checkup_Item_DIV}    Convert To String    健檢大項查詢
+    ${Verify_Health_Checkup_Name_Label}    Convert To String    健檢細項名稱:
+    ${Verify_Query_Button}    Convert To String    查詢
+    ${Verify_Refill_Button}    Convert To String    重填
+    ${Get_Health_Checkup_Item_DIV}    Get Text    xpath=${Health_Checkup_Item_DIV}
+    ${Get_Health_Checkup_Name_Label}    Get Text    xpath=${Health_Checkup_Name_Label}
+    ${Get_Query_Button}    Get Text    xpath=${Query_Button}
+    ${Get_Refill_Button}    Get Text    xpath=${Refill_Button}
     Should Be Equal    ${Verify_Health_Checkup_Item_DIV}    ${Get_Health_Checkup_Item_DIV}
     Should Be Equal    ${Verify_Health_Checkup_Name_Label}    ${Get_Health_Checkup_Name_Label}
     Should Be Equal    ${Verify_Query_Button}    ${Get_Query_Button}
     Should Be Equal    ${Verify_Refill_Button}    ${Get_Refill_Button}
-    Element Should Be Visible    ${Health_Checkup_Item_DIV}
-    Log    Verify 健檢大項 Div
-    ${Verify_Health_Checkup_Big_Item_DIV}=    Convert To String    健檢大項
-    ${Verify_Health_Checkup_Big_Item_Insert_Button}=    Convert To String    新增
-    ${Verify_Health_Checkup_Big_Item_Delete_Button}=    Convert To String    刪除
-    ${Verify_Health_Checkup_Big_Item_Code_Column}=    Convert To String    大項代碼
-    ${Verify_Health_Checkup_Big_Item_Name_Column}=    Convert To String    大項名稱
-    ${Verify_Health_Checkup_Big_Item_Insert_Button}=    Convert To String    新增
-    ${Verify_Health_Checkup_Big_Item_Delete_Button}=    Convert To String    刪除
-    ${Get_Health_Checkup_Big_Item_DIV}    Get Text    ${Health_Checkup_Big_Item_DIV}
-    ${Get_Health_Checkup_Big_Item_Insert_Button}    Get Text    ${Health_Checkup_Big_Item_Insert_Button}
-    ${Get_Health_Checkup_Big_Item_Delete_Button}    Get Text    ${Health_Checkup_Big_Item_Delete_Button}
-    ${Get_Health_Checkup_Big_Item_Code_Column}    Get Text    ${Health_Checkup_Big_Item_Code_Column}
-    ${Get_Health_Checkup_Big_Item_Name_Column}    Get Text    ${Health_Checkup_Big_Item_Name_Column}
-    ${Get_Health_Checkup_Big_Item_Insert_Button}=    Get Text    ${Health_Checkup_Big_Item_Insert_Button}
-    ${Get_Health_Checkup_Big_Item_Delete_Button}=    Get Text    ${Health_Checkup_Big_Item_Delete_Button}
+    #Verify 健檢大項 Div
+    ${Verify_Health_Checkup_Big_Item_DIV}    Convert To String    健檢大項
+    ${Verify_Health_Checkup_Big_Item_Insert_Button}    Convert To String    新增
+    ${Verify_Health_Checkup_Big_Item_Delete_Button}    Convert To String    刪除
+    ${Verify_Health_Checkup_Big_Item_Code_Column}    Convert To String    大項代碼
+    ${Verify_Health_Checkup_Big_Item_Name_Column}    Convert To String    大項名稱
+    ${Get_Health_Checkup_Big_Item_DIV}    Get Text    xpath=${Health_Checkup_Big_Item_DIV}
+    ${Get_Health_Checkup_Big_Item_Insert_Button}    Get Text    xpath=${Health_Checkup_Big_Item_Insert_Button}
+    ${Get_Health_Checkup_Big_Item_Delete_Button}    Get Text    xpath=${Health_Checkup_Big_Item_Delete_Button}
+    ${Get_Health_Checkup_Big_Item_Code_Column}    Get Text    xpath=${Health_Checkup_Big_Item_Code_Column}
+    ${Get_Health_Checkup_Big_Item_Name_Column}    Get Text    xpath=${Health_Checkup_Big_Item_Name_Column}
+    ${Get_Health_Checkup_Big_Item_Insert_Button}    Get Text    xpath=${Health_Checkup_Big_Item_Insert_Button}
+    ${Get_Health_Checkup_Big_Item_Delete_Button}    Get Text    xpath=${Health_Checkup_Big_Item_Delete_Button}
     ${Get_Health_Checkup_Big_Item_Code_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
     ${Get_Health_Checkup_Big_Item_Name_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
     Should Be Equal    ${Verify_Health_Checkup_Big_Item_DIV}    ${Get_Health_Checkup_Big_Item_DIV}
-    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Insert_Button}    ${Get_Health_Checkup_Big_Item_Insert_Button}
-    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Delete_Button}    ${Get_Health_Checkup_Big_Item_Delete_Button}
-    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Code_Column}    ${Get_Health_Checkup_Big_Item_Code_Column}
-    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Name_Column}    ${Get_Health_Checkup_Big_Item_Name_Column}
     Should Be Equal    ${Verify_Insert_Button}    ${Get_Health_Checkup_Big_Item_Insert_Button}
     Should Be Equal    ${Verify_Delete_Button}    ${Get_Health_Checkup_Big_Item_Delete_Button}
+    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Code_Column}    ${Get_Health_Checkup_Big_Item_Code_Column}
+    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Name_Column}    ${Get_Health_Checkup_Big_Item_Name_Column}
+    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Insert_Button}    ${Get_Health_Checkup_Big_Item_Insert_Button}
+    Should Be Equal    ${Verify_Health_Checkup_Big_Item_Delete_Button}    ${Get_Health_Checkup_Big_Item_Delete_Button}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Big_Item_Code_Style}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Big_Item_Name_Style}
-    Log    Verify 健檢細項 DIV
+    #Verify 健檢細項 DIV
     ${Verify_Health_Checkup_Detail_Item_DIV}    Convert To String    健檢細項
     ${Verify_Health_Checkup_Detail_Item_LOINC_Column}    Convert To String    LOINC
     ${Verify_Health_Checkup_Detail_Item_Code_Column}    Convert To String    健保碼
@@ -164,17 +170,17 @@ Check Page
     ${Verify_Health_Checkup_Detail_Item_DataType_Column}    Convert To String    資料類型
     ${Verify_Health_Checkup_Detail_Item_OrgSystem_Column}    Convert To String    器官系統
     ${Verify_Health_Checkup_Detail_Item_Description_Column}    Convert To String    細項說明
-    ${Get_Health_Checkup_Detail_Item_DIV}    Get Text    ${Health_Checkup_Detail_Item_DIV}
-    ${Get_Health_Checkup_Detail_Item_Insert_Button}    Get Text    ${Health_Checkup_Detail_Item_Insert_Button}
-    ${Get_Health_Checkup_Detail_Item_Delete_Button}    Get Text    ${Health_Checkup_Detail_Item_Delete_Button}
-    ${Get_Health_Checkup_Detail_Item_LOINC_Column}    Get Text    ${Health_Checkup_Detail_Item_LOINC_Column}
-    ${Get_Health_Checkup_Detail_Item_Code_Column}    Get Text    ${Health_Checkup_Detail_Item_Code_Column}
-    ${Get_Health_Checkup_Detail_Item_DetailCode_Column}    Get Text    ${Health_Checkup_Detail_Item_DetailCode_Column}
-    ${Get_Health_Checkup_Detail_Item_DetailName_Column}    Get Text    ${Health_Checkup_Detail_Item_DetailName_Column}
-    ${Get_Health_Checkup_Detail_Item_WorkerItem_Column}    Get Text    ${Health_Checkup_Detail_Item_WorkerItem_Column}
-    ${Get_Health_Checkup_Detail_Item_DataType_Column}    Get Text    ${Health_Checkup_Detail_Item_DataType_Column}
-    ${Get_Health_Checkup_Detail_Item_OrgSystem_Column}    Get Text    ${Health_Checkup_Detail_Item_OrgSystem_Column}
-    ${Get_Health_Checkup_Detail_Item_Description_Column}    Get Text    ${Health_Checkup_Detail_Item_Description_Column}
+    ${Get_Health_Checkup_Detail_Item_DIV}    Get Text    xpath=${Health_Checkup_Detail_Item_DIV}
+    ${Get_Health_Checkup_Detail_Item_Insert_Button}    Get Text    xpath=${Health_Checkup_Detail_Item_Insert_Button}
+    ${Get_Health_Checkup_Detail_Item_Delete_Button}    Get Text    xpath=${Health_Checkup_Detail_Item_Delete_Button}
+    ${Get_Health_Checkup_Detail_Item_LOINC_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_LOINC_Column}
+    ${Get_Health_Checkup_Detail_Item_Code_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_Code_Column}
+    ${Get_Health_Checkup_Detail_Item_DetailCode_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_DetailCode_Column}
+    ${Get_Health_Checkup_Detail_Item_DetailName_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_DetailName_Column}
+    ${Get_Health_Checkup_Detail_Item_WorkerItem_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_WorkerItem_Column}
+    ${Get_Health_Checkup_Detail_Item_DataType_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_DataType_Column}
+    ${Get_Health_Checkup_Detail_Item_OrgSystem_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_OrgSystem_Column}
+    ${Get_Health_Checkup_Detail_Item_Description_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_Description_Column}
     Log    Check align
     Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[4]/div    ${G_Wait_For_Element_Timeout}
     ${Get_Health_Checkup_Detail_Item_LOINC_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
@@ -204,27 +210,34 @@ Check Page
     Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_DataType_Style}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Health_Checkup_Detail_Item_OrgSystem_Style}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Health_Checkup_Detail_Item_Description_Style}
-    Log    Verify 健檢大項 跳窗
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    ${Verify_Big_Item_Title}    Get Text    ${PopupWindow_BigItem_Code_Title}
+    #Verify 健檢大項 跳窗
+    Click Element    xpath=${Health_Checkup_Big_Item_Insert_Button}
+    ${Verify_Big_Item_Title}    Get Text    xpath=${PopupWindow_BigItem_Code_Title}
     ${Verify_Big_Item_Title}    Convert To String    健檢大項維護
     ${Verify_Big_Item_Code}    Convert To String    *大項代碼:
     ${Verify_Big_Name_Code_English}    Convert To String    *大項名稱(英文):
     ${Verify_Big_Name_Code_Simple_Chinese}    Convert To String    *大項名稱(簡中):
     ${Verify_Big_Name_Code_Tranditional_Chinese}    Convert To String    *大項名稱(繁中):
-    ${Get_PopupWindow_BigItem_Code_Label}    Get Text    ${PopupWindow_BigItem_Code_Label}
-    ${Get_PopupWindow_BigItem_Name_English_Label}    Get Text    ${PopupWindow_BigItem_Name_English_Label}
-    ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}    Get Text    ${PopupWindow_BigItem_Name_Simple_Chinese_Label}
-    ${Get_PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    Get Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}
+    ${Get_PopupWindow_BigItem_Code_Label}    Get Text    xpath=${PopupWindow_BigItem_Code_Label}
+    ${Get_PopupWindow_BigItem_Name_English_Label}    Get Text    xpath=${PopupWindow_BigItem_Name_English_Label}
+    ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}    Get Text    xpath=${PopupWindow_BigItem_Name_Simple_Chinese_Label}
+    ${Get_PopupWindow_BigItem_Name_Tranditional_Chinese_Label}    Get Text    xpath=${PopupWindow_BigItem_Name_Tranditional_Chinese_Label}
     Should Be Equal    ${Verify_Big_Item_Title}    ${Verify_Big_Item_Title}
     Should Be Equal    ${Verify_Big_Item_Code}    ${Get_PopupWindow_BigItem_Code_Label}
     Should Be Equal    ${Verify_Big_Name_Code_English}    ${Get_PopupWindow_BigItem_Name_English_Label}
     Should Be Equal    ${Verify_Big_Name_Code_Simple_Chinese}    ${Get_PopupWindow_BigItem_Name_Simple_Chinese_Label}
     Should Be Equal    ${Verify_Big_Name_Code_Tranditional_Chinese}    ${Get_PopupWindow_BigItem_Name_Tranditional_Chinese_Label}
-    Click Element    ${PopupWindow_BigItem_Close_Button}
-    Log    Verify 健檢大項 跳窗
-    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
-    Sleep    1
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Code_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Name_English_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Insert_Button}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Close_Button}
+    Element Should Be Visible    xpath=${PopupWindow_BigItem_Refill_Button}
+    Click Element    xpath=${PopupWindow_BigItem_Close_Button}    #Click close button
+    #Verify 健檢細項 跳窗
+    Click Element    xpath=${Health_Checkup_Detail_Item_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_Detail_Title}    ${G_Wait_For_Element_Timeout}    #跳窗
     ${Verify_Detail_Title}    Convert To String    健檢細項維護
     ${Verify_Detail_Name_Label}    Convert To String    大項分類:
     ${Verify_Detail_Item_Label}    Convert To String    勞檢項目:
@@ -238,19 +251,19 @@ Check Page
     ${Verify_Detail_Description_Label}    Convert To String    細項說明:
     ${Verify_Detail_OwnOrg_Div}    Convert To String    所屬器官系統
     ${Verify_Detail_OwnOrg_Column}    Convert To String    器官名稱
-    ${Get_Detail_Title}    Get Text    ${PopupWindow_Detail_Title}
-    ${Get_Detail_Name_Label}    Get Text    ${PopupWindow_Detail_Name_Label}
-    ${Get_Detail_Item_Label}    Get Text    ${PopupWindow_Detail_Item_Label}
-    ${Get_Detail_LOINC_Label}    Get Text    ${PopupWindow_Detail_LOINC_Label}
-    ${Get_Detail_HCode_Label}    Get Text    ${PopupWindow_Detail_HCode_Label}
-    ${Get_Detail_DCode_Label}    Get Text    ${PopupWindow_Detail_DCode_Label}
-    ${Get_Detail_English_Label}    Get Text    ${PopupWindow_Detail_English_Label}
-    ${Get_Detail_Tranditional_Chinese_Label}    Get Text    ${PopupWindow_Detail_Tranditional_Chinese_Label}
-    ${Get_Detail_Simple_Chinese_Label}    Get Text    ${PopupWindow_Detail_Simple_Chinese_Label}
-    ${Get_Detail_DataType_Label}    Get Text    ${PopupWindow_Detail_DataType_Label}
-    ${Get_Detail_Description_Label}    Get Text    ${PopupWindow_Detail_Description_Label}
-    ${Get_Detail_OwnOrg_Div}    Get Text    ${PopupWindow_Detail_OwnOrg_Div}
-    ${Get_Detail_OwnOrg_Column}    Get Text    ${PopupWindow_Detail_OwnOrg_Column}
+    ${Get_Detail_Title}    Get Text    xpath=${PopupWindow_Detail_Title}
+    ${Get_Detail_Name_Label}    Get Text    xpath=${PopupWindow_Detail_Big_Item_Category_Label}
+    ${Get_Detail_Item_Label}    Get Text    xpath=${PopupWindow_Detail_Laber_Item_Label}
+    ${Get_Detail_LOINC_Label}    Get Text    xpath=${PopupWindow_Detail_LOINC_Label}
+    ${Get_Detail_HCode_Label}    Get Text    xpath=${PopupWindow_Detail_Healthcare_Code_Label}
+    ${Get_Detail_DCode_Label}    Get Text    xpath=${PopupWindow_Detail_Detail_Code_Label}
+    ${Get_Detail_English_Label}    Get Text    xpath=${PopupWindow_Detail_English_Label}
+    ${Get_Detail_Tranditional_Chinese_Label}    Get Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_Label}
+    ${Get_Detail_Simple_Chinese_Label}    Get Text    xpath=${PopupWindow_Detail_Simple_Chinese_Label}
+    ${Get_Detail_DataType_Label}    Get Text    xpath=${PopupWindow_Detail_DataType_Label}
+    ${Get_Detail_Description_Label}    Get Text    xpath=${PopupWindow_Detail_Description_Label}
+    ${Get_Detail_OwnOrg_Div}    Get Text    xpath=${PopupWindow_Detail_Own_Organ_Div}
+    ${Get_Detail_OwnOrg_Column}    Get Text    xpath=${PopupWindow_Detail_Own_Organ_Column}
     ${Get_Detail_OwnOrg_Style}    Get Element Attribute    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr[1]/td[3]/div@style
     Should Be Equal    ${Verify_Detail_Title}    ${Get_Detail_Title}
     Should Be Equal    ${Verify_Detail_Name_Label}    ${Get_Detail_Name_Label}
@@ -266,6 +279,20 @@ Check Page
     Should Be Equal    ${Verify_Detail_OwnOrg_Div}    ${Get_Detail_OwnOrg_Div}
     Should Be Equal    ${Verify_Detail_OwnOrg_Column}    ${Get_Detail_OwnOrg_Column}
     Should Be Equal    ${Verify_Align_Left}    ${Get_Detail_OwnOrg_Style}
+    #Check Conponent
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_LOINC_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_HCode_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_DCode_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_English_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_DataType_writing_CheckBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_DataType_writingblock_CheckBox}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Description_TextArea}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Refill_Button}
+    Element Should Be Visible    xpath=${PopupWindow_Detail_Insert_Button}
     [Teardown]    Close Browser
 
 Sort By Item Code
@@ -275,7 +302,7 @@ Sort By Item Code
     ...    Verify :
     ...    大項代碼應該由小到大排列
     Connect Database
-    ${Get_Item_Code_Count}=    Get Matching Xpath Count    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
+    ${Get_Item_Code_Count}    Get Matching Xpath Count    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
     ${Get_Item_Code_List}    Create List
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Item_Code_Count}+1
     \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${INDEX}]/td[4]/div
@@ -295,7 +322,6 @@ Sort By Detail Code
     ...    Verify :
     ...    細項代碼應該由小到大排列
     Connect Database
-    Sleep    1
     ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Detail_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr
     ${Get_Detail_List}    Create List
@@ -319,9 +345,8 @@ Sort By Organ Name
     ...    Verify :
     ...    器官名稱應該由小到大排序
     Connect Database
-    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
-    Sleep    1
-    ${Get_Organ_Name_Count}=    Get Matching Xpath Count    html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr
+    Click Element    xpath=${Health_Checkup_Detail_Item_Insert_Button}    #點擊 健檢細項新增按鈕
+    ${Get_Organ_Name_Count}    Get Matching Xpath Count    html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr
     ${Get_Organ_Name_List}    Create List
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Organ_Name_Count}+1
     \    ${Get_Name}=    Get Text    xpath=html/body/div[13]/div[2]/div[3]/div[3]/div/table/tbody/tr[${INDEX}]/td[3]/div
@@ -434,18 +459,18 @@ Refill Form For Big Item
     ...
     ...    Verify :
     ...    所有欄位應該要被清空
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
-    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
-    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
-    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
-    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
-    Click Element    ${PopupWindow_BigItem_Refill_Button}
-    ${Get_BigItem_Code}    Get Text    ${PopupWindow_BigItem_Code_TextBox}
-    ${Get_BigItem_Name_English}    Get Text    ${PopupWindow_BigItem_Name_English_TextBox}
-    ${Get_BigItem_Name_Simple_Chinese}    Get Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}
-    ${Get_BigItem_Name_Tranditional_Chinese}    Get Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}
+    Click Element    xpath=${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    #輸入資料
+    Input Text    xpath=${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    xpath=${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    xpath=${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    xpath=${PopupWindow_BigItem_Refill_Button}
+    ${Get_BigItem_Code}    Get Text    xpath=${PopupWindow_BigItem_Code_TextBox}
+    ${Get_BigItem_Name_English}    Get Text    xpath=${PopupWindow_BigItem_Name_English_TextBox}
+    ${Get_BigItem_Name_Simple_Chinese}    Get Text    xpath=${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}
+    ${Get_BigItem_Name_Tranditional_Chinese}    Get Text    xpath=${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}
     Should Be Empty    ${Get_BigItem_Code}
     Should Be Empty    ${Get_BigItem_Name_English}
     Should Be Empty    ${Get_BigItem_Name_Simple_Chinese}
@@ -571,12 +596,12 @@ Alter Detail Item Form
 *** Keywords ***
 Click Health Checkup Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${Health_Checkup_Basic_File_ID}
-    Click Element    ${Health_Checkup_Basic_File_ID}
-    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID2}    ${G_Wait_For_Element_Timeout}
-    Click Element    ${Health_Checkup_Basic_File_ID2}
-    Sleep    1
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Basic_File_MainTain_Tab}
+    Click Element    ${G_Basic_File_MainTain_Tab}
+    Wait Until Element Is Visible    ${Health_Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
+    Click Element    ${Health_Checkup_Item_ID}
+    Wait Until Element Is Visible    xpath=${Health_Checkup_Item_Tab_XPATH}    ${G_Wait_For_Element_Timeout}    #等待Tab出現就算完成
 
 Insert One Record In Detail Item
     Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
