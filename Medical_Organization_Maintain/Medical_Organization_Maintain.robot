@@ -251,7 +251,7 @@ Insert Two Records
     Add Two Record In DB
     ${queryBasic_Hospital_TestData_1}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_1}' and addr='${TestData_Organization_Address_1}' and hospital_code='${TestData_System_Code_1}' and phone='${TestData_Contact_Phone_1}' and email='${TestData_Contact_Email_1}' and nhi_code='${TestData_Organization_Code_1}' and active_flag=1 and announcement='${TestData_Kanban_1}' and is_chk_hosp= 'Y'
     ${queryBasic_Hospital_TestData_2}=    Set Variable    select * from Basic_Hospital where hospital_name ='${TestData_Organization_Name_2}' and addr='${TestData_Organization_Address_2}' and hospital_code='${TestData_System_Code_2}' and phone='${TestData_Contact_Phone_2}' and email='${TestData_Contact_Email_2}' and nhi_code='${TestData_Organization_Code_2}' and active_flag=1 and announcement='${TestData_Kanban_2}' and is_chk_hosp= 'N'
-    Log    Verify 資料庫是否有剛新增的兩筆資料
+    #Verify 資料庫是否有剛新增的兩筆資料
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_1}
     Check If Exists In DataBase    ${queryBasic_Hospital_TestData_2}
     [Teardown]    Close Browser
@@ -272,21 +272,21 @@ Query Organization Code and Name
     ...    查詢時是否能正常顯示
     Connect Database
     Add Two Record In DB
-    Log    Verify 查詢機構代碼
-    Input Text    ${Organization_Code_Dropdown_ID}    ${TestData_Organization_Code_1}
-    Click Element    ${Query_Button_ID}
-    Sleep    2
-    ${Get_Code}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    #Verify 查詢機構代碼
+    Input Text    xpath=${Organization_Code_Dropdown_XPATH}    ${TestData_Organization_Code_1}
+    Click Element    xpath=${Query_Button_XPATH}
+    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div    ${G_Wait_For_Element_Timeout}
+    ${Get_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
     Should Be Equal    ${TestData_Organization_Code_1}    ${Get_Code}
-    Log    Verify 查詢機構名稱
-    Input Text    ${Organization_CodeName_Dropdown_ID}    ${TestData_Organization_Name_1}
-    Click Element    ${Query_Button_ID}
+    #Verify 查詢機構名稱
+    Input Text    xpath=${Organization_CodeName_Dropdown_XPATH}    ${TestData_Organization_Name_1}
+    Click Element    xpath=${Query_Button_XPATH}
     Sleep    2
-    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
+    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
     Log    Verify 查詢機構代碼和名稱
-    Input Text    ${Organization_Code_Dropdown_ID}    ${EMPTY}
-    Click Element    ${Query_Button_ID}
+    Input Text    xpath=${Organization_Code_Dropdown_XPATH}    ${EMPTY}
+    Click Element    xpath=${Query_Button_XPATH}
     Sleep    2
     ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[6]/div
     Should Be Equal    ${TestData_Organization_Name_1}    ${Get_Name}
@@ -340,17 +340,18 @@ Sort By Organization Name
     ...
     ...    Verify :
     ...    驗證機溝名稱的下拉選單筆數是否和DB查詢出來的筆數一致
-    Log    Verify 組織名稱排序
+    #Verify 組織名稱排序
     Connect Database
     Add Two Record In DB
     Sleep    1
-    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr    #取得機構代碼的Dropdlown數量
     ${Organization_Name_List}    Create List
     : FOR    ${Index}    IN RANGE    1    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${Index}]/td[6]/div
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[${Index}]/td[6]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    Append To List    ${Organization_Name_List}    ${Get_Name}
-    ${Query_Basic_hospital}=    Set Variable    select Top ${Get_Organization_Count} hospital_name from Basic_Hospital where active_flag = 1 order by hospital_name
-    ${Result}=    Query    ${Query_Basic_hospital}
+    ${Query_Basic_hospital}    Set Variable    select Top ${Get_Organization_Count} hospital_name from Basic_Hospital where active_flag = 1 order by hospital_name
+    ${Result}    Query    ${Query_Basic_hospital}
+    #Verify 網頁資料和資料庫比較
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}
     \    ${Verify_from_DB}    Convert To String    ${Result[${Index}][0]}
     \    ${Get_from_Web}    Convert To String    ${Organization_Name_List[${Index}]}
@@ -403,18 +404,20 @@ Query Not Found
     ...    1. 在查詢機構代碼應該要顯示無符合條件紀錄
     ...    2. 在查詢機構名稱應該要顯示無符合條件紀錄
     ${Verify_Data_Not_Found}    Convert To String    無符合條件紀錄
+    ${Test_Data}    Convert To String    _這是測試資料
+    ${Data_Not_Fount_XPATH}    Convert To String    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div
     #驗證機構代碼輸入無效value，查詢後應該無資料
-    INPUT TEXT    ${Organization_Code_Dropdown_ID}    _這是測試資料
-    Click Element    ${Query_Button_ID}
-    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div    ${G_Wait_For_Element_Timeout}
-    ${Get_Data_Not_Found}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div
+    INPUT TEXT    xpath=${Organization_Code_Dropdown_XPATH}    ${Test_Data}
+    Click Element    xpath=${Query_Button_XPATH}
+    Wait Until Element Is Visible    xpath=${Data_Not_Fount_XPATH}    ${G_Wait_For_Element_Timeout}
+    ${Get_Data_Not_Found}    Get Text    xpath=${Data_Not_Fount_XPATH}
     Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
-    Click Element    ${Refill_Button_ID}
+    Click Element    xpath=${Refill_Button_XPATH}    #按下重填
     #驗證機構名稱輸入無效value，查詢後應該無資料
-    INPUT TEXT    ${Organization_CodeName_Dropdown_ID}    _這是測試資料
-    Click Element    ${Query_Button_ID}
-    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div    ${G_Wait_For_Element_Timeout}
-    ${Get_Data_Not_Found}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/div
+    INPUT TEXT    xpath=${Organization_CodeName_Dropdown_XPATH}    ${Test_Data}
+    Click Element    xpath=${Query_Button_XPATH}
+    Wait Until Element Is Visible    xpath=${Data_Not_Fount_XPATH}    ${G_Wait_For_Element_Timeout}
+    ${Get_Data_Not_Found}    Get Text    xpath=${Data_Not_Fount_XPATH}
     Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
     [Teardown]    Close Browser
 
