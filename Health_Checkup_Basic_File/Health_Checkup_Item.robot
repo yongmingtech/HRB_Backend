@@ -641,6 +641,3 @@ Remove Test Data
     ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
     Execute Sql String    ${Delete_Detail_Item}
     Execute Sql String    ${Delete_Big_Item}
-
-Close Browser
-    close browser
