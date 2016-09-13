@@ -16,7 +16,6 @@ Resource          ../DataBase.robot
 Resource          DB_Query.robot
 
 *** Variables ***
-${Basic_File_MainTain_Tab}    button-1019-btnIconEl    #左邊Menu的基本檔維護
 ${Medical_Organization_Maintain_Button_ID}    menuitem-1015-textEl    #基本檔維護中的醫療機構維護Menu的選項
 #Begin 醫療機構維護 項目
 ${Organization_Maintain_Tab_XPATH}    html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    # 醫療機構維護 Tab

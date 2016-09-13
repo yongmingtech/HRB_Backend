@@ -5,7 +5,7 @@ Documentation     健檢基本檔 -> 器官系統
 ...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關物件是否存在
 Suite Setup
 Suite Teardown
-Test Setup        Click Organ System
+Test Setup        Click Organ System Item Button
 Test Teardown     Close Web Browser
 Force Tags
 Metadata          Version    0.1
@@ -14,21 +14,20 @@ Resource          ../DataBase.robot
 
 *** Variables ***
 ${Health_Checkup_Basic_File_ID}    button-1022-btnIconEl
-${Organ_System_Item_ID}    menuitem-1021-textEl
-${Organ_System_Insert_Button}    button-1075-btnInnerEl    #器官系統 新增 按鈕
-${PopupWindow_Organ_System_Title}    maintainFormWindow-1105_header_hd-textEl    #跳窗-器官系統維護-Title
+${Organ_System_Item_ID}    menuitem-1018-textEl
+${PopupWindow_Organ_System_Title}    html/body/div[13]/div[1]/div/div/div/div[1]/span    #跳窗-器官系統維護-Title
 ${PopupWindow_Organ_System_Code_Label}    textfield-1107-labelEl    #跳窗-器官代碼:-Label
 ${PopupWindow_Organ_System_Name_Label}    textfield-1108-labelEl    #跳窗-器官名稱:-Label
 ${PopupWindow_Organ_System_Sex_Label}    genderComboBox-1109-labelEl    #跳窗-限定性別:-Label
 ${PopupWindow_Organ_System_Display_Label}    trueFalseRadioGroup-1110-labelEl    #跳窗-是否顯示:-Label
-${PopupWindow_Organ_Code_TextBox}    textfield-1107-inputEl    #跳窗-器官系統 新增 按鈕
-${PopupWindow_Organ_Name_TextBox}    textfield-1108-inputEl    #跳窗-器官系統 新增 按鈕
-${PopupWindow_Organ_Limit_Sex_Dropdown}    genderComboBox-1109-inputEl    #跳窗-器官系統 新增 按鈕
-${PopupWindow_Organ_Display_Y_RadioButton}    radiofield-1111-inputEl    #跳窗-是否顯示-Y-Radio Button
+${PopupWindow_Organ_Code_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[1]/tbody/tr/td[2]/input    #跳窗-器官系統 新增 按鈕
+${PopupWindow_Organ_Name_TextBox}    html/body/div[13]/div[2]/div[1]/div/span/div/table[2]/tbody/tr/td[2]/input    #跳窗-器官系統 新增 按鈕
+${PopupWindow_Organ_Limit_Sex_Dropdown}    html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/table/tbody/tr/td[1]/input    #跳窗-器官系統 新增 按鈕
+${PopupWindow_Organ_Display_Y_RadioButton}    html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    #跳窗-是否顯示-Y-Radio Button
 ${PopupWindow_Organ_Display_N_RadioButton}    radiofield-1112-inputEl    #跳窗-是否顯示-N-Radio Button
 ${PopupWindow_Organ_System_DetailCode_Column}    gridcolumn-1118-textEl
 ${PopupWindow_Organ_System_DetailName_Column}    gridcolumn-1119-textEl
-${PopupWindow_Organ_System_Refill_Button}    button-1124-btnInnerEl    #跳窗-重填-按鈕
+${PopupWindow_Organ_System_Refill_Button}    html/body/div[13]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗-重填-按鈕
 ${PopupWindow_Organ_System_Insert_Button}    button-1122-btnInnerEl    #跳窗-新增-按鈕
 ${TestData_Organ_Code_TextBox}    _A123456
 ${TestData_Organ_Name_TextBox}    _測試
@@ -38,8 +37,8 @@ ${Organ_System_Code_Column}    gridcolumn-1069-textEl    #器官代碼 Column
 ${Organ_System_Name_Column}    gridcolumn-1070-textEl    #器官名稱 Column
 ${Organ_System_Sexy_Column}    gridcolumn-1071-textEl    #限定性別 Column
 ${Organ_System_IsDisplay_Column}    gridcolumn-1072-textEl    #是否顯示 Column
-${Organ_System_Insert_Button}    button-1075-btnInnerEl    #新增按鈕
-${Organ_System_Delete_Button}    button-1077-btnInnerEl    #刪除按鈕
+${Organ_System_Insert_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[1]    #新增按鈕
+${Organ_System_Delete_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[3]    #刪除按鈕
 
 *** Test Cases ***
 Sort By Organ Code
@@ -72,17 +71,17 @@ Refill Form For Big Organ System
     ...
     ...    Not verify yet
     ...    由於程式碼是使用套件，產生出來的Div ID 不穩定，沒有測試細項的checkbox.
-    Click Element    ${Organ_System_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
+    Click Element    xpath=${Organ_System_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
+    # 在跳窗中輸入資料
     Fill Test Data In Organ System
-    Click Element    ${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
+    Click Element    xpath=${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
     Log    Verify 資料
     ${Verify_Sex}    Convert To String    不限
-    ${Get_Organ_Code_TextBox}    Get Text    ${PopupWindow_Organ_Code_TextBox}
-    ${Get_Organ_Name_TextBox}    Get Text    ${PopupWindow_Organ_Name_TextBox}
-    ${Get_Sex_TextBox}    Get Value    ${PopupWindow_Organ_Limit_Sex_Dropdown}
-    ${Get_Radio_Button}    Get Value    ${PopupWindow_Organ_Display_Y_RadioButton}
+    ${Get_Organ_Code_TextBox}    Get Text    xpath=${PopupWindow_Organ_Code_TextBox}
+    ${Get_Organ_Name_TextBox}    Get Text    xpath=${PopupWindow_Organ_Name_TextBox}
+    ${Get_Sex_TextBox}    Get Value    xpath=${PopupWindow_Organ_Limit_Sex_Dropdown}
+    ${Get_Radio_Button}    Get Value    xpath=${PopupWindow_Organ_Display_Y_RadioButton}
     Should Be Empty    ${Get_Organ_Code_TextBox}
     Should Be Empty    ${Get_Organ_Name_TextBox}
     Should Be Equal    ${Verify_Sex}    ${Get_Sex_TextBox}
@@ -190,16 +189,17 @@ Delete Record In Organ System
     Check If Not Exists In Database    ${Query_Organ_System}
     Remove Test Data
     Disconnect From Database
-    [Teardown]
+    [Teardown]    Close Browser
 
 *** Keywords ***
-Click Organ System
+Click Organ System Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${Health_Checkup_Basic_File_ID}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${Health_Checkup_Basic_File_ID}
-    Click Element    ${Health_Checkup_Basic_File_ID}
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Basic_File_MainTain_Tab}
+    Click Element    ${G_Basic_File_MainTain_Tab}
     Wait Until Element Is Visible    ${Organ_System_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Organ_System_Item_ID}
+    Wait Until Element Is Visible    xpath=html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    ${G_Wait_For_Element_Timeout}    #等待Tab出現就算完成
 
 Insert One Record In Organ System
     Remove Test Data
@@ -231,11 +231,8 @@ Remove Test Data
     Execute Sql String    ${Delete_Organ_System}
 
 Fill Test Data In Organ System
-    Input Text    ${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
-    Input Text    ${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
-    Click Element    ${PopupWindow_Organ_Display_Y_RadioButton}
-    Click Element    ${PopupWindow_Organ_Limit_Sex_Dropdown}
+    Input Text    xpath=${PopupWindow_Organ_Code_TextBox}    ${TestData_Organ_Code_TextBox}
+    Input Text    xpath=${PopupWindow_Organ_Name_TextBox}    ${TestData_Organ_Name_TextBox}
+    Click Element    xpath=${PopupWindow_Organ_Display_Y_RadioButton}
+    Click Element    xpath=${PopupWindow_Organ_Limit_Sex_Dropdown}
     Click Element    xpath=html/body/div[17]/div/ul/li[3]
-
-Close Web Browser
-    Close Browser
