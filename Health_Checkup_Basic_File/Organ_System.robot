@@ -178,12 +178,13 @@ Insert Record In Organ System
     [Teardown]    Close Browser
 
 Delete Record In Organ System
+    ${Popupwindow_OK_Button}    Convert To String    html/body/div[14]/div[3]/div/div/div[2]/div/a/span[2]
     Insert One Record In Organ System
     Sleep    1
     Click Element    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[1]/td[2]/div/img    #Click the first checkbox
-    Click Element    id=button-1077-btnInnerEl    #Click the delete button
-    Wait Until Element Is Visible    id=button-1006-btnIconEl    ${G_Wait_For_Element_Timeout}    #Jump the popup windows, then click the OK button
-    Click Element    id=button-1006-btnIconEl
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[3]/div/a/span[1]    #Click the delete button
+    Wait Until Element Is Visible    xpath=${Popupwindow_OK_Button}    ${G_Wait_For_Element_Timeout}    #Jump the popup windows, then click the OK button
+    Click Element    xpath=${Popupwindow_OK_Button}
     Sleep    2
     ${Query_Organ_System}    Set Variable    select * from Basic_Organ \ where organ_code='${TestData_Organ_Code_TextBox}'
     Check If Not Exists In Database    ${Query_Organ_System}
