@@ -182,7 +182,7 @@ Check Page
     ${Get_Health_Checkup_Detail_Item_OrgSystem_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_OrgSystem_Column}
     ${Get_Health_Checkup_Detail_Item_Description_Column}    Get Text    xpath=${Health_Checkup_Detail_Item_Description_Column}
     Log    Check align
-    Wait Until Element Is Visible    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[4]/div    ${G_Wait_For_Element_Timeout}
+    Sleep    3
     ${Get_Health_Checkup_Detail_Item_LOINC_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[4]/div@style
     ${Get_Health_Checkup_Detail_Item_Code_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[5]/div@style
     ${Get_Health_Checkup_Detail_Item_DetailCode_Style}    Get Element Attribute    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr[1]/td[6]/div@style
@@ -527,6 +527,7 @@ Refill Form For Detail Item
     : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
     \    ${Get_CheckBox}    Get Text    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr[${Index}]/td[1]/div/img
     \    Should Be Empty    ${Get_CheckBox}
+    Remove Test Data
     [Teardown]    Close Browser
 
 Insert Record In Detail Item
