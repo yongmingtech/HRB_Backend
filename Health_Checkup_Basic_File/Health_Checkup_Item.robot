@@ -443,9 +443,9 @@ Alert Big Item Form
     Should Be Equal    ${Test_Item_Name_Tranditional_Chinese_2}    ${Get_Item_Name}
     Log    UI 作刪除
     Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
-    Click Element    ${Health_Checkup_Big_Item_Delete_Button}
+    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
     Sleep    2
-    Click Element    ${PopupWindow_BigItem_OK_Button}
+    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
     Sleep    2
     Log    驗正輸入資料不應該再DB
     Check If Not Exists In Database    ${Query_Big_Item}
@@ -488,8 +488,8 @@ Refill Form For Detail Item
     ...    Verify :
     ...    所有欄位應該要被清空
     Insert One Record In Big Item
-    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_Detail_Title}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Health_Checkup_Detail_Item_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_Detail_Title}    ${G_Wait_For_Element_Timeout}
     ${Get_CheckBox_Count}    Get Matching Xpath Count    xpath=html/body/div[14]/div[2]/div[3]/div[3]/div/table/tbody/tr
     Log    輸入資料
     : FOR    ${Index}    IN RANGE    1    ${Get_CheckBox_Count}
@@ -503,8 +503,8 @@ Refill Form For Detail Item
     Input Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}    ${Test_ItemCode}
     Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_ItemCode}
-    Click Element    id=button-1161-btnInnerEl
-    Log    取得資料
+    Click Element    xpath=${PopupWindow_Detail_Refill_Button}    #點擊重填
+    #取得資料
     ${Get_Detail_LOINC_TextBox}    Get Text    xpath=${PopupWindow_Detail_LOINC_TextBox}
     ${Get_Detail_HCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_HCode_TextBox}
     ${Get_Detail_DCode_TextBox}    Get Text    xpath=${PopupWindow_Detail_DCode_TextBox}
@@ -512,7 +512,7 @@ Refill Form For Detail Item
     ${Get_Detail_Tranditional_Chinese_TextBox}    Get Text    xpath=${PopupWindow_Detail_Tranditional_Chinese_TextBox}
     ${Get_Detail_Simple_Chinese_TextBox}    Get Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}
     ${Get_Detail_Description_TextArea}    Get Text    xpath=${PopupWindow_Detail_Description_TextArea}
-    Log    驗證欄位
+    #驗證欄位
     CheckBox Should Not Be Selected    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
     Should Be Empty    ${Get_Detail_LOINC_TextBox}
     Should Be Empty    ${Get_Detail_HCode_TextBox}
@@ -591,7 +591,8 @@ Alter Detail Item Form
     Should Be Equal    ${Test_Temp}    ${Get_Detail_Name}
     Should Be Equal    ${Verify_DataType}    ${Get_DataType}
     Should Be Equal    ${Test_Temp}    ${Get_Description}
-    Sleep    3
+    Sleep    1
+    Remove Test Data
     [Teardown]    Close Browser
 
 *** Keywords ***
