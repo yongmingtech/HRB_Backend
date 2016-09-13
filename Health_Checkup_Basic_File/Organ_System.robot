@@ -31,12 +31,12 @@ ${PopupWindow_Organ_System_Refill_Button}    html/body/div[13]/div[3]/div/div/di
 ${PopupWindow_Organ_System_Insert_Button}    html/body/div[13]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗-新增-按鈕
 ${TestData_Organ_Code_TextBox}    _A123456
 ${TestData_Organ_Name_TextBox}    _測試
-${Tab}            tab-1086-btnInnerEl    #Tab
-${Organ_System_DIV}    basicOrganGrid-1050_header_hd    #器官系統 Column
-${Organ_System_Code_Column}    gridcolumn-1069-textEl    #器官代碼 Column
-${Organ_System_Name_Column}    gridcolumn-1070-textEl    #器官名稱 Column
-${Organ_System_Sexy_Column}    gridcolumn-1071-textEl    #限定性別 Column
-${Organ_System_IsDisplay_Column}    gridcolumn-1072-textEl    #是否顯示 Column
+${Tab}            html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    #Tab
+${Organ_System_DIV}    html/body/div[5]/div[2]/div/div/div[1]/div[1]/div/div/div/div/span    #器官系統 Column
+${Organ_System_Code_Column}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[4]/div/span    #器官代碼 Column
+${Organ_System_Name_Column}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[5]/div/span    #器官名稱 Column
+${Organ_System_Sexy_Column}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[6]/div/span    #限定性別 Column
+${Organ_System_IsDisplay_Column}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[7]/div/span    #是否顯示 Column
 ${Organ_System_Insert_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[1]    #新增按鈕
 ${Organ_System_Delete_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[3]    #刪除按鈕
 
@@ -95,24 +95,24 @@ Check Page
     ...    Verify :
     ...    1. 文字和欄位的對齊模式
     ...    2. 驗證跳窗文字是否跟規格一樣
-    Log    Declare the Variable
+    #Declare the common variable
     ${Verify_Align_Center}    Convert To String    text-align: center;
     ${Verify_Align_Left}    Convert To String    text-align: left;
-    Log    驗證Tab
+    #Verify Tab
     ${Verify_Tab}    Convert To String    器官系統
-    ${Get_Tab_Name}    Get Text    ${Tab}
+    ${Get_Tab_Name}    Get Text    xpath=${Tab}
     Should Be Equal    ${Verify_Tab}    ${Get_Tab_Name}
-    Log    驗證器官系統 Div
-    ${Get_Organ_System_DIV}    Get Text    ${Organ_System_DIV}
+    #Verify 器官系統 Div
+    ${Get_Organ_System_DIV}    Get Text    xpath=${Organ_System_DIV}
     Should Be Equal    ${Verify_Tab}    ${Get_Organ_System_DIV}
     ${Verify_Organ_System_Code}    Convert To String    器官代碼
     ${Verify_Organ_System_Name}    Convert To String    器官名稱
     ${Verify_Organ_System_Sexy}    Convert To String    限定性別
     ${Verify_Organ_System_IsDisplay}    Convert To String    是否顯示
-    ${Get_Organ_System_Code}    Get Text    ${Organ_System_Code_Column}
-    ${Get_Organ_System_Name}    Get Text    ${Organ_System_Name_Column}
-    ${Get_Organ_System_Sexy}    Get Text    ${Organ_System_Sexy_Column}
-    ${Get_Organ_System_IsDisplay}    Get Text    ${Organ_System_IsDisplay_Column}
+    ${Get_Organ_System_Code}    Get Text    xpath=${Organ_System_Code_Column}
+    ${Get_Organ_System_Name}    Get Text    xpath=${Organ_System_Name_Column}
+    ${Get_Organ_System_Sexy}    Get Text    xpath=${Organ_System_Sexy_Column}
+    ${Get_Organ_System_IsDisplay}    Get Text    xpath=${Organ_System_IsDisplay_Column}
     Should Be Equal    ${Verify_Organ_System_Code}    ${Get_Organ_System_Code}
     Should Be Equal    ${Verify_Organ_System_Name}    ${Get_Organ_System_Name}
     Should Be Equal    ${Verify_Organ_System_Sexy}    ${Get_Organ_System_Sexy}
@@ -125,45 +125,45 @@ Check Page
     Should Be Equal    ${Verify_Align_Left}    ${Get_Organ_System_Name_Align}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_Sexy_Align}
     Should Be Equal    ${Verify_Align_Center}    ${Get_Organ_System_IsDisplay_Align}
-    Element Should Be Visible    ${Organ_System_Insert_Button}    # Verify Insert Button
-    Element Should Be Visible    ${Organ_System_Delete_Button}    # Verify Delete Button
+    Element Should Be Visible    xpath=${Organ_System_Insert_Button}    # Verify Insert Button
+    Element Should Be Visible    xpath=${Organ_System_Delete_Button}    # Verify Delete Button
     Log    Verify 健檢細項 DIV    #Start Verify 健檢細項 DIV
     ${Verify_Health_Item_Tab}    Convert To String    健檢項目
-    ${Get_Health_Item_Tab}    Get Text    id=basicCheckGroupGroupingFormatGrid-1079_header_hd-textEl
+    ${Get_Health_Item_Tab}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[1]/div/div/div/div[1]/span    #Get Tab
     Should Be Equal    ${Verify_Health_Item_Tab}    ${Get_Health_Item_Tab}
     ${Verify_Detail_Item_Code}    Convert To String    細項代碼
     ${Verify_Detail_Item_Name}    Convert To String    細項名稱
-    ${Get_Detail_Item_Code}    Get Text    id=gridcolumn-1083-textEl
-    ${Get_Detail_Item_Name}    Get Text    id=gridcolumn-1084-textEl
+    ${Get_Detail_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[2]/div/div/div[3]/div/span
+    ${Get_Detail_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[2]/div/div/div[4]/div/span
     Should Be Equal    ${Verify_Detail_Item_Code}    ${Get_Detail_Item_Code}
     Should Be Equal    ${Verify_Detail_Item_Name}    ${Get_Detail_Item_Name}    #End Verify 健檢細項 DIV
     Log    Verify 驗證跳窗    #Start Verify 驗證跳窗
-    Click Element    ${Organ_System_Insert_Button}    # Click Insert Button
-    Wait Until Element Is Visible    id=maintainFormWindow-1105_header_hd-textEl    10
+    Click Element    xpath=${Organ_System_Insert_Button}    # Click Insert Button
+    Wait Until Element Is Visible    xpath=${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
     ${Verify_Organ_System_MainTain_Tab}    Convert To String    器官系統維護
-    ${Get_Organ_System_MainTain_Tab}    Get Text    id=maintainFormWindow-1105_header_hd-textEl
+    ${Get_Organ_System_MainTain_Tab}    Get Text    xpath=${PopupWindow_Organ_System_Title}
     Should Be Equal    ${Verify_Organ_System_MainTain_Tab}    ${Get_Organ_System_MainTain_Tab}
     ${Verify_Organ_System_Code}    Convert To String    *器官代碼:
     ${Verify_Organ_System_Name}    Convert To String    *器官名稱:
     ${Verify_Organ_System_Sexy}    Convert To String    限定性別
     ${Verify_Organ_System_IsDisplay}    Convert To String    *是否顯示:
-    ${Get_Organ_System_Code}    Get Text    id=textfield-1107-labelEl
-    ${Get_Organ_System_Name}    Get Text    id=textfield-1108-labelEl
-    ${Verify_Organ_System_Sexy}    Get Text    id=genderComboBox-1109-labelEl
-    ${Verify_Organ_System_IsDisplay}    Get Text    id=trueFalseRadioGroup-1110-labelEl
+    ${Get_Organ_System_Code}    Get Text    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[1]/tbody/tr/td[1]/label
+    ${Get_Organ_System_Name}    Get Text    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[2]/tbody/tr/td[1]/label
+    ${Verify_Organ_System_Sexy}    Get Text    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[1]/label
+    ${Verify_Organ_System_IsDisplay}    Get Text    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[1]/label
     Should Be Equal    ${Verify_Organ_System_Code}    ${Get_Organ_System_Code}
     Should Be Equal    ${Verify_Organ_System_Name}    ${Get_Organ_System_Name}
     Should Be Equal    ${Verify_Organ_System_Sexy}    ${Verify_Organ_System_Sexy}
     Should Be Equal    ${Verify_Organ_System_IsDisplay}    ${Verify_Organ_System_IsDisplay}
-    ${Get_Detail_Item_Code}    Get Text    id=gridcolumn-1118-textEl    # 驗證 跳窗 裡面的Column
-    ${Get_Detail_Item_Name}    Get Text    id=gridcolumn-1119-textEl
+    ${Get_Detail_Item_Code}    Get Text    xpath=html/body/div[13]/div[2]/div[3]/div[1]/div/div/div[4]/div/span    # 驗證 跳窗 裡面的Column
+    ${Get_Detail_Item_Name}    Get Text    xpath=html/body/div[13]/div[2]/div[3]/div[1]/div/div/div[5]/div/span
     Should Be Equal    ${Verify_Detail_Item_Code}    ${Get_Detail_Item_Code}
     Should Be Equal    ${Verify_Detail_Item_Name}    ${Get_Detail_Item_Name}
-    Element Should Be Visible    id=textfield-1107-inputEl    # 驗證 跳窗 裡面的TextBox
-    Element Should Be Visible    id=textfield-1108-inputEl    # 驗證 跳窗 裡面的TextBox
-    Element Should Be Visible    id=genderComboBox-1109-inputEl    # 驗證 跳窗 裡面的限定性別Combobox
-    Element Should Be Visible    id=radiofield-1111-inputEl    # 驗證 跳窗 裡面的Radio Button
-    Element Should Be Visible    id=radiofield-1112-inputEl    # 驗證 跳窗 裡面的Radio Button
+    Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[1]/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的TextBox
+    Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[2]/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的TextBox
+    Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/table/tbody/tr/td[1]/input    # 驗證 跳窗 裡面的限定性別Combobox
+    Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的Radio Button
+    Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/div/table/tbody/tr/td[2]/table/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的Radio Button
     [Teardown]    Close Browser
 
 Insert Record In Organ System
@@ -178,6 +178,14 @@ Insert Record In Organ System
     [Teardown]    Close Browser
 
 Delete Record In Organ System
+    [Documentation]    Test case Description :
+    ...    主要驗證器官是先新增一筆資料，然後再做刪除
+    ...
+    ...    Verify :
+    ...    1. 新增後會檢查Basic_Organ是否有存到DB
+    ...    2. 檢查網頁資料是否和新增的吻合
+    ...    3. 透過UI刪除資料
+    ...    4. 驗證資料庫資料有無被刪除
     ${Popupwindow_OK_Button}    Convert To String    html/body/div[14]/div[3]/div/div/div[2]/div/a/span[2]
     Insert One Record In Organ System
     Sleep    1
