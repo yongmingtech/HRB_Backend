@@ -56,7 +56,7 @@ ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    html/body/div[13]/div[2]/d
 ${PopupWindow_BigItem_Insert_Button}    html/body/div[13]/div[3]/div/div/div[1]/div/a/span[1]    #跳窗    健檢大項維護 新增按鈕 Button
 ${PopupWindow_BigItem_Close_Button}    html/body/div[13]/div[3]/div/div/div[4]/div/a/span[1]    #跳窗    健檢大項維護的關閉按鈕 Button
 ${PopupWindow_BigItem_Refill_Button}    html/body/div[13]/div[3]/div/div/div[3]/div/a/span[1]    #跳窗    健檢大項維護的重填按鈕 Button
-${PopupWindow_BigItem_OK_Button}    button-1005-btnIconEl    #跳窗    健檢大項維護的警告確認按鈕 Button (必填欄位未填)
+${PopupWindow_BigItem_OK_Button}    html/body/div[14]/div[3]/div/div/div[2]/div/a/span[2]    #跳窗    健檢大項維護的警告確認按鈕 Button (必填欄位未填)
 #End 跳窗-健檢大項
 #Begin 跳窗-健檢細項
 ${PopupWindow_Detail_Title}    html/body/div[14]/div[1]/div/div/div/div[1]/span    #跳窗 健檢細項維護的Tile
@@ -400,11 +400,12 @@ Insert Record in Big Item
     Insert One Record In Big Item
     Log    UI 作刪除
     Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
-    Click Element    ${Health_Checkup_Big_Item_Delete_Button}
+    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_BigItem_OK_Button}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
     Sleep    2
-    Click Element    ${PopupWindow_BigItem_OK_Button}
-    Sleep    1
     Check Big Item Record IS NOT IN DB
+    Remove Test Data    #移除測試資料
     [Teardown]    Close Browser
 
 Alert Big Item Form
@@ -636,20 +637,20 @@ Insert One Record In Detail Item
     Should Be Equal    ${Test_PopupWindow_Detail_Description}    ${Get_Description}
 
 Insert One Record In Big Item
-    Remove Test Data
-    Click Element    ${Health_Checkup_Big_Item_Insert_Button}
-    Wait Until Element Is Visible    ${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
-    Log    輸入資料
-    Input Text    ${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
-    Input Text    ${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
-    Input Text    ${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
-    Input Text    ${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
-    Click Element    ${PopupWindow_BigItem_Insert_Button}
-    Log    驗正輸入資料是否存在DB
+    Remove Test Data    #移除測試資料
+    Click Element    xpath=${Health_Checkup_Big_Item_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_BigItem_Code_TextBox}    ${G_Wait_For_Element_Timeout}
+    #輸入測試資料
+    Input Text    xpath=${PopupWindow_BigItem_Code_TextBox}    ${Test_ItemCode}
+    Input Text    xpath=${PopupWindow_BigItem_Name_English_TextBox}    ${Test_Item_Name_English}
+    Input Text    xpath=${PopupWindow_BigItem_Name_Simple_Chinese_TextBox}    ${Test_Item_Name_Simply_Chinese}
+    Input Text    xpath=${PopupWindow_BigItem_Name_Tranditional_Chinese_TextBox}    ${Test_Item_Name_Tranditional_Chinese}
+    Click Element    xpath=${PopupWindow_BigItem_Insert_Button}    #點擊 新增按鈕
+    #驗正輸入資料是否存在DB
     Sleep    2
     ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode}' and group_name_en='${Test_Item_Name_English}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}' and active_flag=1
     Check If Exists In Database    ${Query_Big_Item}
-    Log    檢查網頁資料是否正確
+    #檢查網頁資料是否正確
     ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
     Should Be Equal    ${Test_ItemCode}    ${Get_Big_Item_Code}
