@@ -359,98 +359,6 @@ Sort By Organ Name
     \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
     [Teardown]    Close Browser
 
-Query Detail Name
-    [Documentation]    Test case Description :
-    ...    1. 使用者點擊健檢細項裡面的第一筆資料
-    ...    2. 跳出健檢細項維護的視窗
-    ...    3. 驗證所屬器官系統的器官名稱是否由小到大排序
-    ...
-    ...    Verify :
-    ...    器官名稱應該由小到大排序
-    Connect Database
-    Insert One Record In Big Item
-    Insert One Record In Detail Item
-    Input Text    ${Health_Checkup_Name_Dropdown}    ${Test_PopupWindow_Detail_Tranditional_Chinese}
-    Click Element    ${Query_Button}
-    Sleep    1
-    Log    Verify 健檢大項是否有資料
-    ${Query_Basic_CheckGroup}    Set Variable    select group_code,group_name_zh_tw from Basic_CheckGroup where group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}'
-    ${Query_Item_Result}    Query    ${Query_Basic_CheckGroup}
-    ${Get_Item_Code_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Item_Name_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    ${Get_Item_Code_From_DB}    Convert To String    ${Query_Item_Result[0][0]}
-    ${Get_Item_Name_From_DB}    Convert To String    ${Query_Item_Result[0][1]}
-    Should Be Equal    ${Get_Item_Code_From_Web}    ${Get_Item_Code_From_DB}
-    Should Be Equal    ${Get_Item_Name_From_Web}    ${Get_Item_Name_From_DB}
-    Log    Verify 健檢細項是否有資料
-    [Teardown]    Close Browser
-
-Insert Record in Big Item
-    [Documentation]    Test case Description :
-    ...    1. 使用者在健檢大項中點擊新增按鈕
-    ...    2. 視窗會跳出健檢大項維護的相關資訊
-    ...    3. 輸入資料後並按下確定
-    ...    4. 驗證資料是否有在資料庫中
-    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
-    ...    6. 在畫面中刪除資料
-    ...    7. 檢查資料是否在DB中有被成功移除
-    ...
-    ...    Verify :
-    ...    新增是和刪除和網頁是否正確
-    Insert One Record In Big Item
-    Log    UI 作刪除
-    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
-    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
-    Wait Until Element Is Visible    xpath=${PopupWindow_BigItem_OK_Button}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
-    Sleep    2
-    Check Big Item Record IS NOT IN DB
-    Remove Test Data    #移除測試資料
-    [Teardown]    Close Browser
-
-Alert Big Item Form
-    [Documentation]    Test case Description :
-    ...    1. 使用者在健檢大項中點擊新增按鈕
-    ...    2. 視窗會跳出健檢大項維護的相關資訊
-    ...    3. 輸入資料後並按下確定
-    ...    4. 驗證資料是否有在資料庫中
-    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
-    ...    6. 點擊第一筆資料並做修改
-    ...    7. 驗證資料是否有在資料庫中
-    ...    8. 驗證資料在網頁中的值跟輸入的是否一樣
-    ...    9. 在畫面中刪除資料
-    ...    10. 檢查資料是否在DB中有被成功移除
-    ...
-    ...    Verify :
-    ...    新增是和刪除和網頁是否正確
-    Insert One Record In Big Item
-    Log    點擊第一筆資料準備做修改
-    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[1]/div
-    Sleep    1
-    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${Test_ItemCode_2}
-    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${Test_Item_Name_English_2}
-    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${Test_Item_Name_Tranditional_Chinese_2}
-    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/input    ${Test_Item_Name_Simply_Chinese_2}
-    Click Element    xpath=html/body/div[14]/div[3]/div/div/div[2]/div/a/span[1]
-    Sleep    2
-    Log    驗證資料庫是否正確
-    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode_2}' and group_name_en='${Test_Item_Name_English_2}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese_2}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese_2}' and active_flag=1
-    Check If Exists In Database    ${Query_Big_Item}
-    Log    驗證修改後的網頁是否正確
-    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
-    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
-    Should Be Equal    ${Test_ItemCode_2}    ${Get_Big_Item_Code}
-    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese_2}    ${Get_Item_Name}
-    Log    UI 作刪除
-    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
-    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
-    Sleep    2
-    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
-    Sleep    2
-    Log    驗正輸入資料不應該再DB
-    Check If Not Exists In Database    ${Query_Big_Item}
-    [Teardown]    Close Browser
-
 Refill Form For Big Item
     [Documentation]    Test case Description :
     ...    1. 使用者在健檢大項中點擊新增按鈕
@@ -530,6 +438,98 @@ Refill Form For Detail Item
     Remove Test Data
     [Teardown]    Close Browser
 
+Query Detail Name
+    [Documentation]    Test case Description :
+    ...    1. 使用者點擊健檢細項裡面的第一筆資料
+    ...    2. 跳出健檢細項維護的視窗
+    ...    3. 驗證所屬器官系統的器官名稱是否由小到大排序
+    ...
+    ...    Verify :
+    ...    器官名稱應該由小到大排序
+    Connect Database
+    Insert One Record In Big Item
+    Insert One Record In Detail Item
+    Input Text    xpath=${Health_Checkup_Name_Dropdown}    ${Test_PopupWindow_Detail_Tranditional_Chinese}
+    Click Element    xpath=${Query_Button}
+    Sleep    3
+    Log    Verify 健檢大項是否有資料
+    ${Query_Basic_CheckGroup}    Set Variable    select group_code,group_name_zh_tw from Basic_CheckGroup where group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese}'
+    ${Query_Item_Result}    Query    ${Query_Basic_CheckGroup}
+    ${Get_Item_Code_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name_From_Web}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    ${Get_Item_Code_From_DB}    Convert To String    ${Query_Item_Result[0][0]}
+    ${Get_Item_Name_From_DB}    Convert To String    ${Query_Item_Result[0][1]}
+    Should Be Equal    ${Get_Item_Code_From_Web}    ${Get_Item_Code_From_DB}
+    Should Be Equal    ${Get_Item_Name_From_Web}    ${Get_Item_Name_From_DB}
+    Log    Verify 健檢細項是否有資料
+    [Teardown]    Close Browser
+
+Insert Record in Big Item
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 輸入資料後並按下確定
+    ...    4. 驗證資料是否有在資料庫中
+    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    6. 在畫面中刪除資料
+    ...    7. 檢查資料是否在DB中有被成功移除
+    ...
+    ...    Verify :
+    ...    新增是和刪除和網頁是否正確
+    Insert One Record In Big Item
+    Log    UI 作刪除
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
+    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_BigItem_OK_Button}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
+    Sleep    2
+    Check Big Item Record IS NOT IN DB
+    Remove Test Data    #移除測試資料
+    [Teardown]    Close Browser
+
+Alert Big Item Form
+    [Documentation]    Test case Description :
+    ...    1. 使用者在健檢大項中點擊新增按鈕
+    ...    2. 視窗會跳出健檢大項維護的相關資訊
+    ...    3. 輸入資料後並按下確定
+    ...    4. 驗證資料是否有在資料庫中
+    ...    5. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    6. 點擊第一筆資料並做修改
+    ...    7. 驗證資料是否有在資料庫中
+    ...    8. 驗證資料在網頁中的值跟輸入的是否一樣
+    ...    9. 在畫面中刪除資料
+    ...    10. 檢查資料是否在DB中有被成功移除
+    ...
+    ...    Verify :
+    ...    新增是和刪除和網頁是否正確
+    Insert One Record In Big Item
+    Log    點擊第一筆資料準備做修改
+    Double Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[1]/div
+    Sleep    1
+    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[2]/tbody/tr/td[2]/input    ${Test_ItemCode_2}
+    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[3]/tbody/tr/td[2]/input    ${Test_Item_Name_English_2}
+    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[4]/tbody/tr/td[2]/input    ${Test_Item_Name_Tranditional_Chinese_2}
+    Input Text    xpath=html/body/div[14]/div[2]/div/div/span/div/table[5]/tbody/tr/td[2]/input    ${Test_Item_Name_Simply_Chinese_2}
+    Click Element    xpath=html/body/div[14]/div[3]/div/div/div[2]/div/a/span[1]
+    Sleep    2
+    Log    驗證資料庫是否正確
+    ${Query_Big_Item}    Set Variable    select * from Basic_CheckGroup where group_code='${Test_ItemCode_2}' and group_name_en='${Test_Item_Name_English_2}' and group_name_zh_cn='${Test_Item_Name_Simply_Chinese_2}' and group_name_zh_tw='${Test_Item_Name_Tranditional_Chinese_2}' and active_flag=1
+    Check If Exists In Database    ${Query_Big_Item}
+    Log    驗證修改後的網頁是否正確
+    ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
+    ${Get_Item_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[5]/div
+    Should Be Equal    ${Test_ItemCode_2}    ${Get_Big_Item_Code}
+    Should Be Equal    ${Test_Item_Name_Tranditional_Chinese_2}    ${Get_Item_Name}
+    Log    UI 作刪除
+    Click Element    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[2]/div/img
+    Click Element    xpath=${Health_Checkup_Big_Item_Delete_Button}
+    Sleep    2
+    Click Element    xpath=${PopupWindow_BigItem_OK_Button}
+    Sleep    2
+    Log    驗正輸入資料不應該再DB
+    Check If Not Exists In Database    ${Query_Big_Item}
+    [Teardown]    Close Browser
+
 Insert Record In Detail Item
     [Documentation]    Test case Description :
     ...    1. 使用者在健檢大項中點擊新增按鈕
@@ -607,7 +607,7 @@ Click Health Checkup Item Button
     Wait Until Element Is Visible    xpath=${Health_Checkup_Item_Tab_XPATH}    ${G_Wait_For_Element_Timeout}    #等待Tab出現就算完成
 
 Insert One Record In Detail Item
-    Click Element    ${Health_Checkup_Detail_Item_Insert_Button}
+    Click Element    xpath=${Health_Checkup_Detail_Item_Insert_Button}
     Sleep    1
     Click Element    xpath=${PopupWindow_Detail_Laber_Item_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_LOINC_TextBox}    ${Test_PopupWindow_Detail_LOINC}
@@ -618,7 +618,7 @@ Insert One Record In Detail Item
     Input Text    xpath=${PopupWindow_Detail_Simple_Chinese_TextBox}    ${Test_PopupWindow_Detail_Simple_Chinese}
     Click Element    xpath=${PopupWindow_Detail_DataType_Number_CheckBox}
     Input Text    xpath=${PopupWindow_Detail_Description_TextArea}    ${Test_PopupWindow_Detail_Description}
-    Click Element    id=button-1159-btnInnerEl
+    Click Element    xpath=${PopupWindow_Detail_Insert_Button}
     Sleep    1
     Log    驗證網頁資料
     ${Verify_DataType}    Convert To String    數字

@@ -408,14 +408,14 @@ Query Not Found
     #驗證機構代碼輸入無效value，查詢後應該無資料
     INPUT TEXT    xpath=${Organization_Code_Dropdown_XPATH}    ${Test_Data}
     Click Element    xpath=${Query_Button_XPATH}
-    Wait Until Element Is Visible    xpath=${Data_Not_Fount_XPATH}    ${G_Wait_For_Element_Timeout}
+    Sleep    3
     ${Get_Data_Not_Found}    Get Text    xpath=${Data_Not_Fount_XPATH}
     Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
     Click Element    xpath=${Refill_Button_XPATH}    #按下重填
     #驗證機構名稱輸入無效value，查詢後應該無資料
     INPUT TEXT    xpath=${Organization_CodeName_Dropdown_XPATH}    ${Test_Data}
     Click Element    xpath=${Query_Button_XPATH}
-    Wait Until Element Is Visible    xpath=${Data_Not_Fount_XPATH}    ${G_Wait_For_Element_Timeout}
+    Sleep    3
     ${Get_Data_Not_Found}    Get Text    xpath=${Data_Not_Fount_XPATH}
     Should Be Equal    ${Verify_Data_Not_Found}    ${Get_Data_Not_Found}
     [Teardown]    Close Browser
