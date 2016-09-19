@@ -118,7 +118,7 @@ check page
     Should Be Equal    ${Verify_Health_check_plan_package_sub_seq}    ${Get_Health_check_plan_package_sub_seq}
     Should Be Equal    ${Verify_Health_check_plan_package_sub_name}    ${Get_Health_check_plan_package_sub_name}
     Should Be Equal    ${Verify_Health_check_plan_package_upload}    ${Get_Health_check_plan_package_upload}
-    [Teardown]    close web browser
+    [Teardown]    close browser
 
 *** Keywords ***
 Health check plan Item Button
@@ -129,6 +129,3 @@ Health check plan Item Button
     Wait Until Element Is Visible    xpath=${Health_check_ID2_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Element    xpath=${Health_check_ID2_XPATH}
     Sleep    1
-
-close web browser
-    close browser

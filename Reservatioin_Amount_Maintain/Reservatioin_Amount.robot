@@ -132,7 +132,7 @@ check page
     Should Be Equal    ${Verify_Reservation_amount_calendar_Fri_XPATH}    ${Get_Reservation_amount_calendar_Fri_XPATH}
     Should Be Equal    ${Verify_Reservation_amount_calendar_Sat_XPATH}    ${Get_Reservation_amount_calendar_Sat_XPATH}
     Should Be Equal    ${Verify_Reservation_amount_calendar_btn_save_XPATH}    ${Get_Reservation_amount_calendar_btn_save_XPATH}
-    [Teardown]    close web browser
+    [Teardown]    close browser
 
 *** Keywords ***
 Reservation_Amount_page
@@ -143,6 +143,3 @@ Reservation_Amount_page
     Wait Until Element Is Visible    xpath=${Reservation_amount_page2}    ${G_Wait_For_Element_Timeout}
     Click Element    xpath=${Reservation_amount_page2}
     Sleep    1
-
-close web browser
-    close browser
