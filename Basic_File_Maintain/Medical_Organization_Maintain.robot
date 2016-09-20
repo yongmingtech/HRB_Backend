@@ -1,13 +1,5 @@
 *** Setting ***
-Documentation     基本檔維護->醫療機構維護
-...               主要測試醫療機構維護
-...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
-...               2. Refill Form 主要是在新增資料時，測試重填按鈕是否生效
-...               3. Insert Two Records 主要是新增兩筆資料，最後驗證是從DB檢查
-...               4. Query Organization Code and Name 主要先新增兩筆資料，然後再做機構代碼和名稱的查詢
-...               5. Delete Record- 主要是先新增兩筆資料，再透過UI去刪除資料，最後在從下指令查詢資料是否還在DB
-...               6. Sort By Organization Name - 主要驗證機構名稱和資料庫是否比數一樣
-...               7. Update Form - 主要是測試資料能否更新
+Documentation     基本檔維護 -> 醫療機構維護
 Suite Teardown    Disconnect From Database
 Test Setup        Click Medical Organization Maintain Button
 Test Teardown

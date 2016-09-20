@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     健檢基本檔 -> 標準異常值
+Documentation     基本檔維護 -> 標準異常值
 Suite Setup
 Suite Teardown
 Test Setup        Click Stand Exception Item Buttton
