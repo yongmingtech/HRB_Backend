@@ -41,53 +41,6 @@ ${Organ_System_Insert_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/d
 ${Organ_System_Delete_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/div/div/div[3]    #刪除按鈕
 
 *** Test Cases ***
-Sort By Organ Code
-    [Documentation]    Test case Description :
-    ...    主要驗證器官系統的器官代碼是否有小到大排列
-    ...
-    ...    Verify :
-    ...    器官代碼應該由小到大排列
-    Connect Database
-    ${Get_Organ_Code_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr
-    ${Get_Organ_Code_List}    Create List
-    : FOR    ${Index}    IN RANGE    1    ${Get_Organ_Code_Count}+1
-    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[${Index}]/td[4]/div
-    \    Append To List    ${Get_Organ_Code_List}    ${Get_Name}
-    ${Query_Basic_Organ}    Set Variable    select Top ${Get_Organ_Code_Count} organ_code from Basic_Organ \ where active_flag=1 order by organ_code
-    ${Result}    Query    ${Query_Basic_Organ}
-    : FOR    ${Index}    IN RANGE    0    ${Get_Organ_Code_Count}
-    \    ${Verify_From_DB}    Convert To String    ${Result[${Index}][0]}
-    \    ${Get_From_Web}    Convert To String    ${Get_Organ_Code_List[${Index}]}
-    \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
-    [Teardown]    Close Browser
-
-Refill Form For Big Organ System
-    [Documentation]    Test case Description :
-    ...    主要驗證器官系統的新增器官維護，填完資料後，按下重填是否會清空
-    ...
-    ...    Verify :
-    ...    資料要全部清空
-    ...
-    ...
-    ...    Not verify yet
-    ...    由於程式碼是使用套件，產生出來的Div ID 不穩定，沒有測試細項的checkbox.
-    Click Element    xpath=${Organ_System_Insert_Button}
-    Wait Until Element Is Visible    xpath=${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
-    # 在跳窗中輸入資料
-    Fill Test Data In Organ System
-    Click Element    xpath=${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
-    Log    Verify 資料
-    ${Verify_Sex}    Convert To String    不限
-    ${Get_Organ_Code_TextBox}    Get Text    xpath=${PopupWindow_Organ_Code_TextBox}
-    ${Get_Organ_Name_TextBox}    Get Text    xpath=${PopupWindow_Organ_Name_TextBox}
-    ${Get_Sex_TextBox}    Get Value    xpath=${PopupWindow_Organ_Limit_Sex_Dropdown}
-    ${Get_Radio_Button}    Get Value    xpath=${PopupWindow_Organ_Display_Y_RadioButton}
-    Should Be Empty    ${Get_Organ_Code_TextBox}
-    Should Be Empty    ${Get_Organ_Name_TextBox}
-    Should Be Equal    ${Verify_Sex}    ${Get_Sex_TextBox}
-    Should Be Empty    ${Get_Radio_Button}
-    [Teardown]    Close Browser
-
 Check Page
     [Documentation]    Test case Description :
     ...    主要驗證器官所有頁面的文字對齊和文字
@@ -164,6 +117,53 @@ Check Page
     Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[3]/tbody/tr/td[2]/table/tbody/tr/td[1]/input    # 驗證 跳窗 裡面的限定性別Combobox
     Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/table/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的Radio Button
     Element Should Be Visible    xpath=html/body/div[13]/div[2]/div[1]/div/span/div/table[4]/tbody/tr/td[2]/div/table/tbody/tr/td[2]/table/tbody/tr/td[2]/input    # 驗證 跳窗 裡面的Radio Button
+    [Teardown]    Close Browser
+
+Sort By Organ Code
+    [Documentation]    Test case Description :
+    ...    主要驗證器官系統的器官代碼是否有小到大排列
+    ...
+    ...    Verify :
+    ...    器官代碼應該由小到大排列
+    Connect Database
+    ${Get_Organ_Code_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr
+    ${Get_Organ_Code_List}    Create List
+    : FOR    ${Index}    IN RANGE    1    ${Get_Organ_Code_Count}+1
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[1]/div[4]/div/table/tbody/tr[${Index}]/td[4]/div
+    \    Append To List    ${Get_Organ_Code_List}    ${Get_Name}
+    ${Query_Basic_Organ}    Set Variable    select Top ${Get_Organ_Code_Count} organ_code from Basic_Organ \ where active_flag=1 order by organ_code
+    ${Result}    Query    ${Query_Basic_Organ}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organ_Code_Count}
+    \    ${Verify_From_DB}    Convert To String    ${Result[${Index}][0]}
+    \    ${Get_From_Web}    Convert To String    ${Get_Organ_Code_List[${Index}]}
+    \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
+    [Teardown]    Close Browser
+
+Refill Form For Big Organ System
+    [Documentation]    Test case Description :
+    ...    主要驗證器官系統的新增器官維護，填完資料後，按下重填是否會清空
+    ...
+    ...    Verify :
+    ...    資料要全部清空
+    ...
+    ...
+    ...    Not verify yet
+    ...    由於程式碼是使用套件，產生出來的Div ID 不穩定，沒有測試細項的checkbox.
+    Click Element    xpath=${Organ_System_Insert_Button}
+    Wait Until Element Is Visible    xpath=${PopupWindow_Organ_System_Title}    ${G_Wait_For_Element_Timeout}
+    # 在跳窗中輸入資料
+    Fill Test Data In Organ System
+    Click Element    xpath=${PopupWindow_Organ_System_Refill_Button}    #點擊重填按鈕
+    Log    Verify 資料
+    ${Verify_Sex}    Convert To String    不限
+    ${Get_Organ_Code_TextBox}    Get Text    xpath=${PopupWindow_Organ_Code_TextBox}
+    ${Get_Organ_Name_TextBox}    Get Text    xpath=${PopupWindow_Organ_Name_TextBox}
+    ${Get_Sex_TextBox}    Get Value    xpath=${PopupWindow_Organ_Limit_Sex_Dropdown}
+    ${Get_Radio_Button}    Get Value    xpath=${PopupWindow_Organ_Display_Y_RadioButton}
+    Should Be Empty    ${Get_Organ_Code_TextBox}
+    Should Be Empty    ${Get_Organ_Name_TextBox}
+    Should Be Equal    ${Verify_Sex}    ${Get_Sex_TextBox}
+    Should Be Empty    ${Get_Radio_Button}
     [Teardown]    Close Browser
 
 Insert Record In Organ System

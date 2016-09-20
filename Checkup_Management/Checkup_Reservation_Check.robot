@@ -34,7 +34,7 @@ ${Reservatioin_Review_list_approveDate_XPATH}    //div[15]/div/span    # 申請�
 ${Reservatioin_Review_list_statusName_XPATH}    html/body/div[5]/div[2]/div/div/div[3]/div[3]/div/div/div[16]/div/span    # 預約狀態
 
 *** Test Cases ***
-check page
+Check Page
     ${Verify_Tab_Reservatioin_review_XPATH}    Convert To String    健檢預約審核
     ${Verify_Head_Reservatioin_review_Inquire_XPATH}    Convert To String    預約審核查詢
     ${Verify_Head_Reservatioin_review_List_XPATH}    Convert To String    預約清單

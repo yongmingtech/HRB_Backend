@@ -36,7 +36,7 @@ ${Health_check_plan_package_sub_name_XPATH}    //div[2]/div[3]/div/div/div[6]/di
 ${Health_check_plan_package_upload_XPATH}    //div[2]/div[3]/div/div/div[8]/div/span    # 附件
 
 *** Test Cases ***
-check page
+Check Page
     ${Verify_Tab_Health_check_plan}=    Convert To String    健檢方案維護
     ${Verify_Head_Health_check_plan_sch}=    Convert To String    健檢方案搜尋
     ${Verify_Head_Health_check_plan_list}=    Convert To String    健檢方案
@@ -116,7 +116,7 @@ check page
     Should Be Equal    ${Verify_Health_check_plan_package_sub_seq}    ${Get_Health_check_plan_package_sub_seq}
     Should Be Equal    ${Verify_Health_check_plan_package_sub_name}    ${Get_Health_check_plan_package_sub_name}
     Should Be Equal    ${Verify_Health_check_plan_package_upload}    ${Get_Health_check_plan_package_upload}
-    [Teardown]    close browser
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Health check plan Item Button

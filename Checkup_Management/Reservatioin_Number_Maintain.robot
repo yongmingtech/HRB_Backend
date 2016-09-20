@@ -41,7 +41,7 @@ ${Reservation_amount_calendar_Sat_XPATH}    //th[7]    # Sat
 ${Reservation_amount_calendar_btn_save_XPATH}    //div[4]/div/div/div/div/a/span    # 儲存
 
 *** Test Cases ***
-check page
+Check Page
     ${Verify_Tab_Reservation_amount_XPATH}    Convert To String    預約量維護
     ${Verify_Head_Reservation_amount_Inquire_XPATH}    Convert To String    預約量查詢
     ${Verify_Head_Reservation_amount_helper_XPATH}    Convert To String    設定小幫手
@@ -132,7 +132,7 @@ check page
     Should Be Equal    ${Verify_Reservation_amount_calendar_Fri_XPATH}    ${Get_Reservation_amount_calendar_Fri_XPATH}
     Should Be Equal    ${Verify_Reservation_amount_calendar_Sat_XPATH}    ${Get_Reservation_amount_calendar_Sat_XPATH}
     Should Be Equal    ${Verify_Reservation_amount_calendar_btn_save_XPATH}    ${Get_Reservation_amount_calendar_btn_save_XPATH}
-    [Teardown]    close browser
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Reservation_Amount_page

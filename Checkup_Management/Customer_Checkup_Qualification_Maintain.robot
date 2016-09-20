@@ -91,7 +91,7 @@ check page
     Should Be Equal    ${Verify_checkup_qualifications_list_checkupYear}    ${Get_checkup_qualifications_list_checkupYear}
     Should Be Equal    ${Verify_checkup_qualifications_list_crLevel}    ${Get_checkup_qualifications_list_crLevel}
     Should Be Equal    ${Verify_checkup_qualifications_list_havecheckup}    ${Get_checkup_qualifications_list_havecheckup}
-    [Teardown]    Close Web Browser
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Click checkup_qualifications Item Button
@@ -102,6 +102,3 @@ Click checkup_qualifications Item Button
     Wait Until Element Is Visible    xpath=${checkup_qualifications_button2}    ${G_Wait_For_Element_Timeout}
     Click Element    xpath=${checkup_qualifications_button2}
     Sleep    1
-
-close web browser
-    close browser

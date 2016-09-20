@@ -31,7 +31,7 @@ ${HC_data_upload_list_consultAttachment_XPATH}    //div[11]/div/span    # 異常
 ${HC_data_upload_list_trackingFlag_XPATH}    //div[12]/div/span    # 完成判定
 
 *** Test Cases ***
-Check page
+Check Page
     ${Verify_Tab_HC_data_upload}    Convert To String    已健檢資料上傳
     ${Verify_Head_HC_data_upload_list}    Convert To String    預約清單
     ${Verify_HC_data_upload_sch_hospitalId}    Convert To String    *醫療機構:
@@ -89,7 +89,7 @@ Check page
     Should Be Equal    ${Verify_HC_data_upload_list_reservationAttachment}    ${Get_HC_data_upload_list_reservationAttachment}
     Should Be Equal    ${Verify_HC_data_upload_list_consultAttachment}    ${Get_HC_data_upload_list_consultAttachment}
     Should Be Equal    ${Verify_HC_data_upload_list_trackingFlag}    ${Get_HC_data_upload_list_trackingFlag}
-    [Teardown]    close browser
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Health_check_data_upload_page

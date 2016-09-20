@@ -36,7 +36,7 @@ ${HC_payment_operation_list_anTotalcash_XPATH}    //div[14]/div/span    # 付款
 ${HC_payment_operation_list_status_XPATH}    //div[15]/div/span    # 狀態
 
 *** Test Cases ***
-check page
+Check Page
     ${Verify_Tab_HC_payment_operation_XPATH}    Convert To String    健檢請款作業
     ${Verify_Head_HC_payment_operation_sch_XPATH}    Convert To String    請款清單查詢
     ${Verify_Head_HC_payment_operation_list_XPATH}    Convert To String    請款清單
@@ -118,7 +118,7 @@ check page
     Should Be Equal    ${Verify_HC_payment_operation_list_anDate_XPATH}    ${Get_HC_payment_operation_list_anDate}
     Should Be Equal    ${Verify_HC_payment_operation_list_anTotalcash_XPATH}    ${Get_HC_payment_operation_list_anTotalcash}
     Should Be Equal    ${Verify_HC_payment_operation_list_status_XPATH}    ${Get_HC_payment_operation_list_status}
-    [Teardown]
+    [Teardown]    Close Browser
 
 *** Keywords ***
 Health_check_payment_operation_page
