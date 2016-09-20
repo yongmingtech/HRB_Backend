@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation     健檢管理 -> 健檢請款作業
 Test Setup        Health_check_payment_operation_page
 Resource          ../DataBase.robot
 Resource          ../Login.robot
@@ -117,7 +118,7 @@ check page
     Should Be Equal    ${Verify_HC_payment_operation_list_anDate_XPATH}    ${Get_HC_payment_operation_list_anDate}
     Should Be Equal    ${Verify_HC_payment_operation_list_anTotalcash_XPATH}    ${Get_HC_payment_operation_list_anTotalcash}
     Should Be Equal    ${Verify_HC_payment_operation_list_status_XPATH}    ${Get_HC_payment_operation_list_status}
-    [Teardown]    close browser
+    [Teardown]
 
 *** Keywords ***
 Health_check_payment_operation_page

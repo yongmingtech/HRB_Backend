@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     已健檢資料上傳
+Documentation     健檢管理 -> 已健檢資料上傳
 ...
 ...               test case 1: check page, verify all show text at this page.
 Test Setup        Health_check_data_upload_page

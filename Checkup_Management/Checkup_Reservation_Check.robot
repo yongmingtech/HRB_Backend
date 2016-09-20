@@ -1,7 +1,5 @@
 *** Settings ***
-Documentation     健檢預約審核 頁面
-...
-...               test case1 : check page , verify all show text at this page.
+Documentation     健檢管理 -> 健檢預約審核
 Test Setup        Health_Check_Reservatioin_Review_page
 Resource          ../DataBase.robot
 Resource          ../Login.robot

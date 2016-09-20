@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     預約量維護
+Documentation     健檢管理 > 預約量維護
 ...
 ...               test case 1: check page, verify all show text at this page.
 Suite Setup       Reservation_Amount_page

@@ -1,4 +1,5 @@
 *** Settings ***
+Documentation     健檢管理 -> 健檢資料維護
 Suite Setup
 Suite Teardown
 Test Setup        Click Chk Report Item Button
