@@ -54,7 +54,7 @@ Check Page
     ${Get_Tab_HC_data_upload}    Get Text    xpath=${Tab_HC_data_upload_XPATH}
     ${Get_Head_HC_data_upload_list}    Get Text    xpath=${Head_HC_data_upload_list_XPATH}
     ${Get_HC_data_upload_sch_hospitalId}    Get Text    xpath=${HC_data_upload_sch_hospitalId_XPATH}
-    ${Get_HC_data_upload_sch_rangeDatepicker}    Get Text    xpath=${HC_data_upload_sch_resvDate_XPATH}
+    ${Get_HC_data_upload_sch_resvDate}    Get Text    xpath=${HC_data_upload_sch_resvDate_XPATH}
     ${Get_HC_data_upload_sch_fromDate}    Get Value    xpath=${HC_data_upload_sch_fromDate_XPATH}
     ${Get_HC_data_upload_sch_toDate}    Get Value    xpath=${HC_data_upload_sch_toDate_XPATH}
     ${Get_HC_data_upload_sch_accountId}    Get Text    xpath=${HC_data_upload_sch_accountId_XPATH}

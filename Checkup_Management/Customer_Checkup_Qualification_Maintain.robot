@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     網頁文字描述檢查
+Documentation     健檢管理 -> 健檢資格維護
 Suite Setup       Click checkup_qualifications Item Button
 Test Teardown
 Resource          ../Login.robot
