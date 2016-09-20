@@ -1,5 +1,6 @@
 *** Setting ***
-Documentation     主要測試醫療機構維護
+Documentation     基本檔維護->醫療機構維護
+...               主要測試醫療機構維護
 ...               1. Check Page 主要測試裡面所有的字型和文字的位置，另外也檢查跳窗的文字和相關下拉式選單是否存在
 ...               2. Refill Form 主要是在新增資料時，測試重填按鈕是否生效
 ...               3. Insert Two Records 主要是新增兩筆資料，最後驗證是從DB檢查
