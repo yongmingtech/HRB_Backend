@@ -302,6 +302,7 @@ Sort By Item Code
     ...    Verify :
     ...    大項代碼應該由小到大排列
     Connect Database
+    Insert One Record In Big Item
     ${Get_Item_Code_Count}    Get Matching Xpath Count    html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr
     ${Get_Item_Code_List}    Create List
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Item_Code_Count}+1
@@ -313,7 +314,8 @@ Sort By Item Code
     \    ${Verify_From_DB}    Convert To String    ${Result[${Index}][0]}
     \    ${Get_From_Web}    Convert To String    ${Get_Item_Code_List[${Index}]}
     \    Should Be Equal    ${Verify_From_DB}    ${Get_From_Web}
-    [Teardown]    Close Browser
+    Remove Test Data
+    [Teardown]    Run Keywords    Remove Test Data    Close Browser
 
 Sort By Detail Code
     [Documentation]    Test case Description :
@@ -322,6 +324,8 @@ Sort By Detail Code
     ...    Verify :
     ...    細項代碼應該由小到大排列
     Connect Database
+    Insert One Record In Big Item
+    Insert One Record In Detail Item
     ${Get_Big_Item_Code}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[4]/div
     ${Get_Detail_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[5]/div[4]/div/table/tbody/tr
     ${Get_Detail_List}    Create List
@@ -334,7 +338,7 @@ Sort By Detail Code
     \    ${Verify_From_DB}    Convert To String    ${Result[${index}][0]}
     \    ${Verify_From_Web}    Convert To String    ${Get_Detail_List[${INDEX}]}
     \    Should Be Equal    ${Verify_From_DB}    ${Verify_From_Web}
-    [Teardown]    Close Browser
+    [Teardown]    Run Keywords    Remove Test Data    Close Browser
 
 Sort By Organ Name
     [Documentation]    Test case Description :
@@ -664,6 +668,7 @@ Check Big Item Record IS NOT IN DB
     Check If Not Exists In Database    ${Query_Big_Item}
 
 Remove Test Data
+    [Documentation]    移除測試資料
     Connect Database
     ${Delete_Detail_Item}    Set Variable    delete from Basic_CheckItem where ID=( select id from Basic_CheckItem where group_id=(select id from Basic_CheckGroup where group_code='${Test_ItemCode}')) \
     ${Delete_Big_Item}    Set Variable    delete from Basic_CheckGroup where group_code='${Test_ItemCode}'
