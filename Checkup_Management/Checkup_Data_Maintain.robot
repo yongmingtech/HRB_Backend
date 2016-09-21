@@ -11,8 +11,7 @@ Resource          ../DataBase.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Chk_Report_ID1_XPATH}    //div[3]/div/a/span[2]    # 健檢管理
-${Chk_Report_ID2_XPATH}    //div[9]/a/span    # 健檢資料維護
+${Chk_Report_ID_XPATH}    //div[9]/a/span    # 健檢資料維護
 ${Subpage_Checkup_Report_XPATH}    //div[2]/div/div/div/a/span    # 健檢資料維護
 ${HEADER_Checkup_Report_XPATH}    //div/div/div/span    # 健檢資料健檢查詢
 ${HEADER_Checkup_Reportlist_XPATH}    //div[3]/div/div/div/div/div/span    # 健檢清單
@@ -106,9 +105,9 @@ Check Page
 *** Keywords ***
 Click Chk Report Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Chk_Report_ID1_XPATH}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Chk_Report_ID1_XPATH}
-    Click Element    xpath=${Chk_Report_ID1_XPATH}
-    Wait Until Element Is Visible    xpath=${Chk_Report_ID2_XPATH}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Chk_Report_ID2_XPATH}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Chk_Report_ID_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Chk_Report_ID_XPATH}
     Sleep    1

@@ -6,8 +6,7 @@ Resource          ../Login.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Checkup_Invoice_Operation_page1}    //div[3]/div/a/span[2]
-${Checkup_Invoice_Operation_page2}    //div[6]/a/span
+${Checkup_Invoice_Operation_Page}    //div[6]/a/span
 ${Tab_Checkup_Invoice_Operation_XPATH}    //div[2]/div/div/div/a/span    # 健檢請款作業
 ${Head_Checkup_Invoice_Operation_Search_XPATH}    //div/div/div/span    # 請款清單查詢
 ${Head_Checkup_Invoice_Operation_List_XPATH}    //div[3]/div/div/div/div/div/span    # 請款清單
@@ -125,8 +124,8 @@ Check Page
 *** Keywords ***
 Checkup_Invoice_Operation_page
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Checkup_Invoice_Operation_page1}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Checkup_Invoice_Operation_page1}
-    Click Element    xpath=${Checkup_Invoice_Operation_page1}
-    Wait Until Element Is Visible    xpath=${Checkup_Invoice_Operation_page2}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Checkup_Invoice_Operation_page2}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Checkup_Invoice_Operation_Page}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Invoice_Operation_Page}

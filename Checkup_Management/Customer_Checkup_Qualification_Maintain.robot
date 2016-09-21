@@ -8,8 +8,7 @@ Resource          ../DataBase.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Checkup_Qualifications_button}    //div[3]/div/a/span[2]    # 健檢管理
-${Checkup_Qualifications_button2}    //div[2]/div[2]/div/a/span    # 健檢資格維護
+${Checkup_Qualifications_button}    //div[2]/div[2]/div/a/span    # 健檢資格維護
 ${Checkup_Qualifications_tab_XPATH}    //div[2]/div/div/div/a/span    # 客戶健檢資格維護
 ${HEADER_Checkup_Qualifications_Search_XPATH}    //div/div/div/span    # 健檢資格搜尋
 ${HEADER_Checkup_Qualifications_customer_XPATH}    //div[3]/div/div/div/div/div/span    # 客戶清單
@@ -98,9 +97,9 @@ check page
 *** Keywords ***
 Click Checkup_Qualifications Item Button
     Open Broser and Login automatically
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
     Wait Until Element Is Visible    xpath=${Checkup_Qualifications_button}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Checkup_Qualifications_button}
     Click Element    xpath=${Checkup_Qualifications_button}
-    Wait Until Element Is Visible    xpath=${Checkup_Qualifications_button2}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Checkup_Qualifications_button2}
     Sleep    1

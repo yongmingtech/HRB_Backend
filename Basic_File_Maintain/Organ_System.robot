@@ -203,9 +203,9 @@ Delete Record In Organ System
 *** Keywords ***
 Click Organ System Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${G_Basic_File_MainTain_Tab}
-    Click Element    ${G_Basic_File_MainTain_Tab}
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Basic_File_MainTain_Menu}
+    Click Element    ${G_Basic_File_MainTain_Menu}
     Wait Until Element Is Visible    ${Organ_System_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Organ_System_Item_ID}
     Wait Until Element Is Visible    xpath=html/body/div[5]/div[1]/div[1]/div[2]/div/div/div/a/span[1]    ${G_Wait_For_Element_Timeout}    #等待Tab出現就算完成

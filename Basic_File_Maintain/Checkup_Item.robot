@@ -599,9 +599,9 @@ Alter Detail Item Form
 *** Keywords ***
 Click Health Checkup Item Button
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${G_Basic_File_MainTain_Tab}
-    Click Element    ${G_Basic_File_MainTain_Tab}
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Basic_File_MainTain_Menu}
+    Click Element    ${G_Basic_File_MainTain_Menu}
     Wait Until Element Is Visible    ${Checkup_Item_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Checkup_Item_ID}
     Wait Until Element Is Visible    xpath=${Checkup_Item_Tab_XPATH}    ${G_Wait_For_Element_Timeout}    #等待Tab出現就算完成

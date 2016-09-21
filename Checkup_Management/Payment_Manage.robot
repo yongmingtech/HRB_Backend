@@ -6,8 +6,7 @@ Resource          ../Login.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Payment_Manage_page1}    //div[3]/div/a/span[2]
-${Payment_Manage_page2}    //div[8]/a
+${Payment_Manage_page}    //div[8]/a
 ${Tab_Payment_Manage_XPATH}    //div[2]/div/div/div/a/span    # 付款管理
 ${Payment_Manage_Search_XPATH}    //div/div/div/span    # 請款清單查詢
 ${Payment_Manage_List_XPATH}    //div[3]/div/div/div/div/div/span    # 請款清單
@@ -105,9 +104,9 @@ Check Page
 *** Keywords ***
 Payment_Manage_Page
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Payment_Manage_page1}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Payment_Manage_page1}
-    Click Element    xpath=${Payment_Manage_page1}
-    Wait Until Element Is Visible    xpath=${Payment_Manage_page2}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Payment_Manage_page2}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Payment_Manage_page}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Payment_Manage_page}
     Sleep    1

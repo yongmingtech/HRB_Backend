@@ -6,8 +6,7 @@ Resource          ../Login.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Checkup_Plan1_XPATH}    //div[3]/div/a/span[2]    # 健檢管理
-${Checkup_Plan2_XPATH}    //div[2]/a/span    # 健檢管理
+${Checkup_Plan_XPATH}    //div[2]/a/span    # 健檢管理
 ${Checkup_Plan_ID1_XPATH}    //div[3]/div/a/span[2]    # 健檢管理
 ${Tab_Checkup_Plan_List_XPATH}    //div[2]/div/div/div/a/span    # 健檢方案維護
 ${Checkup_Plan_List_sch_XPATH}    //div/div/div/span    # 健檢方案搜尋
@@ -122,9 +121,9 @@ Check Page
 *** Keywords ***
 Checkup_Plan_Maintain_Page
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Checkup_Plan1_XPATH}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Checkup_Plan1_XPATH}
-    Click Element    xpath=${Checkup_Plan1_XPATH}
-    Wait Until Element Is Visible    xpath=${Checkup_Plan2_XPATH}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Checkup_Plan2_XPATH}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Checkup_Plan_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Plan_XPATH}
     Sleep    1

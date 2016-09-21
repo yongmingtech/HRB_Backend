@@ -8,8 +8,7 @@ Resource          ../Login.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Reservation_Amount_page1}    html/body/div[3]/div[1]/div/div/div[3]/div/a    # 健檢管理
-${Reservation_Amount_page2}    html/body/div[8]/div/div[2]/div[2]/div[3]/a/span    # 預約量維護
+${Reservation_Amount_page}    html/body/div[8]/div/div[2]/div[2]/div[3]/a/span    # 預約量維護
 ${Tab_Reservation_Amount_XPATH}    //div[2]/div/div/div/a/span    # 預約量維護
 ${Head_Reservation_Amount_Search_XPATH}    //div/div/div/span    # 預約量查詢
 ${Head_Reservation_Amount_Helper_XPATH}    //div[4]/div/div/div/div/div/span    # 設定小幫手
@@ -138,9 +137,9 @@ Check Page
 *** Keywords ***
 Reservation_Amount_page
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Reservation_Amount_page1}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Reservation_Amount_page1}
-    Click Element    xpath=${Reservation_Amount_page1}
-    Wait Until Element Is Visible    xpath=${Reservation_Amount_page2}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Reservation_Amount_page2}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Reservation_Amount_page}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Reservation_Amount_page}
     Sleep    1

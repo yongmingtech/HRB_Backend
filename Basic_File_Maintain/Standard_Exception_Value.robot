@@ -97,9 +97,9 @@ Check Page
 *** Keywords ***
 Click Stand Exception Item Buttton
     Open Broser and Login automatically
-    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Tab}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    ${G_Basic_File_MainTain_Tab}
-    Click Element    ${G_Basic_File_MainTain_Tab}
+    Wait Until Element Is Visible    ${G_Basic_File_MainTain_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Basic_File_MainTain_Menu}
+    Click Element    ${G_Basic_File_MainTain_Menu}
     Wait Until Element Is Visible    ${Standard_Exception_Value_ID}    ${G_Wait_For_Element_Timeout}
     Click Element    ${Standard_Exception_Value_ID}
     Wait Until Element Is Visible    xpath=${Tab_XPATH}    ${G_Wait_For_Element_Timeout}

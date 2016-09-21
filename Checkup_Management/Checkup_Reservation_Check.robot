@@ -6,8 +6,7 @@ Resource          ../Login.robot
 Resource          Checkup_Manage_Resource.robot
 
 *** Variables ***
-${Reservatioin_Review_btn1}    html/body/div[3]/div[1]/div/div/div[3]/div/a/span[2]    # 健檢管理
-${Reservatioin_Review_btn2}    html/body/div[8]/div/div[2]/div[2]/div[4]/a/span    # 健檢管理
+${Reservatioin_Review_button}    html/body/div[8]/div/div[2]/div[2]/div[4]/a/span    # 健檢管理
 ${Tab_Reservatioin_Review_XPATH}    //div[2]/div/div/div/a/span    # 健檢預約審核
 ${Head_Reservatioin_Review_Search_XPATH}    //div/div/div/span    # 預約審核查詢
 ${Head_Reservatioin_Review_List_XPATH}    //div[3]/div/div/div/div/div/span    # 預約清單
@@ -117,9 +116,9 @@ Check Page
 *** Keywords ***
 Health_Check_Reservatioin_Review_page
     Open Broser and Login automatically
-    Wait Until Element Is Visible    xpath=${Reservatioin_Review_btn1}    ${G_Wait_For_Element_Timeout}
-    Mouse Over    xpath=${Reservatioin_Review_btn1}
-    Click Element    xpath=${Reservatioin_Review_btn1}
-    Wait Until Element Is Visible    xpath=${Reservatioin_Review_btn2}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Reservatioin_Review_btn2}
+    Wait Until Element Is Visible    ${G_Checkup_Management_Menu}    ${G_Wait_For_Element_Timeout}
+    Mouse Over    ${G_Checkup_Management_Menu}
+    Click Element    ${G_Checkup_Management_Menu}
+    Wait Until Element Is Visible    xpath=${Reservatioin_Review_button}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Reservatioin_Review_button}
     Sleep    1
