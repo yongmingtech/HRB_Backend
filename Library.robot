@@ -4,3 +4,4 @@ Library           DatabaseLibrary
 Library           Collections
 Library           String
 Library           DateTime
+Library           Dialogs
