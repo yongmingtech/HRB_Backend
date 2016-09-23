@@ -45,8 +45,8 @@ ${Checkup_Qualifications_Input_checkupYear2_XPATH}    //li[1]    #健檢年度
 ${Checkup_Qualifications_Input_checkupYear3_XPATH}    //li[2]    #健檢年度
 ${Checkup_Qualifications_Input_accountId_XPATH}    //td[2]/input    #客戶帳號
 ${Checkup_Qualifications_Input_accountName_XPATH}    //tr[2]/td/table/tbody/tr/td[2]/input    #客戶姓名
-${Checkup_Qualifications_Input_roleName1_XPATH}    //tr[2]/td[2]/table/tbody/tr/td[2]/table/tbody/tr/td[2]/div    #客戶類型
-${Checkup_Qualifications_Input_roleName2_XPATH}    //li[2]    #客戶類型
+${Checkup_Qualifications_Input_roleName1_XPATH}    html/body/div[5]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[2]/td[2]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/input    #客戶類型
+${Checkup_Qualifications_Input_roleName2_XPATH}    html/body/div[9]/div/ul/li[2]    #客戶類型
 
 *** Test Cases ***
 Check Page
@@ -123,20 +123,24 @@ Search_tab
     ...    d \ 2. *法人 + *健檢類別 + 健檢年度
     ...    d \ 3. *法人 + *健檢類別 + 客戶帳號
     ...    d \ 4. *法人 + *健檢類別 + 客戶姓名
+    ...
+    ...    因客戶類別與健檢年度、健檢類別等元件重覆，易出錯，故另開test case處理
+    ...    test case2 :
     ...    n \ 5. *法人 + *健檢類別 + 客戶類別
     connect database
-    ##    Test condition 1 : deptName + crLevel
+    #Test condition 1 : deptName + crLevel
     Reset_Search_Condition
     Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
     #Input Text    xpath=${Checkup_Qualifications_Input_deptName_XPATH}    ${Parameter_Search_deptName}    # 法人:
     Click Element    xpath=${Checkup_Qualifications_Input_deptName1_XPATH}    # 法人:
     Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    ${G_Wait_For_Element_Timeout}
-    Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 2016
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 法人:
     Click Element    xpath=${Search_Tab_Search_Button}
-    Connect Database
-    ${Query_By_Must}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptCode='FIHLX02' AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId
+    ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel
+    #${Query_By_Must}    Decode Bytes To String    ${Query_By_Must_byte}    UTF-8
+    ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
     ${Organization_Name_List}    Create List
-    ${Must_Database}    query    ${Query_By_Must}
+    ${Must_Database}    Query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
     \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
@@ -154,31 +158,127 @@ Search_tab
     # Test condition 2 : deptName + crLevel + checkupYear
     sleep    5
     Reset_Search_Condition
+    #Input Text    xpath=${Checkup_Qualifications_Input_deptName_XPATH}    ${Parameter_Search_deptName}    # 法人:
     Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear1_XPATH}    # 健檢年度:
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear3_XPATH}    #2016
     Click Element    xpath=${Search_Tab_Search_Button}
-    #sleep    5
-    Reset_Search_Condition
+    ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level \ from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND CrL.checkup_year='2016' AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel + checkupYear
+    ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
+    ${Organization_Name_List}    Create List
+    ${Must_Database_checkyear}    Query    ${Query_By_Must}
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
+    : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
+    \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
+    \    Append To List    ${Organization_Name_List}    ${check_word2}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
+    \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
+    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
+    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
+    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
+    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
+    \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     # Test condition 3 : deptName + crLevel + accountId
+    sleep    5
+    Reset_Search_Condition
     Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
     Input Text    xpath=${Checkup_Qualifications_Input_accountId_XPATH}    ${Parameter_Search_accountId}    # 客戶帳號:
     Click Element    xpath=${Search_Tab_Search_Button}
-    #sleep    5
-    Reset_Search_Condition
+    ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level \ from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND Info.AccountId='Y120521840' AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel + accountId
+    ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
+    ${Organization_Name_List}    Create List
+    ${Must_Database}    query    ${Query_By_Must}
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
+    : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
+    \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
+    \    Append To List    ${Organization_Name_List}    ${check_word2}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
+    \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
+    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
+    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
+    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
+    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
+    \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     # Test condition 4 : deptName + crLevel + accountName
+    sleep    5
+    Reset_Search_Condition
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName1_XPATH}    # 法人:
+    Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 2016
     Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
     Input Text    xpath=${Checkup_Qualifications_Input_accountName_XPATH}    ${Parameter_Search_accountName}    # 客戶姓名:
     Click Element    xpath=${Search_Tab_Search_Button}
-    #sleep    5
-    Reset_Search_Condition
+    ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level \ from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND Info.AccountName='汪泰穎' \ AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel + accountName
+    ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
+    ${Organization_Name_List}    Create List
+    ${Must_Database}    query    ${Query_By_Must}
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
+    : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
+    \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
+    \    Append To List    ${Organization_Name_List}    ${check_word2}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
+    \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
+    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
+    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
+    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
+    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
+    \    should be equal    ${Verify_from_DB}    ${Get_from_web}
+    sleep    1
+    [Teardown]    close browser
+
+Search_tab_2
+    [Documentation]    健檢資格維護 -> 搜尋tab
+    ...    目的：測試搜尋bar，所以搜尋條件都可以正確動作
+    ...    Criteria：
+    ...    1. 可正確找出符合條件資料
+    ...    2. 與資料庫比對資料正確性，確認欄位正確
+    ...    test case1 :
+    ...    d \ 1. *法人 + *健檢類別
+    ...    d \ 2. *法人 + *健檢類別 + 健檢年度
+    ...    d \ 3. *法人 + *健檢類別 + 客戶帳號
+    ...    d \ 4. *法人 + *健檢類別 + 客戶姓名
+    ...
+    ...    因客戶類別與健檢年度、健檢類別等元件重覆，易出錯，故另開test case處理
+    ...    test case2 :
+    ...    n \ 5. *法人 + *健檢類別 + 客戶類別
     # Test condition 5 : deptName + crLevel + roleName
-    Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
-    Click Element    xpath=${Checkup_Qualifications_Input_roleName1_XPATH}    # 客戶類型:
-    #Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    ${G_Wait_For_Element_Timeout}
-    #Click Element    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    # 客戶類型:
-    #Click Element    xpath=${Search_Tab_Search_Button}
     #Reset_Search_Condition
+    Click Element    xpath=${Checkup_Qualifications_Input_roleName1_XPATH}    # 客戶類型:
+    Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    # 客戶類型:
+    Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName1_XPATH}    # 法人:
+    Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 法人:
+    Click Element    xpath=${Search_Tab_Search_Button}
+    connect database
+    ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level \ from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND Role.RoleName='一般' \ AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel + RoleName
+    ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
+    ${Organization_Name_List}    Create List
+    ${Must_Database}    query    ${Query_By_Must}
+    ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
+    : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
+    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
+    \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
+    \    Append To List    ${Organization_Name_List}    ${check_word2}
+    : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
+    \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
+    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
+    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
+    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
+    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
+    \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     [Teardown]    close browser
 
 *** Keywords ***
@@ -196,6 +296,16 @@ Reset_Search_Condition
     Input Text    xpath=${Checkup_Qualifications_Input_accountName_XPATH}    ${empty}
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear1_XPATH}    # 健檢年度:
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear2_XPATH}    # space
+
+Fit_Search_Condition
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName1_XPATH}    # 法人:
+    Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    ${G_Wait_For_Element_Timeout}
+    Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 法人:
+    Input Text    xpath=${Checkup_Qualifications_Input_crLevel_XPATH}    ${Parameter_Search_crLevel}    # *健檢類別:
+    Input Text    xpath=${Checkup_Qualifications_Input_accountId_XPATH}    ${Parameter_Search_accountId}
+    Input Text    xpath=${Checkup_Qualifications_Input_accountName_XPATH}    ${Parameter_Search_accountName}
+    Click Element    xpath=${Checkup_Qualifications_Input_checkupYear1_XPATH}    # 健檢年度:
+    Click Element    xpath=${Checkup_Qualifications_Input_checkupYear3_XPATH}    # 2016
 
 DATABASE BACKUP
     [Documentation]    [cr_level] [checkup_year] [accountUID]
