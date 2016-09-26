@@ -35,6 +35,8 @@ ${Parameter_Search_checkupYear}    2016
 ${Parameter_Search_accountId}    Y120521840
 ${Parameter_Search_accountName}    汪泰穎
 ${Parameter_Search_roleName}    一般
+${Import_Excel_Button}    //div[3]/div[2]/div/div/div
+${Import_Excel_File_Path}    //div/input
 ${Search_Tab_Search_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[1]
 ${Search_Tab_Clear_Button}    html/body/div[5]/div[2]/div/div/div[1]/div[3]/div/div/div[2]
 ${Checkup_Qualifications_Input_deptName1_XPATH}    //td[2]/div    #*法人
@@ -112,7 +114,7 @@ Check Page
     Should Be Equal    ${Verify_Checkup_Qualifications_List_havecheckup}    ${Get_Checkup_Qualifications_List_havecheckup}
     [Teardown]    Close Browser
 
-Search_tab
+Condition_Search_in_Search_Tab
     [Documentation]    健檢資格維護 -> 搜尋tab
     ...    目的：測試搜尋bar，所以搜尋條件都可以正確動作
     ...    Criteria：
@@ -143,16 +145,14 @@ Search_tab
     ${Must_Database}    Query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
     \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
     \    Append To List    ${Organization_Name_List}    ${check_word2}
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
     \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
-    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
-    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
-    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
-    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${result_DB}    Transfer_DB_Value_to_Web    ${from_data}
+    \    ${Verify_from_DB}    Convert To String    ${result_DB}
     \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     # Test condition 2 : deptName + crLevel + checkupYear
@@ -169,16 +169,14 @@ Search_tab
     ${Must_Database_checkyear}    Query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
     \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
     \    Append To List    ${Organization_Name_List}    ${check_word2}
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
     \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
-    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
-    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
-    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
-    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${result_DB}    Transfer_DB_Value_to_Web    ${from_data}
+    \    ${Verify_from_DB}    Convert To String    ${result_DB}
     \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     # Test condition 3 : deptName + crLevel + accountId
@@ -193,16 +191,14 @@ Search_tab
     ${Must_Database}    query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
     \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
     \    Append To List    ${Organization_Name_List}    ${check_word2}
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
     \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
-    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
-    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
-    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
-    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${result_DB}    Transfer_DB_Value_to_Web    ${from_data}
+    \    ${Verify_from_DB}    Convert To String    ${result_DB}
     \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     # Test condition 4 : deptName + crLevel + accountName
@@ -220,22 +216,20 @@ Search_tab
     ${Must_Database}    query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
     \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
     \    Append To List    ${Organization_Name_List}    ${check_word2}
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
     \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
-    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
-    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
-    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
-    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${result_DB}    Transfer_DB_Value_to_Web    ${from_data}
+    \    ${Verify_from_DB}    Convert To String    ${result_DB}
     \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    should be equal    ${Verify_from_DB}    ${Get_from_web}
     sleep    1
     [Teardown]    close browser
 
-Search_tab_2
+Condition_Search_RoleName_in_Search_Tab
     [Documentation]    健檢資格維護 -> 搜尋tab
     ...    目的：測試搜尋bar，所以搜尋條件都可以正確動作
     ...    Criteria：
@@ -252,6 +246,7 @@ Search_tab_2
     ...    n \ 5. *法人 + *健檢類別 + 客戶類別
     # Test condition 5 : deptName + crLevel + roleName
     #Reset_Search_Condition
+    connect database
     Click Element    xpath=${Checkup_Qualifications_Input_roleName1_XPATH}    # 客戶類型:
     Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Element    xpath=${Checkup_Qualifications_Input_roleName2_XPATH}    # 客戶類型:
@@ -260,25 +255,27 @@ Search_tab_2
     Wait Until Element Is Visible    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    ${G_Wait_For_Element_Timeout}
     Click Element    xpath=${Checkup_Qualifications_Input_deptName2_XPATH}    # 法人:
     Click Element    xpath=${Search_Tab_Search_Button}
-    connect database
     ${Query_By_Must_byte}    Set Variable    select Dept.DeptName, Info.SectionName, Role.RoleName,Info.AccountId, Info.AccountName, Info.Gender, Info.LeaveDate, CrL.checkup_year, CrL.cr_level \ from Account_CrLevel CrL, AccountInfo Info, DeptBasic Dept, RoleBasic Role where CrL.cr_level='V' AND Dept.DeptName='FIH(富智康)' AND Role.RoleName='一般' \ AND CrL.accountUID = Info.accountUID AND Info.SystemRole = Role.SystemRole AND Info.DeptCode = Dept.DeptCode order by Info.AccountId    #deptName + crLevel + RoleName
     ${Query_By_Must}    Encode String To Bytes    ${Query_By_Must_byte}    UTF-8
     ${Organization_Name_List}    Create List
     ${Must_Database}    query    ${Query_By_Must}
     ${Get_Organization_Count}    Get Matching Xpath Count    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td
     : FOR    ${Index}    IN RANGE    4    ${Get_Organization_Count}+1
-    \    ${Get_Name}=    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
+    \    ${Get_Name}    Get Text    xpath=html/body/div[5]/div[2]/div/div/div[3]/div[4]/div/table/tbody/tr[1]/td[${index}]/div    #把構代碼的Dropdlown一筆一筆放入到List
     \    ${check_word1}    Set Variable If    '${Get_Name}'=="${EMPTY} "    空白    ${Get_Name}
     \    ${check_word2}    Set Variable If    '${Get_Name}'=="在職"    空白    ${check_word1}
     \    Append To List    ${Organization_Name_List}    ${check_word2}
     : FOR    ${Index}    IN RANGE    0    ${Get_Organization_Count}-4
     \    ${from_data}    set variable    ${Must_Database[0][${Index}]}
-    \    ${check_word1}    Set Variable If    "M" not in '${Must_Database[0][${Index}]}'    ${from_data}    男
-    \    ${check_word2}    Set Variable If    '${Must_Database[0][${Index}]}'=="V"    V類    ${check_word1}
-    \    ${check_word3}    Set Variable If    '${Must_Database[0][${Index}]}'=="${none}"    空白    ${check_word2}
-    \    ${Verify_from_DB}    Convert To String    ${check_word3}
+    \    ${result_DB}    Transfer_DB_Value_to_Web    ${from_data}
+    \    ${Verify_from_DB}    Convert To String    ${result_DB}
     \    ${Get_from_web}    Convert To String    ${Organization_Name_List[${Index}]}
     \    should be equal    ${Verify_from_DB}    ${Get_from_web}
+    [Teardown]    close browser
+
+Import Excel
+    Click Element    xpath=${Import_Excel_Button}
+    Click Element    ${Import_Excel_File_Path}
     [Teardown]    close browser
 
 *** Keywords ***
@@ -306,6 +303,16 @@ Fit_Search_Condition
     Input Text    xpath=${Checkup_Qualifications_Input_accountName_XPATH}    ${Parameter_Search_accountName}
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear1_XPATH}    # 健檢年度:
     Click Element    xpath=${Checkup_Qualifications_Input_checkupYear3_XPATH}    # 2016
+
+Transfer_DB_Value_to_Web
+    [Arguments]    ${from_data}
+    ${check_word1}    Set Variable If    "M" not in '${from_data}'    ${from_data}    男
+    ${check_word2}    Set Variable If    '${from_data}' =="V"    V類    ${check_word1}
+    ${check_word3}    Set Variable If    '${from_data}' =="A"    A類    ${check_word2}
+    ${check_word4}    Set Variable If    '${from_data}' =="B"    B類    ${check_word3}
+    ${check_word5}    Set Variable If    '${from_data}' =="${none}"    空白    ${check_word4}
+    ${check_word6}    Set Variable If    '${from_data}' =="F"    女    ${check_word5}
+    [Return]    ${check_word6}
 
 DATABASE BACKUP
     [Documentation]    [cr_level] [checkup_year] [accountUID]
