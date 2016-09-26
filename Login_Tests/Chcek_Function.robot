@@ -8,21 +8,14 @@ Resource          ../Library.robot
 Check Menu
     [Documentation]    登入後主要驗證左邊的Menu是否跟資料庫一樣
     Open Broser and Login automatically
-    Connect Database
-    Click Basic File Maintain Menu
-    Verify Basic File Maintain Main
-    Click Checkup Mgnt Menu
-    Verify Checkup Mgnt
-    Click System Information Monitor
-    Verify System Information Monitor
-    Click Management Work
-    Verify Management Work
-    Click Equipment Management
-    Verify Equipment Management
-    Click Dial Service
-    Verify Dial Service
-    Click System Management
-    Verify System Management
+    Connect Database    #Connect To Database
+    Verify Basic File Maintain Main    #基本檔維護
+    Verify Checkup Mgnt    #健檢管理
+    Verify System Information Monitor    #系統資訊監控
+    Verify Management Work    #管理作業
+    Verify Equipment Management    #設備管理
+    Verify Dial Service    #外撥服務
+    Verify System Management    #系統管理
     [Teardown]    Close Browser
 
 *** Keywords ***
@@ -47,6 +40,7 @@ Verify Basic File Maintain Main
     #跟DB驗證
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料到Get_List_From_Web
+    Click Basic File Maintain Menu
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -80,6 +74,7 @@ Verify Checkup Mgnt
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click Checkup Mgnt Menu
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -109,6 +104,7 @@ Verify System Information Monitor
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click System Information Monitor
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -141,6 +137,7 @@ Verify Management Work
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click Management Work
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -168,6 +165,7 @@ Verify Equipment Management
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click Equipment Management
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -199,6 +197,7 @@ Verify Dial Service
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click Dial Service
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
@@ -227,6 +226,7 @@ Verify System Management
     \    Append To List    ${Get_List_From_DB}    ${Temp}
     Lists Should Be Equal    ${Expected_List}    ${Get_List_From_DB}
     #抓取網頁資料準備驗證
+    Click System Management
     ${Get_List_From_Web}    Create List
     ${Get_Web_Count}    Get Matching Xpath Count    html/body/div[${Sub_Menu_Index}]/div/div[2]/div[2]/div
     : FOR    ${INDEX}    IN RANGE    1    ${Get_Web_Count}+1
