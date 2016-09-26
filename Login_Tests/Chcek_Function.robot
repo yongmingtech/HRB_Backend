@@ -244,43 +244,35 @@ Click Basic File Maintain Menu
 Click Checkup Mgnt Menu
     Mouse Over    ${G_Checkup_Management_Menu}
     Click Element    ${G_Checkup_Management_Menu}
-    Sleep    1
 
 Click System Information Monitor
     Mouse Over    ${G_System_Information_Monitor_Menu}
     Click Element    ${G_System_Information_Monitor_Menu}
-    Sleep    1
 
 Click Management Work
     Mouse Over    ${G_Management_Work}
     Click Element    ${G_Management_Work}
-    Sleep    1
 
 Click Equipment Management
     Mouse Over    ${G_Equipment_Management}
     Click Element    ${G_Equipment_Management}
-    Sleep    1
 
 Click Dial Service
     #左邊Menu的外撥服務
     Mouse Over    ${G_Dial_Service}
     Click Element    ${G_Dial_Service}
-    Sleep    1
 
 Click System Management
     #左邊Menu的系統管理
     Mouse Over    ${G_System_Management}
     Click Element    ${G_System_Management}
-    Sleep    1
 
 Click Factory Check
     #左邊Menu的廠區看診
     Mouse Over    ${G_Factory_Check}
     Click Element    ${G_Factory_Check}
-    Sleep    1
 
 Click Activity Management
     #左邊Menu的活動管理
     Mouse Over    ${G_Activity_Management}
     Click Element    ${G_Activity_Management}
-    Sleep    1
